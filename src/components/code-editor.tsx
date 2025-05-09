@@ -45,7 +45,7 @@ export function CodeEditor({ language, onChange }: CodeEditorProps) {
 
   return (
     <div ref={wrapperRef} className="w-full bg-[#1e1e1e] py-2 pr-2">
-      <div ref={containerRef} className="w-full min-h-64 ">
+      <div ref={containerRef} className="w-full min-h-48 max-h-[500px]">
         <Editor
           theme="vs-dark"
           language={language}
@@ -57,6 +57,9 @@ export function CodeEditor({ language, onChange }: CodeEditorProps) {
               vertical: "visible",
               horizontal: "hidden",
               useShadows: false,
+            },
+            stickyScroll: {
+              enabled: false,
             },
             overviewRulerLanes: 0,
             overviewRulerBorder: false,
