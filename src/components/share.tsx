@@ -11,13 +11,17 @@ import {
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import CopyButton from "./copy-button";
+import { Share } from "lucide-react";
 
 export function ShareButton() {
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="secondary">Share</Button>
+        <Button variant="secondary">
+          <Share />
+          Share
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

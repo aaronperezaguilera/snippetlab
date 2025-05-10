@@ -1,4 +1,7 @@
 import { ProfileNav } from "@/components/profile-nav";
+import { RelativeTime } from "@/components/relative-time";
+import { SnippetCard } from "@/components/snippet-card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -8,11 +11,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
-import { users } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { pins, snippets, users } from "@/db/schema";
+import { currentUser } from "@clerk/nextjs/server";
+import { and, eq } from "drizzle-orm";
 import { PlusIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function ProfilePage({
   params,
@@ -20,6 +26,8 @@ export default async function ProfilePage({
   params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
+
+  const authenticatedUser = await currentUser();
 
   const user = await db
     .select()
@@ -34,6 +42,17 @@ export default async function ProfilePage({
       </div>
     );
   }
+
+  const snippetsList = await db
+    .select()
+    .from(pins)
+    .innerJoin(
+      snippets,
+      and(eq(snippets.id, pins.snippetId), eq(snippets.userId, user[0].id))
+    )
+    .where(
+      and(eq(snippets.id, pins.snippetId), eq(snippets.userId, user[0].id))
+    );
 
   return (
     <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
@@ -56,42 +75,24 @@ export default async function ProfilePage({
       <div className="flex flex-col gap-4">
         <ProfileNav username={user[0].username} active="profile" />
         <h1 className="text-2xl font-bold">Snippets</h1>
-        <div className="flex gap-2">
-          <Input placeholder="Find a snippet..." />
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button>
-            <PlusIcon /> Create
-          </Button>
-        </div>
+        {snippetsList.length > 0 ? (
+          <div className="flex flex-col gap-4">
+            {snippetsList.map(
+              (pin) =>
+                (pin.snippets.userId == authenticatedUser?.id ||
+                  pin.snippets.visibility === "public") && (
+                  <SnippetCard
+                    isPinned
+                    key={pin.snippets.id}
+                    username={username}
+                    {...pin.snippets}
+                  />
+                )
+            )}
+          </div>
+        ) : (
+          <p>No snippets found</p>
+        )}
       </div>
     </main>
   );

@@ -2,10 +2,10 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export function ProfileNav({
-  username,
+  username = "",
   active,
 }: {
-  username: string;
+  username?: string;
   active: "profile" | "snippets" | "collections";
 }) {
   return (

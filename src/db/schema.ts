@@ -34,4 +34,19 @@ export const snippets = pgTable("snippets", {
   userId: varchar("user_id", { length: 191 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
+});
+
+export const pins = pgTable("pins", {
+  id: serial("id").primaryKey(),
+  snippetId: serial("snippet_id")
+    .notNull()
+    .references(() => snippets.id, { onDelete: "cascade" }),
+  userId: varchar("user_id", { length: 191 })
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
 });

@@ -6,10 +6,11 @@ import Editor, { OnMount } from "@monaco-editor/react";
 
 interface CodeEditorProps {
   language: string;
+  code: string | undefined;
   onChange: (value: string | undefined) => void;
 }
 
-export function CodeEditor({ language, onChange }: CodeEditorProps) {
+export function CodeEditor({ language, code, onChange }: CodeEditorProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +50,7 @@ export function CodeEditor({ language, onChange }: CodeEditorProps) {
         <Editor
           theme="vs-dark"
           language={language}
-          defaultValue="// Some comment"
+          defaultValue={code}
           onChange={(value) => onChange(value)}
           options={{
             minimap: { enabled: false },

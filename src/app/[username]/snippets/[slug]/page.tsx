@@ -2,15 +2,16 @@ import { CodeReader } from "@/components/code-reader";
 import { ProfileNav } from "@/components/profile-nav";
 import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
-import { snippets, users } from "@/db/schema";
+import { pins, snippets, users } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Edit, Pin, Share, Star } from "lucide-react";
+import { Edit, Pin, Star } from "lucide-react";
 import { currentUser } from "@clerk/nextjs/server";
 import { ShareButton } from "@/components/share";
+import { PinButton } from "@/components/pin-button";
 
 export default async function SnippetPage({
   params,
@@ -39,6 +40,18 @@ export default async function SnippetPage({
         <h1 className="text-2xl font-bold">Snippet not found</h1>
       </div>
     );
+  }
+
+  const pinnedSnippets = await db
+    .select()
+    .from(pins)
+    .where(
+      and(eq(pins.snippetId, currentSnippet.id), eq(pins.userId, author[0].id))
+    );
+
+  let pinned = false;
+  if (pinnedSnippets.length > 0) {
+    pinned = true;
   }
 
   if (
@@ -90,7 +103,11 @@ export default async function SnippetPage({
             <span className="text-muted-foreground">Tags</span>
             <div className="flex gap-2">
               {currentSnippet.tags.map((tag) => (
-                <Badge key={tag} variant="secondary">
+                <Badge
+                  key={tag}
+                  variant="secondary"
+                  className="border border-neutral-700"
+                >
                   {tag}
                 </Badge>
               ))}
@@ -102,12 +119,16 @@ export default async function SnippetPage({
         <ProfileNav active="snippets" username={username} />
         <header className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">{currentSnippet.title}</h1>
+            <div className="flex gap-4 items-center">
+              <h1 className="text-2xl font-bold">{currentSnippet.title}</h1>
+              <Badge variant="secondary" className="border border-neutral-700">
+                {currentSnippet.visibility.slice(0, 1).toUpperCase() +
+                  currentSnippet.visibility.slice(1)}
+              </Badge>
+            </div>
             <div className="flex gap-2">
               {author[0].id === authenticatedUser?.id && (
-                <Button variant="secondary">
-                  <Pin /> Pin
-                </Button>
+                <PinButton id={currentSnippet.id} initialPinned={pinned} />
               )}
               {currentSnippet.visibility === "public" && (
                 <>
@@ -122,7 +143,7 @@ export default async function SnippetPage({
               {author[0].id === authenticatedUser?.id && (
                 <Button asChild>
                   <Link
-                    href={`/${username}/snippets/${currentSnippet.slug}/delete`}
+                    href={`/${username}/snippets/${currentSnippet.slug}/edit`}
                   >
                     <Edit /> Edit
                   </Link>

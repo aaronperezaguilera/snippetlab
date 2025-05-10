@@ -1,5 +1,5 @@
 import { ProfileNav } from "@/components/profile-nav";
-import { Badge } from "@/components/ui/badge";
+import { SnippetCard } from "@/components/snippet-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -9,11 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
-import { snippets, users } from "@/db/schema";
+import { pins, snippets, users } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { PlusIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,6 +43,11 @@ export default async function ProfilePage({
     .select()
     .from(snippets)
     .where(eq(snippets.userId, user[0].id));
+
+  const pinnedSnippets = await db
+    .select()
+    .from(pins)
+    .where(eq(pins.userId, user[0].id));
 
   return (
     <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
@@ -108,68 +112,21 @@ export default async function ProfilePage({
         </div>
         {snippetsList.length > 0 ? (
           <div className="flex flex-col gap-4">
-            {snippetsList.map((snippet) =>
-              snippet.userId == authenticatedUser?.id ? (
-                <Link
-                  href={`/${username}/snippets/${snippet.slug}`}
-                  key={snippet.id}
-                  className="p-4 border bg-card flex flex-col gap-4"
-                >
-                  <div className="flex gap-4 items-center">
-                    <h2 className="text-lg font-bold">{snippet.title}</h2>
-                    <Badge
-                      variant="secondary"
-                      className="border border-neutral-700"
-                    >
-                      {snippet.visibility.slice(0, 1).toUpperCase() +
-                        snippet.visibility.slice(1)}
-                    </Badge>
-                  </div>
-                  <div className="text-sm text-muted-foreground flex gap-2">
-                    <div className="flex gap-1 items-center">
-                      <div className="w-4 h-4">
-                        {LANGUAGE_ICON[snippet.language]}
-                      </div>
-                      <span>
-                        {snippet.language.slice(0, 1).toUpperCase() +
-                          snippet.language.slice(1)}
-                      </span>
-                    </div>
-                    | <span>Updated 2 weeks ago</span>
-                  </div>
-                </Link>
-              ) : (
-                snippet.visibility === "public" && (
-                  <Link
-                    href={`/${username}/snippets/${snippet.slug}`}
+            {snippetsList.map(
+              (snippet) =>
+                (snippet.userId == authenticatedUser?.id ||
+                  snippet.visibility === "public") && (
+                  <SnippetCard
+                    isPinned={
+                      pinnedSnippets.find(
+                        (pin) => pin.snippetId === snippet.id
+                      ) !== undefined
+                    }
                     key={snippet.id}
-                    className="p-4 border bg-card flex flex-col gap-4"
-                  >
-                    <div className="flex gap-4 items-center">
-                      <h2 className="text-lg font-bold">{snippet.title}</h2>
-                      <Badge
-                        variant="secondary"
-                        className="border border-neutral-700"
-                      >
-                        {snippet.visibility.slice(0, 1).toUpperCase() +
-                          snippet.visibility.slice(1)}
-                      </Badge>
-                    </div>
-                    <div className="text-sm text-muted-foreground flex gap-2">
-                      <div className="flex gap-1 items-center">
-                        <div className="w-4 h-4">
-                          {LANGUAGE_ICON[snippet.language]}
-                        </div>
-                        <span>
-                          {snippet.language.slice(0, 1).toUpperCase() +
-                            snippet.language.slice(1)}
-                        </span>
-                      </div>
-                      | <span>Updated 2 weeks ago</span>
-                    </div>
-                  </Link>
+                    username={username}
+                    {...snippet}
+                  />
                 )
-              )
             )}
           </div>
         ) : (
