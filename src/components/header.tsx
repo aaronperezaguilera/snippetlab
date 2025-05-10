@@ -5,19 +5,74 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
+import { Logo } from "./logo";
+import Link from "next/link";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { ChevronDown, LogOut, Plus, Settings, User } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { currentUser } from "@clerk/nextjs/server";
+import Image from "next/image";
 
-export function Header() {
+export async function Header() {
+  const user = await currentUser();
+
   return (
-    <header className="flex justify-between items-center p-4 gap-4 h-16">
-      <div>SnippetLab</div>
+    <header className="flex justify-between items-center p-4 gap-4 h-16 bg-neutral-900 border-b border-neutral-800">
+      <Link href="/" className="flex gap-2 items-center">
+        <Logo />
+        <span className="text-xl font-semibold">SnippetLab</span>
+      </Link>
       <div>
-        <SignedOut>
-          <SignInButton mode="modal" />
-          <SignUpButton mode="modal" />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+        <Input className="w-2xl" />
+      </div>
+      <div className="flex items-center gap-4">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" className="flex items-center gap-2">
+              <Plus /> <ChevronDown />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent side="bottom" align="end">
+            <DropdownMenuItem>Create Snippet</DropdownMenuItem>
+            <DropdownMenuItem>Create Collection</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="cursor-pointer">
+            <Image
+              src={user?.imageUrl || "/default-avatar.png"}
+              alt={`${user?.username || "User"}'s profile picture`}
+              width={100}
+              height={100}
+              className="w-9 h-9 border"
+            />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent side="bottom" align="end">
+            <DropdownMenuItem asChild>
+              <Link href={`/${user?.username}`}>
+                <User />
+                Profile
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/settings">
+                <Settings />
+                Account settings
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/settings">
+                <LogOut /> Log out
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
