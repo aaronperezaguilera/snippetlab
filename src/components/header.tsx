@@ -2,7 +2,7 @@ import { Logo } from "./logo";
 import Link from "next/link";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { ChevronDown, Plus, Settings, User } from "lucide-react";
+import { ChevronDown, Plus, Settings, User, UserIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +12,7 @@ import {
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { SignOutButton } from "./sign-out-button";
+import { UserButton } from "./user-button";
 
 export async function Header() {
   const user = await currentUser();
@@ -26,47 +27,66 @@ export async function Header() {
         <Input className="w-2xl" />
       </div>
       <div className="flex items-center gap-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" className="flex items-center gap-2">
-              <Plus /> <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent side="bottom" align="end">
-            <DropdownMenuItem>Create Snippet</DropdownMenuItem>
-            <DropdownMenuItem>Create Collection</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <DropdownMenu>
-          <DropdownMenuTrigger className="cursor-pointer">
-            <Image
-              src={user?.imageUrl || "/default-avatar.png"}
-              alt={`${user?.username || "User"}'s profile picture`}
-              width={100}
-              height={100}
-              className="w-9 h-9 border"
-            />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent side="bottom" align="end">
-            <DropdownMenuItem asChild>
-              <Link href={`/${user?.username}`}>
-                <User />
-                Profile
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/account">
-                <Settings />
-                Account settings
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/settings">
-                <SignOutButton />
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {user ? (
+          <>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="flex items-center gap-2">
+                  <Plus /> <ChevronDown />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent side="bottom" align="end">
+                <DropdownMenuItem asChild>
+                  <Link href={`${user?.username}/snippets/new`}>
+                    Create Snippet
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Create Collection</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="cursor-pointer">
+                <Image
+                  src={user?.imageUrl || "/default-avatar.png"}
+                  alt={`${user?.username || "User"}'s profile picture`}
+                  width={100}
+                  height={100}
+                  className="w-9 h-9 border"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent side="bottom" align="end">
+                <DropdownMenuItem asChild>
+                  <Link href={`/${user?.username}`}>
+                    <UserIcon />
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/account">
+                    <Settings />
+                    Account settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <div>
+                    <SignOutButton />
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        ) : (
+          <div className="flex gap-2">
+            <Link href="/sign-in">
+              <Button variant="ghost" className="flex items-center gap-2">
+                Sign In
+              </Button>
+            </Link>
+            <Link href="/sign-up">
+              <Button className="flex items-center gap-2">Sign Up</Button>
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );

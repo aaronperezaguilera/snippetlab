@@ -9,7 +9,8 @@ export default async function EditSnippet({
 }: {
   params: { username: string; slug: string };
 }) {
-  const slug = await params.slug;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { username, slug } = await params;
 
   const authenticatedUser = await currentUser();
 

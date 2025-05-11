@@ -17,7 +17,7 @@ import { Icons } from "@/components/ui/icons";
 
 export default function SignInPage() {
   return (
-    <div className="grid w-full grow items-center px-4 sm:justify-center">
+    <section className="flex h-screen justify-center mt-16">
       <SignIn.Root>
         <Clerk.Loading>
           {(isGlobalLoading) => (
@@ -256,6 +256,6 @@ export default function SignInPage() {
           )}
         </Clerk.Loading>
       </SignIn.Root>
-    </div>
+    </section>
   );
 }

@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 export default function SignUpPage() {
   return (
-    <div className="grid w-full grow items-center px-4 sm:justify-center">
+    <section className="flex h-screen justify-center mt-16">
       <SignUp.Root>
         <Clerk.Loading>
           {(isGlobalLoading) => (
@@ -269,6 +269,6 @@ export default function SignUpPage() {
           )}
         </Clerk.Loading>
       </SignUp.Root>
-    </div>
+    </section>
   );
 }
