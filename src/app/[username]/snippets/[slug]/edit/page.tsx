@@ -4,10 +4,10 @@ import { snippets } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 
-export default async function NewSnippet({
+export default async function EditSnippet({
   params,
 }: {
-  params: { slug: string };
+  params: { username: string; slug: string };
 }) {
   const { slug } = await params;
 
