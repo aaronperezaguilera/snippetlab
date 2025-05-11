@@ -7,10 +7,9 @@ import { eq } from "drizzle-orm";
 export default async function EditSnippet({
   params,
 }: {
-  params: { username: string; slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { username, slug } = await params;
+  const { slug } = await params;
 
   const authenticatedUser = await currentUser();
 
