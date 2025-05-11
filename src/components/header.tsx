@@ -2,7 +2,7 @@ import { Logo } from "./logo";
 import Link from "next/link";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { ChevronDown, Plus, Settings, User, UserIcon } from "lucide-react";
+import { ChevronDown, Plus, Settings, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,6 @@ import {
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { SignOutButton } from "./sign-out-button";
-import { UserButton } from "./user-button";
 
 export async function Header() {
   const user = await currentUser();
@@ -57,7 +56,7 @@ export async function Header() {
               <DropdownMenuContent side="bottom" align="end">
                 <DropdownMenuItem asChild>
                   <Link href={`/${user?.username}`}>
-                    <UserIcon />
+                    <User />
                     Profile
                   </Link>
                 </DropdownMenuItem>

@@ -4,7 +4,7 @@ import { SnippetCard } from "@/components/snippet-card";
 import { SnippetsFilter } from "@/components/snippets-filter";
 import { Button } from "@/components/ui/button";
 import { db } from "@/db/drizzle";
-import { pins, snippets, users } from "@/db/schema";
+import { pins, snippets, stars, users } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { and, eq, asc, desc, sql } from "drizzle-orm";
 import { PlusIcon } from "lucide-react";
@@ -68,7 +68,7 @@ export default async function ProfilePage({
       break;
     case "popular":
       // contaremos cuántos pins tiene cada snippet
-      orderByClause = desc(sql`COUNT(${pins.id})`);
+      orderByClause = desc(sql`COUNT(${stars.id})`);
       break;
     default:
       orderByClause = desc(snippets.createdAt);
@@ -79,10 +79,10 @@ export default async function ProfilePage({
       return await db
         .select({
           snippet: snippets,
-          pinCount: sql`COUNT(${pins.id})`.as("pinCount"),
+          starsCount: sql`COUNT(${stars.id})`.as("starsCount"),
         })
         .from(snippets)
-        .leftJoin(pins, eq(pins.snippetId, snippets.id))
+        .leftJoin(stars, eq(stars.snippetId, snippets.id))
         .where(and(...whereClauses))
         .groupBy(snippets.id)
         .orderBy(orderByClause);

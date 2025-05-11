@@ -189,15 +189,11 @@ export default function SignInPage() {
                     <CardTitle>Forgot your password?</CardTitle>
                   </CardHeader>
                   <CardContent className="grid gap-y-4">
-                    <SignIn.SupportedStrategy name="reset_password_email_code">
-                      {(strategy) => (
-                        <Button
-                          onClick={strategy.start}
-                          disabled={isGlobalLoading}
-                        >
-                          Reset password
-                        </Button>
-                      )}
+                    <SignIn.SupportedStrategy
+                      name="reset_password_email_code"
+                      asChild
+                    >
+                      <Button disabled={isGlobalLoading}>Reset password</Button>
                     </SignIn.SupportedStrategy>
                   </CardContent>
                   <CardFooter>
