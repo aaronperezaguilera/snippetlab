@@ -37,7 +37,7 @@ export async function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent side="bottom" align="end">
                 <DropdownMenuItem asChild>
-                  <Link href={`${user?.username}/snippets/new`}>
+                  <Link href={`/${user?.username}/snippets/new`}>
                     Create Snippet
                   </Link>
                 </DropdownMenuItem>
