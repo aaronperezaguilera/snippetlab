@@ -11,5 +11,5 @@ export function RelativeTime({ datetime }: RelativeTimeProps) {
     import("@github/relative-time-element");
   }, []);
 
-  return <relative-time datetime={datetime.toISOString()}></relative-time>;
+  return <relative-time datetime={String(datetime)}></relative-time>;
 }
