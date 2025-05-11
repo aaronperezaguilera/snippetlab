@@ -12,23 +12,20 @@ export function PinButton({
   id: number;
   initialPinned: boolean;
 }) {
-  // 1) Estado optimista: prev → next
   const [isPinned, addOptimisticPin] = useOptimistic(
     initialPinned,
-    (prev, next) => next
+    (prev: boolean, next: boolean) => next
   );
 
-  // 2) Transition para agrupar la actualización de estado + server action
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 3) Mueve tanto el optimismo como la llamada al server action
     startTransition(() => {
       const nextState = !isPinned;
-      addOptimisticPin(nextState); // actualiza UI inmediatamente
-      updatePin(id, nextState); // server action en background
+      addOptimisticPin(nextState);
+      updatePin(id, nextState);
     });
   };
 

@@ -1,24 +1,11 @@
 import { ProfileNav } from "@/components/profile-nav";
-import { RelativeTime } from "@/components/relative-time";
 import { SnippetCard } from "@/components/snippet-card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
 import { pins, snippets, users } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
-import { PlusIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 export default async function ProfilePage({
   params,

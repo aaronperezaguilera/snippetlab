@@ -1,16 +1,8 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-  UserProfile,
-} from "@clerk/nextjs";
 import { Logo } from "./logo";
 import Link from "next/link";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { ChevronDown, LogOut, Plus, Settings, User } from "lucide-react";
+import { ChevronDown, Plus, Settings, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,

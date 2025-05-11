@@ -2,8 +2,8 @@
 
 import { useOptimistic, useTransition } from "react";
 import { Button } from "./ui/button";
-import { updatePin, updateStar } from "@/app/[username]/snippets/actions";
-import { Pin, Star } from "lucide-react";
+import { updateStar } from "@/app/[username]/snippets/actions";
+import { Star } from "lucide-react";
 import { Badge } from "./ui/badge";
 
 export function StarButton({
@@ -15,23 +15,20 @@ export function StarButton({
   initialStarred: boolean;
   initialStars: number;
 }) {
-  // 1) Estado optimista: prev → next
   const [isStarred, addOptimisticStar] = useOptimistic(
     initialStarred,
-    (prev, next) => next
+    (prev: boolean, next: boolean) => next
   );
 
-  // 2) Transition para agrupar la actualización de estado + server action
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 3) Mueve tanto el optimismo como la llamada al server action
     startTransition(() => {
       const nextState = !isStarred;
-      addOptimisticStar(nextState); // actualiza UI inmediatamente
-      updateStar(id, nextState); // server action en background
+      addOptimisticStar(nextState);
+      updateStar(id, nextState);
     });
   };
 
