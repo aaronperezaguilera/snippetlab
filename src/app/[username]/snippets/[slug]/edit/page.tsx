@@ -9,7 +9,7 @@ export default async function EditSnippet({
 }: {
   params: { username: string; slug: string };
 }) {
-  const { slug } = await params;
+  const { username, slug } = await params;
 
   const authenticatedUser = await currentUser();
 
@@ -20,15 +20,11 @@ export default async function EditSnippet({
 
   const currentSnippet = snippet[0];
 
-  if (snippet.length === 0) {
-    return (
-      <div className="container mx-auto mt-16 ">
-        <h1 className="text-2xl font-bold">Snippet not found</h1>
-      </div>
-    );
-  }
-
-  if (authenticatedUser?.id !== currentSnippet.userId) {
+  if (
+    snippet.length === 0 ||
+    authenticatedUser?.id !== currentSnippet.userId ||
+    !currentSnippet
+  ) {
     return (
       <div className="container mx-auto mt-16 ">
         <h1 className="text-2xl font-bold">Snippet not found</h1>
