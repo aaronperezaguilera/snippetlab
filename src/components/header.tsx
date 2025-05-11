@@ -19,9 +19,9 @@ export async function Header() {
   const user = await currentUser();
 
   return (
-    <header className="flex justify-between items-center p-4 gap-4 h-16 bg-neutral-900 border-b border-neutral-800">
+    <header className="flex justify-between items-center p-4 gap-4 h-16 bg-background">
       <div className="flex items-center gap-4">
-        <SidebarToggleButton />
+        {user && <SidebarToggleButton />}
         <Link href="/" className="flex gap-2 items-center">
           <Logo />
           <span className="text-xl font-semibold">SnippetLab</span>
