@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
+import { SidebarToggleButton } from "./sidebar";
 import { SignOutButton } from "./sign-out-button";
 
 export async function Header() {
@@ -19,10 +20,13 @@ export async function Header() {
 
   return (
     <header className="flex justify-between items-center p-4 gap-4 h-16 bg-neutral-900 border-b border-neutral-800">
-      <Link href="/" className="flex gap-2 items-center">
-        <Logo />
-        <span className="text-xl font-semibold">SnippetLab</span>
-      </Link>
+      <div className="flex items-center gap-4">
+        <SidebarToggleButton />
+        <Link href="/" className="flex gap-2 items-center">
+          <Logo />
+          <span className="text-xl font-semibold">SnippetLab</span>
+        </Link>
+      </div>
       <div>
         <Input className="w-2xl" />
       </div>
