@@ -4,6 +4,7 @@ import {
   SignInButton,
   SignUpButton,
   UserButton,
+  UserProfile,
 } from "@clerk/nextjs";
 import { Logo } from "./logo";
 import Link from "next/link";
@@ -18,6 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
+import { SignOutButton } from "./sign-out-button";
 
 export async function Header() {
   const user = await currentUser();
@@ -61,14 +63,14 @@ export async function Header() {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/settings">
+              <Link href="/account">
                 <Settings />
                 Account settings
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link href="/settings">
-                <LogOut /> Log out
+                <SignOutButton />
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>

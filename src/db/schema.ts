@@ -50,3 +50,13 @@ export const pins = pgTable("pins", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
 });
+
+export const stars = pgTable("stars", {
+  id: serial("id").primaryKey(),
+  snippetId: serial("snippet_id")
+    .notNull()
+    .references(() => snippets.id, { onDelete: "cascade" }),
+  userId: varchar("user_id", { length: 191 })
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+});

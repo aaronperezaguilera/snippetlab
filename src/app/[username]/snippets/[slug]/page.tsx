@@ -2,16 +2,17 @@ import { CodeReader } from "@/components/code-reader";
 import { ProfileNav } from "@/components/profile-nav";
 import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
-import { pins, snippets, users } from "@/db/schema";
+import { pins, snippets, stars, users } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Edit, Pin, Star } from "lucide-react";
+import { Edit } from "lucide-react";
 import { currentUser } from "@clerk/nextjs/server";
 import { ShareButton } from "@/components/share";
 import { PinButton } from "@/components/pin-button";
+import { StarButton } from "@/components/star-button";
 
 export default async function SnippetPage({
   params,
@@ -53,6 +54,25 @@ export default async function SnippetPage({
   if (pinnedSnippets.length > 0) {
     pinned = true;
   }
+
+  const starredSnippets = await db
+    .select()
+    .from(stars)
+    .where(
+      and(
+        eq(stars.snippetId, currentSnippet.id),
+        eq(stars.userId, author[0].id)
+      )
+    );
+  let starred = false;
+  if (starredSnippets.length > 0) {
+    starred = true;
+  }
+
+  const starsCount = await db
+    .select()
+    .from(stars)
+    .where(eq(stars.snippetId, currentSnippet.id));
 
   if (
     currentSnippet.visibility === "private" &&
@@ -133,10 +153,11 @@ export default async function SnippetPage({
               {currentSnippet.visibility === "public" && (
                 <>
                   <ShareButton />
-                  <Button variant="secondary">
-                    <Star />
-                    Star
-                  </Button>
+                  <StarButton
+                    id={currentSnippet.id}
+                    initialStarred={starred}
+                    initialStars={starsCount.length}
+                  />
                 </>
               )}
 
