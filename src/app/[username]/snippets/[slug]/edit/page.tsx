@@ -9,7 +9,7 @@ export default async function NewSnippet({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const authenticatedUser = await currentUser();
 
