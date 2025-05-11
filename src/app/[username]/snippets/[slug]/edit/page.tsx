@@ -9,7 +9,7 @@ export default async function EditSnippet({
 }: {
   params: { username: string; slug: string };
 }) {
-  const { username, slug } = await params;
+  const slug = await params.slug;
 
   const authenticatedUser = await currentUser();
 
