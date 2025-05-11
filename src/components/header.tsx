@@ -1,4 +1,4 @@
-import { Logo } from "./logo";
+import { Logo, LogoMuted } from "./logo";
 import Link from "next/link";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -8,6 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
@@ -64,6 +65,13 @@ export async function Header() {
                   <Link href="/account">
                     <Settings />
                     Account settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href={`/home`}>
+                    <LogoMuted />
+                    Home Page
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>

@@ -1,10 +1,10 @@
 <svg width="34" height="33" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
     #path1 {
-        fill: #000000;
+        fill: #fafafa;
     }
     #path2 {
-        stroke: #fafafa;
+        stroke: #000000;
     }
     #path3 {
         fill: #000000;
