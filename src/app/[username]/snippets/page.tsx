@@ -12,24 +12,27 @@ import { unstable_cache } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 
+type SearchParams = {
+  search?: string;
+  page?: string;
+  language?: string;
+  type?: "all" | "public" | "private";
+  sort?: "popular" | "newest" | "oldest";
+};
+
 export default async function ProfilePage({
   params,
   searchParams,
 }: {
   params: Promise<{ username: string }>;
-  searchParams?: {
-    search?: string;
-    page?: string;
-    language?: string;
-    type?: "all" | "public" | "private";
-    sort?: string; // "popular" | "newest" | "oldest"
-  };
+  searchParams?: Promise<SearchParams>;
 }) {
   const { username } = await params;
-  const search = (searchParams?.search || "").trim().toLowerCase();
-  const language = searchParams?.language || "";
-  const type = searchParams?.type || "";
-  const sort = searchParams?.sort || "newest";
+  const params_search = (await searchParams) || {};
+  const search = (params_search.search || "").trim().toLowerCase();
+  const language = params_search.language || "";
+  const type = params_search.type || "";
+  const sort = params_search.sort || "newest";
 
   const authenticatedUser = await currentUser();
 
