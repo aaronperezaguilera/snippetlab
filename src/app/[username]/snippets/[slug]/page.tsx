@@ -17,7 +17,7 @@ import { StarButton } from "@/components/star-button";
 export default async function SnippetPage({
   params,
 }: {
-  params: { username: string; slug: string };
+  params: Promise<{ username: string; slug: string }>;
 }) {
   const { username, slug } = await params;
 
