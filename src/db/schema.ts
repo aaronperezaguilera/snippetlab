@@ -5,6 +5,8 @@ import {
   serial,
   timestamp,
   pgEnum,
+  boolean,
+  integer,
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
@@ -34,21 +36,13 @@ export const snippets = pgTable("snippets", {
   userId: varchar("user_id", { length: 191 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
+  pinned: boolean("pinned").default(false).notNull(),
+  starsCount: integer("stars_count").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => new Date())
     .notNull(),
-});
-
-export const pins = pgTable("pins", {
-  id: serial("id").primaryKey(),
-  snippetId: serial("snippet_id")
-    .notNull()
-    .references(() => snippets.id, { onDelete: "cascade" }),
-  userId: varchar("user_id", { length: 191 })
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
 });
 
 export const stars = pgTable("stars", {

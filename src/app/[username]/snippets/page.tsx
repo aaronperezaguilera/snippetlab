@@ -4,7 +4,7 @@ import { SnippetCard } from "@/components/snippet-card";
 import { SnippetsFilter } from "@/components/snippets-filter";
 import { Button } from "@/components/ui/button";
 import { db } from "@/db/drizzle";
-import { pins, snippets, stars, users } from "@/db/schema";
+import { snippets, users } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { and, eq, asc, desc, sql } from "drizzle-orm";
 import { PlusIcon } from "lucide-react";
@@ -51,7 +51,6 @@ export default async function ProfilePage({
 
   const whereClauses = [
     eq(snippets.userId, user.id),
-    // si hay search, hacemos ILIKE sobre el título en minúsculas
     ...(search ? [sql`LOWER(${snippets.title}) LIKE ${`%${search}%`}`] : []),
     ...(language && language !== "all"
       ? [eq(snippets.language, language)]
@@ -70,8 +69,7 @@ export default async function ProfilePage({
       orderByClause = asc(snippets.createdAt);
       break;
     case "popular":
-      // contaremos cuántos pins tiene cada snippet
-      orderByClause = desc(sql`COUNT(${stars.id})`);
+      orderByClause = desc(snippets.starsCount);
       break;
     default:
       orderByClause = desc(snippets.createdAt);
@@ -80,12 +78,8 @@ export default async function ProfilePage({
   const getRows = unstable_cache(
     async () => {
       return await db
-        .select({
-          snippet: snippets,
-          starsCount: sql`COUNT(${stars.id})`.as("starsCount"),
-        })
+        .select()
         .from(snippets)
-        .leftJoin(stars, eq(stars.snippetId, snippets.id))
         .where(and(...whereClauses))
         .groupBy(snippets.id)
         .orderBy(orderByClause);
@@ -95,17 +89,10 @@ export default async function ProfilePage({
 
   const rows = await getRows();
 
-  const pinnedRows = await db
-    .select({ snippetId: pins.snippetId })
-    .from(pins)
-    .where(eq(pins.userId, user.id));
-
-  const pinnedIds = pinnedRows.map((p) => p.snippetId);
-
   return (
     <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
       {/* … panel izquierdo con avatar y botón “Edit” … */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 w-full">
         <div className="w-full aspect-square bg-neutral-600">
           {user.image_url && (
             <Image
@@ -123,7 +110,7 @@ export default async function ProfilePage({
       </div>
 
       {/* … lista de snippets … */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 overflow-hidden">
         <ProfileNav username={user.username} active="snippets" />
         <h1 className="text-2xl font-bold">Snippets</h1>
 
@@ -138,10 +125,9 @@ export default async function ProfilePage({
             </Button>
           )}
         </div>
-
         {rows.length > 0 ? (
           <div className="flex flex-col gap-4">
-            {rows.map(({ snippet }) =>
+            {rows.map((snippet) =>
               snippet.userId === authenticatedUser?.id ||
               snippet.visibility === "public" ? (
                 <SnippetCard
@@ -149,7 +135,7 @@ export default async function ProfilePage({
                   username={username}
                   {...snippet}
                   // marcamos “pin” solo si está pineado por este usuario
-                  isPinned={pinnedIds.includes(snippet.id)}
+                  isPinned={snippet.pinned}
                 />
               ) : null
             )}

@@ -32,7 +32,6 @@ export function SnippetCard({
 }) {
   return (
     <div className="p-4 border bg-card flex flex-col gap-4 relative">
-      {/* Cabecera */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4 items-center">
           <h2 className="text-lg font-bold">{title}</h2>
@@ -58,6 +57,8 @@ export function SnippetCard({
             minHeight: "10rem",
             maxHeight: "10rem",
             overflow: "auto",
+            whiteSpace: "pre-wrap",
+            wordBreak: "break-word",
           }}
         >
           {code}

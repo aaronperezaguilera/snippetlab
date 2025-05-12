@@ -1,7 +1,7 @@
 import { CodeReader } from "@/components/code-reader";
 import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
-import { pins, snippets, stars, users } from "@/db/schema";
+import { snippets, stars, users } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import Link from "next/link";
 import Image from "next/image";
@@ -43,18 +43,6 @@ export default async function SnippetPage({
     );
   }
 
-  const pinnedSnippets = await db
-    .select()
-    .from(pins)
-    .where(
-      and(eq(pins.snippetId, currentSnippet.id), eq(pins.userId, author[0].id))
-    );
-
-  let pinned = false;
-  if (pinnedSnippets.length > 0) {
-    pinned = true;
-  }
-
   const starredSnippets = await db
     .select()
     .from(stars)
@@ -64,15 +52,6 @@ export default async function SnippetPage({
         eq(stars.userId, authenticatedUser?.id || "")
       )
     );
-  let starred = false;
-  if (starredSnippets.length > 0) {
-    starred = true;
-  }
-
-  const starsCount = await db
-    .select()
-    .from(stars)
-    .where(eq(stars.snippetId, currentSnippet.id));
 
   if (
     currentSnippet.visibility === "private" &&
@@ -152,15 +131,18 @@ export default async function SnippetPage({
             </div>
             <div className="flex gap-2">
               {author[0].id === authenticatedUser?.id && (
-                <PinButton id={currentSnippet.id} initialPinned={pinned} />
+                <PinButton
+                  id={currentSnippet.id}
+                  initialPinned={currentSnippet.pinned}
+                />
               )}
               {currentSnippet.visibility === "public" && (
                 <>
                   <ShareButton />
                   <StarButton
                     id={currentSnippet.id}
-                    initialStarred={starred}
-                    initialStars={starsCount.length}
+                    initialStarred={starredSnippets.length > 0}
+                    initialStars={currentSnippet.starsCount}
                   />
                 </>
               )}

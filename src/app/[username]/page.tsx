@@ -3,7 +3,7 @@ import { ProfileNav } from "@/components/profile-nav";
 import { SnippetCard } from "@/components/snippet-card";
 import { Button } from "@/components/ui/button";
 import { db } from "@/db/drizzle";
-import { follows, pins, snippets, users } from "@/db/schema";
+import { follows, snippets, users } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { and, eq, sql } from "drizzle-orm";
 import Image from "next/image";
@@ -58,14 +58,8 @@ export default async function ProfilePage({
 
   const snippetsList = await db
     .select()
-    .from(pins)
-    .innerJoin(
-      snippets,
-      and(eq(snippets.id, pins.snippetId), eq(snippets.userId, user[0].id))
-    )
-    .where(
-      and(eq(snippets.id, pins.snippetId), eq(snippets.userId, user[0].id))
-    );
+    .from(snippets)
+    .where(eq(snippets.pinned, true));
 
   const followed = authenticatedUser?.id
     ? await db
@@ -115,14 +109,14 @@ export default async function ProfilePage({
         {snippetsList.length > 0 ? (
           <div className="flex flex-col gap-4">
             {snippetsList.map(
-              (pin) =>
-                (pin.snippets.userId == authenticatedUser?.id ||
-                  pin.snippets.visibility === "public") && (
+              (snippet) =>
+                (snippet.userId == authenticatedUser?.id ||
+                  snippet.visibility === "public") && (
                   <SnippetCard
                     isPinned
-                    key={pin.snippets.id}
+                    key={snippet.id}
                     username={username}
-                    {...pin.snippets}
+                    {...snippet}
                   />
                 )
             )}
