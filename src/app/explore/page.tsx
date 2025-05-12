@@ -1,11 +1,24 @@
 // app/explorar/page.tsx
 import { db } from "@/db/drizzle";
 import { snippets, users } from "@/db/schema";
-import { eq, desc, and, ne } from "drizzle-orm";
-import { SnippetCard } from "@/components/snippet-card";
+import { eq, desc, and, ne, sql, asc } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs/server";
+import { ExploreFilters } from "@/components/explore-filters";
+import { SocialSnippetCard } from "@/components/social-snippet-card";
 
-export default async function ExplorePage() {
+type SearchParams = {
+  search?: string;
+  page?: string;
+  language?: string;
+  tags?: string;
+  sort?: "popular" | "newest" | "oldest";
+};
+
+export default async function ExplorePage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
   const authenticatedUser = await currentUser();
   if (!authenticatedUser) {
     return (
@@ -16,58 +29,67 @@ export default async function ExplorePage() {
       </div>
     );
   }
+  const params_search = (await searchParams) || {};
+  const search = (params_search.search || "").trim().toLowerCase();
+  const language = params_search.language || "";
+  const sort = params_search.sort || "newest";
+
+  const whereClauses = [
+    ...(search ? [sql`LOWER(${snippets.title}) LIKE ${`%${search}%`}`] : []),
+    ...(language && language !== "all"
+      ? [eq(snippets.language, language)]
+      : []),
+  ];
+
+  let orderByClause;
+  switch (sort) {
+    case "newest":
+      orderByClause = desc(snippets.createdAt);
+      break;
+    case "oldest":
+      orderByClause = asc(snippets.createdAt);
+      break;
+    case "popular":
+      orderByClause = desc(snippets.starsCount);
+      break;
+    default:
+      orderByClause = desc(snippets.createdAt);
+  }
 
   const recientes = await db
-    .select({ snippets, username: users.username })
+    .select({ snippets, users })
     .from(snippets)
     .leftJoin(users, eq(snippets.userId, users.id))
     .where(
       and(
         eq(snippets.visibility, "public"),
-        ne(snippets.userId, authenticatedUser.id)
+        ne(snippets.userId, authenticatedUser.id),
+        ...whereClauses
       )
     )
-    .orderBy(desc(snippets.createdAt))
-    .limit(10);
-
-  const populares = await db
-    .select({ snippets, username: users.username })
-    .from(snippets)
-    .leftJoin(users, eq(snippets.userId, users.id))
-    .where(
-      and(
-        eq(snippets.visibility, "public"),
-        ne(snippets.userId, authenticatedUser.id)
-      )
-    )
-    .orderBy(desc(snippets.starsCount))
+    .orderBy(orderByClause)
     .limit(10);
 
   return (
-    <main className="max-w-4xl mx-auto p-6 space-y-12">
+    <main className="px-16 mx-auto grid grid-cols-[300px_1fr] gap-16 mt-16">
       <section>
-        <h2 className="text-2xl font-semibold mb-4">Más recientes</h2>
-        <div className="grid sm:grid-cols-2 gap-6">
-          {recientes.map((snip) => (
-            <SnippetCard
-              key={snip.snippets.id}
-              username={snip.username || ""}
-              {...snip.snippets}
-            />
-          ))}
+        <h1 className="text-2xl font-semibold mb-4">Explore</h1>
+        <div className="flex flex-col gap-2">
+          <ExploreFilters />
         </div>
       </section>
-
       <section>
-        <h2 className="text-2xl font-semibold mb-4">Más populares</h2>
         <div className="grid sm:grid-cols-2 gap-6">
-          {populares.map((snip) => (
-            <SnippetCard
-              key={snip.snippets.id}
-              username={snip.username || ""}
-              {...snip.snippets}
-            />
-          ))}
+          {recientes.map(
+            (snip) =>
+              snip.users && (
+                <SocialSnippetCard
+                  key={snip.snippets.id}
+                  user={snip.users}
+                  {...snip.snippets}
+                />
+              )
+          )}
         </div>
       </section>
     </main>

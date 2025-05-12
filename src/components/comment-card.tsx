@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Card, CardContent } from "./ui/card";
 
-export type Comment = InferSelectModel<typeof comments>;
+type Comment = InferSelectModel<typeof comments>;
 
 export default async function CommentCard({ comment }: { comment: Comment }) {
   if (!comment) {

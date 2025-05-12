@@ -2,7 +2,7 @@ import { db } from "@/db/drizzle";
 import { snippets, follows, users } from "@/db/schema";
 import { eq, inArray, desc, and } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs/server";
-import { SnippetCard } from "./snippet-card";
+import { SocialSnippetCard } from "./social-snippet-card";
 
 export async function Feed() {
   const authenticatedUser = await currentUser();
@@ -50,13 +50,16 @@ export async function Feed() {
             <p className="text-muted-foreground">No snippets found</p>
           </div>
         ) : (
-          feedSnippets.map((snippet) => (
-            <SnippetCard
-              key={snippet.snippets.id}
-              username={snippet.users?.username || ""}
-              {...snippet.snippets}
-            />
-          ))
+          feedSnippets.map(
+            (snippet) =>
+              snippet.users && (
+                <SocialSnippetCard
+                  key={snippet.snippets.id}
+                  user={snippet.users}
+                  {...snippet.snippets}
+                />
+              )
+          )
         )}
       </div>
     </div>
