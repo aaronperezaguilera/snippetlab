@@ -100,7 +100,7 @@ export default async function ProfilePage({
               width={1000}
               height={1000}
               alt="Profile"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-lg"
             />
           )}
         </div>

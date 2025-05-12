@@ -4,12 +4,12 @@ import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { LANGUAGE_ICON } from "@/config";
 import { RelativeTime } from "./relative-time";
-import { Star } from "lucide-react";
+import { Heart } from "lucide-react";
 import CopyButton from "./copy-button";
 
 // Import sólo lectura
 import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { nightOwl } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { type InferSelectModel } from "drizzle-orm";
 import { users } from "@/db/schema";
 import { Author } from "./author";
@@ -57,18 +57,18 @@ export function SocialSnippetCard({
           </Badge>
         </div>
         <div className="flex gap-2 items-center text-muted-foreground">
-          <Star size={20} /> {starsCount} stars
+          <Heart size={20} /> {starsCount} likes
         </div>
       </div>
 
       {/* Código con highlight */}
       <div className="relative">
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#1e1e1e] to-transparent z-40" />
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#061626] to-transparent z-40" />
         <CopyButton value={code} className="absolute z-50 right-3 top-3" />
 
         <SyntaxHighlighter
           language={language}
-          style={vscDarkPlus}
+          style={nightOwl}
           showLineNumbers={false}
           customStyle={{
             margin: 0,
@@ -78,6 +78,7 @@ export function SocialSnippetCard({
             overflow: "auto",
             whiteSpace: "pre-wrap",
             wordBreak: "break-word",
+            fontSize: "14px",
           }}
         >
           {code}

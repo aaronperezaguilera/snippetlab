@@ -9,7 +9,7 @@ import CopyButton from "./copy-button";
 
 // Import sólo lectura
 import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export function SnippetCard({
   username,
@@ -31,8 +31,8 @@ export function SnippetCard({
   isPinned?: boolean;
 }) {
   return (
-    <div className="p-4 border bg-card flex flex-col gap-4 relative">
-      <div className="flex justify-between items-center">
+    <div className="bg-card flex flex-col relative rounded-lg">
+      <div className="flex justify-between items-center p-4 ">
         <div className="flex gap-4 items-center">
           <h2 className="text-lg font-bold">{title}</h2>
           <Badge variant="secondary" className="border border-neutral-700">
@@ -44,12 +44,12 @@ export function SnippetCard({
 
       {/* Código con highlight */}
       <div className="relative">
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#1e1e1e] to-transparent z-40" />
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#061626] to-transparent z-40" />
         <CopyButton value={code} className="absolute z-50 right-3 top-3" />
 
         <SyntaxHighlighter
           language={language}
-          style={vscDarkPlus}
+          style={nightOwl}
           showLineNumbers={false}
           customStyle={{
             margin: 0,
@@ -59,6 +59,7 @@ export function SnippetCard({
             overflow: "auto",
             whiteSpace: "pre-wrap",
             wordBreak: "break-word",
+            fontSize: "14px",
           }}
         >
           {code}
@@ -66,7 +67,7 @@ export function SnippetCard({
       </div>
 
       {/* Pie con idioma y fecha */}
-      <div className="text-sm text-muted-foreground flex justify-between">
+      <div className="text-sm text-muted-foreground flex justify-between p-4 ">
         <div className="flex gap-1 items-center">
           <div className="w-4 h-4">{LANGUAGE_ICON[language]}</div>
           <span>{language[0].toUpperCase() + language.slice(1)}</span>

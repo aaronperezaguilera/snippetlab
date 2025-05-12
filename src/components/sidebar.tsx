@@ -3,10 +3,10 @@ import React, { createContext, useContext, useState } from "react";
 import {
   BookMarked,
   Code2,
+  Heart,
   Home,
   Menu,
   Settings,
-  Star,
   Telescope,
   User,
   X,
@@ -126,7 +126,7 @@ export function Sidebar() {
                 href={`/${user.user?.username}/stars`}
                 className="hover:underline flex items-center gap-2"
               >
-                <Star className="size-4" /> Your stars
+                <Heart className="size-4" /> Your loved snippets
               </Link>
             </li>
             <li>

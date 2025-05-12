@@ -3,7 +3,7 @@
 import { useOptimistic, useTransition } from "react";
 import { Button } from "./ui/button";
 import { updateStar } from "@/app/[username]/snippets/actions";
-import { Star } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Badge } from "./ui/badge";
 
 export function StarButton({
@@ -35,8 +35,8 @@ export function StarButton({
   return (
     <form onSubmit={handleSubmit}>
       <Button type="submit" variant="secondary" disabled={isPending}>
-        <Star fill={isStarred ? "#fafafa" : undefined} />
-        {isStarred ? "Starred" : "Star"}
+        <Heart fill={isStarred ? "#fafafa" : undefined} />
+        {isStarred ? "Liked" : "Like"}
         <Badge variant="secondary">{initialStars}</Badge>
       </Button>
     </form>

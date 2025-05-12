@@ -263,7 +263,7 @@ export const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
           ref={ref}
           dir={dir}
           className={cn(
-            "flex items-center flex-wrap gap-1 px-2 py-1 overflow-hidden ring-1 ring-muted w-full ",
+            "flex items-center flex-wrap gap-1 p-2 overflow-hidden ring-1 ring-muted w-full rounded-lg ",
             {
               "focus-within:ring-ring": activeIndex === -1,
             },
@@ -277,7 +277,7 @@ export const TagsInput = React.forwardRef<HTMLDivElement, TagsInputProps>(
               aria-disabled={disableButton}
               data-active={activeIndex === index}
               className={cn(
-                "relative px-1 flex items-center gap-1 data-[active='true']:ring-2 data-[active='true']:ring-muted-foreground truncate aria-disabled:opacity-50 aria-disabled:cursor-not-allowed"
+                "relative px-1 border border-input flex items-center gap-1 data-[active='true']:ring-2 data-[active='true']:ring-muted-foreground truncate aria-disabled:opacity-50 aria-disabled:cursor-not-allowed"
               )}
               variant={"secondary"}
             >

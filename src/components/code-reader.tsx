@@ -13,6 +13,16 @@ export function CodeReader({ language, code }: CodeReaderProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleEditorDidMount: OnMount = (editor, monaco) => {
+    import("monaco-themes/themes/Night Owl.json").then((data) => {
+      monaco.editor.defineTheme("nightOwl", {
+        base: "vs-dark",
+        inherit: data.inherit,
+        rules: data.rules,
+        colors: data.colors,
+      });
+      monaco.editor.setTheme("nightOwl");
+    });
+
     const lineHeight = editor.getOption(monaco.editor.EditorOption.lineHeight);
     const minLines = 3;
     const MIN_HEIGHT = lineHeight * minLines;
@@ -39,11 +49,11 @@ export function CodeReader({ language, code }: CodeReaderProps) {
   return (
     <div
       ref={wrapperRef}
-      className="w-full bg-[#1e1e1e] py-2 pr-2 border relative"
+      className="w-full bg-[#061626] py-2 pr-2 rounded-lg relative"
     >
       <CopyButton value={code} className="absolute z-50 right-3 top-3" />
       <Editor
-        theme="vs-dark"
+        theme="nightOwl"
         language={language}
         defaultValue={code}
         options={{

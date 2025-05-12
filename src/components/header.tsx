@@ -19,7 +19,7 @@ export async function Header() {
   const user = await currentUser();
 
   return (
-    <header className="flex justify-between items-center p-4 gap-4 h-16 bg-background">
+    <header className="flex justify-between items-center p-4 gap-4 h-16">
       <div className="flex items-center gap-4">
         {user && <SidebarToggleButton />}
         <Link href="/" className="flex gap-2 items-center">
@@ -55,7 +55,7 @@ export async function Header() {
                   alt={`${user?.username || "User"}'s profile picture`}
                   width={100}
                   height={100}
-                  className="w-9 h-9 border"
+                  className="w-9 h-9 border rounded-lg"
                 />
               </DropdownMenuTrigger>
               <DropdownMenuContent side="bottom" align="end">
