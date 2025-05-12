@@ -9,16 +9,17 @@ export function SnippetNav({
 }: {
   username?: string;
   snippet?: string;
-  active: "code" | "versions" | "comments";
+  active?: "code" | "versions" | "comments";
 }) {
   return (
     <div className="flex gap-2 items-center w-fit">
       <Link
         href={`/${username}/snippets/${snippet}`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors flex gap-2 items-center",
+          "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
             "border-foreground hover:bg-transparent": active === "code",
+            "hover:bg-neutral-800": active && active !== "code",
           }
         )}
       >
@@ -27,9 +28,10 @@ export function SnippetNav({
       <Link
         href={`/${username}/snippets/${snippet}/versions`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors flex gap-2 items-center",
+          "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
             "border-foreground hover:bg-transparent": active === "versions",
+            "hover:bg-neutral-800": active && active !== "versions",
           }
         )}
       >
@@ -38,9 +40,10 @@ export function SnippetNav({
       <Link
         href={`/${username}/snippets/${snippet}/comments`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors flex gap-2 items-center",
+          "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
             "border-foreground hover:bg-transparent": active === "comments",
+            "hover:bg-neutral-800": active && active !== "comments",
           }
         )}
       >

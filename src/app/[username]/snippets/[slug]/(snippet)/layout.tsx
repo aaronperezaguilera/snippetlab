@@ -1,19 +1,17 @@
-// app/snippet/[id]/page.tsx (o donde renderees el snippet)
-import { comments, snippets, users } from "@/db/schema";
 import { db } from "@/db/drizzle";
-import { currentUser } from "@clerk/nextjs/server";
-import { eq, desc } from "drizzle-orm";
-import CommentCard from "@/components/comment-card";
-import CommentForm from "@/components/comment-form";
-import { Button } from "@/components/ui/button";
+import { snippets, users } from "@/db/schema";
+import { and, eq } from "drizzle-orm";
 import Link from "next/link";
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { SnippetNav } from "@/components/snippet-nav";
+import { currentUser } from "@clerk/nextjs/server";
+import Image from "next/image";
 
-export default async function EditSnippet({
+export default async function SnippetLayout({
+  children,
   params,
 }: {
+  children: React.ReactNode;
   params: Promise<{ username: string; slug: string }>;
 }) {
   const { username, slug } = await params;
@@ -28,14 +26,11 @@ export default async function EditSnippet({
   const snippet = await db
     .select()
     .from(snippets)
-    .where(eq(snippets.slug, slug));
+    .where(and(eq(snippets.slug, slug), eq(snippets.userId, author[0].id)));
 
   const currentSnippet = snippet[0];
 
-  if (
-    currentSnippet.visibility === "private" &&
-    authenticatedUser?.id !== currentSnippet.userId
-  ) {
+  if (snippet.length === 0) {
     return (
       <div className="container mx-auto mt-16 ">
         <h1 className="text-2xl font-bold">Snippet not found</h1>
@@ -43,12 +38,16 @@ export default async function EditSnippet({
     );
   }
 
-  // Traer comentarios existentes
-  const snippetComments = await db
-    .select()
-    .from(comments)
-    .where(eq(comments.snippetId, currentSnippet.id))
-    .orderBy(desc(comments.createdAt));
+  if (
+    currentSnippet.visibility === "private" &&
+    authenticatedUser?.id !== author[0].id
+  ) {
+    return (
+      <div className="container mx-auto mt-16">
+        <h1 className="text-2xl font-bold">Snippet not found</h1>
+      </div>
+    );
+  }
 
   return (
     <main className="mt-16 grid grid-cols-[1fr_3fr_1fr] gap-16 relative">
@@ -100,22 +99,7 @@ export default async function EditSnippet({
           </>
         )}
       </section>
-      <section className="flex flex-col gap-4 px-16">
-        <SnippetNav
-          username={username}
-          snippet={currentSnippet.slug}
-          active="comments"
-        />
-        <h1 className="text-2xl font-bold">Comments</h1>
-        <CommentForm snippetId={currentSnippet.id} />
-        {snippetComments.length === 0 ? (
-          <p className="text-muted-foreground mt-4">
-            Be the first to comment on this snippet!
-          </p>
-        ) : (
-          snippetComments.map((c) => <CommentCard key={c.id} comment={c} />)
-        )}
-      </section>
+      {children}
       <section className="flex flex-col gap-4 pr-16 sticky top-16 h-fit">
         <h2 className="text-2xl font-semibold">Summary</h2>
         <p>

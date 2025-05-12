@@ -1,5 +1,5 @@
 "use client";
-import { addComment } from "@/app/[username]/snippets/[slug]/comments/actions";
+import { addComment } from "@/app/[username]/snippets/[slug]/(snippet)/comments/actions";
 import { useState, FormEvent } from "react";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
