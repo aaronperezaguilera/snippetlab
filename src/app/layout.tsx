@@ -36,7 +36,7 @@ export default async function RootLayout({
     >
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased dark text-[#e1edf4]`}
         >
           <SidebarProvider>
             <Header />
