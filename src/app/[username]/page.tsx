@@ -1,10 +1,11 @@
+import { FollowButton } from "@/components/follow-button";
 import { ProfileNav } from "@/components/profile-nav";
 import { SnippetCard } from "@/components/snippet-card";
 import { Button } from "@/components/ui/button";
 import { db } from "@/db/drizzle";
-import { pins, snippets, users } from "@/db/schema";
+import { follows, pins, snippets, users } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
-import { and, eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import Image from "next/image";
 
 export default async function ProfilePage({
@@ -16,11 +17,36 @@ export default async function ProfilePage({
 
   const authenticatedUser = await currentUser();
 
+  const followersSubquery = db
+    .select({
+      followingId: follows.followingId,
+      count: sql<number>`COUNT(*)`.as("followers"),
+    })
+    .from(follows)
+    .groupBy(follows.followingId)
+    .as("followers_count");
+
+  const followingSubquery = db
+    .select({
+      followerId: follows.followerId,
+      count: sql<number>`COUNT(*)`.as("following"),
+    })
+    .from(follows)
+    .groupBy(follows.followerId)
+    .as("following_count");
+
   const user = await db
-    .select()
+    .select({
+      id: users.id,
+      username: users.username,
+      image_url: users.image_url,
+      followers: followersSubquery.count,
+      following: followingSubquery.count,
+    })
     .from(users)
-    .where(eq(users.username, username))
-    .execute();
+    .leftJoin(followersSubquery, eq(users.id, followersSubquery.followingId))
+    .leftJoin(followingSubquery, eq(users.id, followingSubquery.followerId))
+    .where(eq(users.username, username));
 
   if (!user[0]) {
     return (
@@ -41,9 +67,21 @@ export default async function ProfilePage({
       and(eq(snippets.id, pins.snippetId), eq(snippets.userId, user[0].id))
     );
 
+  const followed = authenticatedUser?.id
+    ? await db
+        .select()
+        .from(follows)
+        .where(
+          and(
+            eq(follows.followerId, authenticatedUser.id),
+            eq(follows.followingId, user[0].id)
+          )
+        )
+    : [];
+
   return (
     <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
-      <div className="flex flex-col gap-4">
+      <section className="flex flex-col gap-4">
         <div className="w-full aspect-square bg-neutral-600">
           {user[0]?.image_url && (
             <Image
@@ -55,10 +93,22 @@ export default async function ProfilePage({
             />
           )}
         </div>
+        {user[0].id !== authenticatedUser?.id && (
+          <FollowButton
+            id={user[0].id}
+            initialFollowed={followed.length > 0 ? true : false}
+          />
+        )}
         <Button className="w-full" variant="secondary">
           Edit profile
         </Button>
-      </div>
+        <div>
+          <span>{user[0].followers ? user[0].followers : 0} followers</span>
+          <span className="ml-4">
+            {user[0].following ? user[0].following : 0} following
+          </span>
+        </div>
+      </section>
       <div className="flex flex-col gap-4">
         <ProfileNav username={user[0].username} active="profile" />
         <h1 className="text-2xl font-bold">Snippets</h1>

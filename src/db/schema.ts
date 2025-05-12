@@ -60,3 +60,26 @@ export const stars = pgTable("stars", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
 });
+
+export const follows = pgTable("follows", {
+  id: serial("id").primaryKey(),
+  followerId: varchar("follower_id", { length: 191 })
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  followingId: varchar("following_id", { length: 191 })
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const comments = pgTable("comments", {
+  id: serial("id").primaryKey(),
+  snippetId: serial("snippet_id")
+    .notNull()
+    .references(() => snippets.id, { onDelete: "cascade" }),
+  userId: varchar("user_id", { length: 191 })
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});

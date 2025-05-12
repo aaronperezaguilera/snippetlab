@@ -95,12 +95,10 @@ export default async function ProfilePage({
 
   const rows = await getRows();
 
-  const pinnedRows = authenticatedUser?.id
-    ? await db
-        .select({ snippetId: pins.snippetId })
-        .from(pins)
-        .where(eq(pins.userId, authenticatedUser.id))
-    : [];
+  const pinnedRows = await db
+    .select({ snippetId: pins.snippetId })
+    .from(pins)
+    .where(eq(pins.userId, user.id));
 
   const pinnedIds = pinnedRows.map((p) => p.snippetId);
 

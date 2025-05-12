@@ -7,6 +7,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { count, eq } from "drizzle-orm";
+import { upsertUser } from "@/db";
 
 export async function createSnippet(
   value: string | undefined,
@@ -21,6 +22,8 @@ export async function createSnippet(
   };
 
   const user = await currentUser();
+
+  upsertUser(user);
 
   if (!user) {
     throw new Error("User not found");

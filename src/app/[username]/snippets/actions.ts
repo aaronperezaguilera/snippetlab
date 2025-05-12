@@ -5,10 +5,13 @@ import { pins, snippets, stars } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { and, eq } from "drizzle-orm";
+import { upsertUser } from "@/db";
 
 export async function updatePin(id: number, pin: boolean) {
   // 1. Obtener el usuario actual
   const user = await currentUser();
+
+  upsertUser(user);
 
   if (!user) {
     throw new Error("User not found");
@@ -52,6 +55,8 @@ export async function updateStar(id: number, star: boolean) {
   // 1. Obtener el usuario actual
   const user = await currentUser();
 
+  upsertUser(user);
+
   if (!user) {
     throw new Error("User not found");
   }
@@ -64,13 +69,6 @@ export async function updateStar(id: number, star: boolean) {
 
   if (snippet.length === 0) {
     throw new Error("Snippet not found");
-  }
-
-  const currentSnippet = snippet[0];
-
-  // 3. Verificar si el usuario es el propietario del snippet
-  if (userId !== currentSnippet.userId) {
-    throw new Error("You are not the owner of this snippet");
   }
 
   // 4. Actualizar el snippet para marcarlo como "pinned"

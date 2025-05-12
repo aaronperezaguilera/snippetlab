@@ -7,6 +7,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { count, eq } from "drizzle-orm";
+import { upsertUser } from "@/db";
 
 export async function updateSnippet(
   value: string | undefined,
@@ -26,6 +27,8 @@ export async function updateSnippet(
   if (!user) {
     throw new Error("User not found");
   }
+
+  upsertUser(user);
 
   const userId = user.id;
   const username = user.username;
@@ -94,6 +97,8 @@ export async function deleteSnippet(id: number) {
   if (!user) {
     throw new Error("User not found");
   }
+
+  upsertUser(user);
 
   const userId = user.id;
 

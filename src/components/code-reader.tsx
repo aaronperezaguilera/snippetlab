@@ -16,22 +16,19 @@ export function CodeReader({ language, code }: CodeReaderProps) {
     const lineHeight = editor.getOption(monaco.editor.EditorOption.lineHeight);
     const minLines = 3;
     const MIN_HEIGHT = lineHeight * minLines;
-    const MAX_HEIGHT = 785;
 
     if (wrapperRef.current) {
       wrapperRef.current.style.minHeight = `${MIN_HEIGHT}px`;
-      wrapperRef.current.style.maxHeight = `${MAX_HEIGHT}px`;
       wrapperRef.current.style.overflowY = "hidden";
     }
 
     const updateWrapperHeight = () => {
       const contentHeight = editor.getContentHeight();
       // nunca menos que MIN, ni más que MAX
-      const h = Math.min(Math.max(contentHeight, MIN_HEIGHT), MAX_HEIGHT);
+      const h = Math.min(Math.max(contentHeight, MIN_HEIGHT));
       if (wrapperRef.current) {
-        wrapperRef.current.style.height = `${h}px`;
-        wrapperRef.current.style.overflowY =
-          contentHeight > MAX_HEIGHT ? "auto" : "hidden";
+        wrapperRef.current.style.height = `${h + 20}px`;
+        wrapperRef.current.style.overflowY = "hidden";
       }
     };
 
@@ -49,7 +46,6 @@ export function CodeReader({ language, code }: CodeReaderProps) {
         theme="vs-dark"
         language={language}
         defaultValue={code}
-        height="100%"
         options={{
           automaticLayout: true,
           minimap: { enabled: false },

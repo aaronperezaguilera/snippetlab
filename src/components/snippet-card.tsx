@@ -28,7 +28,7 @@ export function SnippetCard({
   visibility: string;
   language: string;
   updatedAt: Date;
-  isPinned: boolean;
+  isPinned?: boolean;
 }) {
   return (
     <div className="p-4 border bg-card flex flex-col gap-4 relative">

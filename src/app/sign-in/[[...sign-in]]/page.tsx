@@ -30,28 +30,6 @@ export default function SignInPage() {
                   </CardHeader>
                   <CardContent className="grid gap-y-4">
                     <div className="grid grid-cols-2 gap-x-4">
-                      <Clerk.Connection name="google" asChild>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          type="button"
-                          disabled={isGlobalLoading}
-                        >
-                          <Clerk.Loading scope="provider:google">
-                            {(isLoading) =>
-                              isLoading ? (
-                                <Icons.spinner className="size-4 animate-spin" />
-                              ) : (
-                                <>
-                                  <Icons.google className="mr-2 size-4" />
-                                  Google
-                                </>
-                              )
-                            }
-                          </Clerk.Loading>
-                        </Button>
-                      </Clerk.Connection>
-
                       <Clerk.Connection name="github" asChild>
                         <Button
                           size="sm"
@@ -73,6 +51,27 @@ export default function SignInPage() {
                           </Clerk.Loading>
                         </Button>
                       </Clerk.Connection>
+                      <Clerk.Connection name="google" asChild>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          type="button"
+                          disabled={isGlobalLoading}
+                        >
+                          <Clerk.Loading scope="provider:google">
+                            {(isLoading) =>
+                              isLoading ? (
+                                <Icons.spinner className="size-4 animate-spin" />
+                              ) : (
+                                <>
+                                  <Icons.google className="mr-2 size-4" />
+                                  Google
+                                </>
+                              )
+                            }
+                          </Clerk.Loading>
+                        </Button>
+                      </Clerk.Connection>
                     </div>
                     <p className="flex items-center gap-x-3 text-sm text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
                       or
@@ -88,19 +87,26 @@ export default function SignInPage() {
                     </Clerk.Field>
                   </CardContent>
                   <CardFooter>
-                    <SignIn.Action submit asChild>
-                      <Button disabled={isGlobalLoading} className="w-full">
-                        <Clerk.Loading>
-                          {(isLoading) =>
-                            isLoading ? (
-                              <Icons.spinner className="size-4 animate-spin" />
-                            ) : (
-                              "Continue"
-                            )
-                          }
-                        </Clerk.Loading>
+                    <div className="grid w-full gap-y-4">
+                      <SignIn.Action submit asChild>
+                        <Button disabled={isGlobalLoading} className="w-full">
+                          <Clerk.Loading>
+                            {(isLoading) =>
+                              isLoading ? (
+                                <Icons.spinner className="size-4 animate-spin" />
+                              ) : (
+                                "Continue"
+                              )
+                            }
+                          </Clerk.Loading>
+                        </Button>
+                      </SignIn.Action>
+                      <Button variant="link" size="sm" asChild>
+                        <Clerk.Link navigate="sign-up">
+                          Don&apos;t have an account? Sign up
+                        </Clerk.Link>
                       </Button>
-                    </SignIn.Action>
+                    </div>
                   </CardFooter>
                 </Card>
               </SignIn.Step>

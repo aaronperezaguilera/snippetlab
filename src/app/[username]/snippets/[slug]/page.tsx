@@ -1,5 +1,4 @@
 import { CodeReader } from "@/components/code-reader";
-import { ProfileNav } from "@/components/profile-nav";
 import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
 import { pins, snippets, stars, users } from "@/db/schema";
@@ -13,6 +12,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { ShareButton } from "@/components/share";
 import { PinButton } from "@/components/pin-button";
 import { StarButton } from "@/components/star-button";
+import { SnippetNav } from "@/components/snippet-nav";
 
 export default async function SnippetPage({
   params,
@@ -31,10 +31,10 @@ export default async function SnippetPage({
   const snippet = await db
     .select()
     .from(snippets)
-    .where(and(eq(snippets.slug, slug), eq(snippets.userId, author[0].id)))
-    .execute();
+    .where(and(eq(snippets.slug, slug), eq(snippets.userId, author[0].id)));
 
   const currentSnippet = snippet[0];
+
   if (snippet.length === 0) {
     return (
       <div className="container mx-auto mt-16 ">
@@ -61,7 +61,7 @@ export default async function SnippetPage({
     .where(
       and(
         eq(stars.snippetId, currentSnippet.id),
-        eq(stars.userId, author[0].id)
+        eq(stars.userId, authenticatedUser?.id || "")
       )
     );
   let starred = false;
@@ -86,8 +86,8 @@ export default async function SnippetPage({
   }
 
   return (
-    <main className="container mx-auto mt-16 grid grid-cols-[1fr_3fr] gap-16 ">
-      <section className="flex flex-col gap-4">
+    <main className="mt-16 grid grid-cols-[1fr_3fr_1fr] gap-16 relative">
+      <section className="flex flex-col gap-4 pl-16 sticky top-16 h-fit">
         <h2 className="text-2xl font-semibold">About</h2>
         <span className="text-muted-foreground">Author</span>
         <div className="flex gap-3 items-center">
@@ -135,8 +135,12 @@ export default async function SnippetPage({
           </>
         )}
       </section>
-      <section className="flex flex-col gap-4">
-        <ProfileNav active="snippets" username={username} />
+      <section className="flex flex-col gap-4 px-16">
+        <SnippetNav
+          active="code"
+          username={username}
+          snippet={currentSnippet.slug}
+        />
         <header className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
@@ -182,7 +186,9 @@ export default async function SnippetPage({
           language={currentSnippet.language}
           code={currentSnippet.code}
         />
-        <h2 className="text-2xl font-bold mb-2">Summary</h2>
+      </section>
+      <section className="flex flex-col gap-4 pr-16 sticky top-16 h-fit">
+        <h2 className="text-2xl font-semibold">Summary</h2>
         <p>
           {currentSnippet.summary
             ? currentSnippet.summary
