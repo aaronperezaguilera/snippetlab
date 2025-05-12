@@ -31,7 +31,7 @@ export function SnippetCard({
   isPinned?: boolean;
 }) {
   return (
-    <div className="bg-[#061626] p-4 flex flex-col relative rounded-lg gap-4">
+    <div className="bg-[#05101b] p-4 flex flex-col relative rounded-lg gap-4">
       <div className="flex justify-between items-center ">
         <div className="flex gap-4 items-center">
           <h2 className="text-lg font-bold">{title}</h2>
