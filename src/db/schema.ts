@@ -16,6 +16,9 @@ export const users = pgTable("users", {
   last_name: varchar("last_name", { length: 100 }),
   image_url: text("avatar_url"),
   bio: text("bio"),
+  website: text("website"),
+  github: text("github"),
+  x: text("x"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
@@ -27,6 +30,7 @@ export const visibilityEnum = pgEnum("visibility", ["public", "private"]);
 export const snippets = pgTable("snippets", {
   id: serial("id").primaryKey(),
   slug: varchar("slug").notNull(),
+  filename: varchar("filename", { length: 100 }).notNull(),
   title: varchar("title", { length: 100 }).notNull(),
   language: varchar("language", { length: 50 }).notNull(),
   code: text("code").notNull(),
@@ -37,7 +41,7 @@ export const snippets = pgTable("snippets", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   pinned: boolean("pinned").default(false).notNull(),
-  starsCount: integer("stars_count").default(0).notNull(),
+  likesCount: integer("likes_count").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
@@ -45,7 +49,7 @@ export const snippets = pgTable("snippets", {
     .notNull(),
 });
 
-export const stars = pgTable("stars", {
+export const likes = pgTable("likes", {
   id: serial("id").primaryKey(),
   snippetId: serial("snippet_id")
     .notNull()

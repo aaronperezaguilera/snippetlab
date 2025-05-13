@@ -69,7 +69,7 @@ export default async function ProfilePage({
       orderByClause = asc(snippets.createdAt);
       break;
     case "popular":
-      orderByClause = desc(snippets.starsCount);
+      orderByClause = desc(snippets.likesCount);
       break;
     default:
       orderByClause = desc(snippets.createdAt);
@@ -130,7 +130,12 @@ export default async function ProfilePage({
             {rows.map((snippet) =>
               snippet.userId === authenticatedUser?.id ||
               snippet.visibility === "public" ? (
-                <SnippetCard key={snippet.id} author={user} {...snippet} />
+                <SnippetCard
+                  key={snippet.id}
+                  author={user}
+                  {...snippet}
+                  snippet={snippet}
+                />
               ) : null
             )}
           </div>

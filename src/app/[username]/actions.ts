@@ -43,5 +43,43 @@ export async function updateFollow(id: string, following: boolean) {
   // 5. Revalidar la ruta para mostrar los cambios
   revalidatePath(`/${user[0].username}`);
   revalidatePath(`/${username}`);
-  revalidatePath(`/$`);
+  revalidatePath(`/`);
+}
+
+export async function updateProfile(formData: FormData) {
+  const rawFormData = {
+    bio: formData.get("bio"),
+    website: formData.get("website"),
+    github: formData.get("github"),
+    x: formData.get("x"),
+  };
+
+  const authenticatedUser = await currentUser();
+
+  upsertUser(authenticatedUser);
+
+  if (!authenticatedUser) {
+    throw new Error("User not found");
+  }
+
+  const userId = authenticatedUser.id;
+  const username = authenticatedUser.username;
+
+  const user = await db.select().from(users).where(eq(users.id, userId));
+
+  if (user.length === 0) {
+    throw new Error("User not found");
+  }
+
+  await db
+    .update(users)
+    .set({
+      bio: rawFormData.bio as string,
+      website: rawFormData.website as string,
+      github: rawFormData.github as string,
+      x: rawFormData.x as string,
+    })
+    .where(eq(users.id, userId));
+
+  revalidatePath(`/${username}`);
 }

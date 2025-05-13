@@ -123,7 +123,7 @@ export function Sidebar() {
             </li>
             <li>
               <Link
-                href={`/${user.user?.username}/stars`}
+                href={`/${user.user?.username}/likes`}
                 className="hover:underline flex items-center gap-2"
               >
                 <Heart className="size-4" /> Your loved snippets

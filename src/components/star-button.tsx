@@ -9,11 +9,11 @@ import { Badge } from "./ui/badge";
 export function StarButton({
   id,
   initialStarred,
-  initialStars,
+  initiallikes,
 }: {
   id: number;
   initialStarred: boolean;
-  initialStars: number;
+  initiallikes: number;
 }) {
   const [isStarred, addOptimisticStar] = useOptimistic(
     initialStarred,
@@ -37,7 +37,7 @@ export function StarButton({
       <Button type="submit" variant="secondary" disabled={isPending}>
         <Heart fill={isStarred ? "#fafafa" : undefined} />
         {isStarred ? "Liked" : "Like"}
-        <Badge variant="secondary">{initialStars}</Badge>
+        <Badge variant="secondary">{initiallikes}</Badge>
       </Button>
     </form>
   );

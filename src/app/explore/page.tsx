@@ -50,7 +50,7 @@ export default async function ExplorePage({
       orderByClause = asc(snippets.createdAt);
       break;
     case "popular":
-      orderByClause = desc(snippets.starsCount);
+      orderByClause = desc(snippets.likesCount);
       break;
     default:
       orderByClause = desc(snippets.createdAt);
@@ -86,8 +86,8 @@ export default async function ExplorePage({
                 <SnippetCard
                   key={snip.snippets.id}
                   author={snip.users}
+                  snippet={snip.snippets}
                   showAuthor
-                  {...snip.snippets}
                 />
               )
           )}

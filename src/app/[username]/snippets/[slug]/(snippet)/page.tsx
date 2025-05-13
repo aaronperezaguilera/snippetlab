@@ -1,7 +1,7 @@
 import { CodeReader } from "@/components/code-reader";
 import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
-import { snippets, stars, users } from "@/db/schema";
+import { snippets, likes, users } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -44,11 +44,11 @@ export default async function SnippetPage({
 
   const starredSnippets = await db
     .select()
-    .from(stars)
+    .from(likes)
     .where(
       and(
-        eq(stars.snippetId, currentSnippet.id),
-        eq(stars.userId, authenticatedUser?.id || "")
+        eq(likes.snippetId, currentSnippet.id),
+        eq(likes.userId, authenticatedUser?.id || "")
       )
     );
 
@@ -92,7 +92,7 @@ export default async function SnippetPage({
                 <StarButton
                   id={currentSnippet.id}
                   initialStarred={starredSnippets.length > 0}
-                  initialStars={currentSnippet.starsCount}
+                  initiallikes={currentSnippet.likesCount}
                 />
               </>
             )}
@@ -115,6 +115,7 @@ export default async function SnippetPage({
         </div>
       </header>
       <CodeReader
+        filename={currentSnippet.filename}
         language={currentSnippet.language}
         code={currentSnippet.code}
       />

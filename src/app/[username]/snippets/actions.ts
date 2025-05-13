@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db/drizzle";
-import { snippets, stars } from "@/db/schema";
+import { snippets, likes } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { and, eq } from "drizzle-orm";
@@ -70,14 +70,14 @@ export async function updateStar(id: number, star: boolean) {
   // 4. Actualizar el snippet para marcarlo como "pinned"
 
   if (star) {
-    await db.insert(stars).values({
+    await db.insert(likes).values({
       snippetId: id,
       userId: userId,
     });
   } else {
     await db
-      .delete(stars)
-      .where(and(eq(stars.snippetId, id), eq(stars.userId, userId)));
+      .delete(likes)
+      .where(and(eq(likes.snippetId, id), eq(likes.userId, userId)));
   }
 
   // 5. Revalidar la ruta para mostrar los cambios

@@ -88,7 +88,7 @@ export function SnippetForm({
         />
         <Label>Language:</Label>
         <Select
-          value={defaultLanguage || language}
+          defaultValue={defaultLanguage || language}
           onValueChange={(val) => setLanguage(val as Language)}
           name="language"
         >
@@ -104,6 +104,14 @@ export function SnippetForm({
             ))}
           </SelectContent>
         </Select>
+        <Label>File name:</Label>
+        <Input
+          type="text"
+          placeholder="filename.ts"
+          defaultValue={title}
+          name="filename"
+          required
+        />
         <Label>Code:</Label>
         <CodeEditor code={value} language={language} onChange={setValue} />
         <Label>Tags:</Label>

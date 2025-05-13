@@ -16,6 +16,7 @@ export async function createSnippet(
 ) {
   const rawFormData = {
     title: formData.get("title"),
+    filename: formData.get("filename"),
     language: formData.get("language"),
     visibility: formData.get("visibility"),
     summary: formData.get("summary"),
@@ -58,6 +59,7 @@ export async function createSnippet(
 
   await db.insert(snippets).values({
     title: rawFormData.title as string,
+    filename: rawFormData.filename as string,
     slug,
     language: rawFormData.language as string,
     code: value as string,

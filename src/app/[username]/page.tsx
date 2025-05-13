@@ -1,7 +1,7 @@
+import { EditProfileForm } from "@/components/edit-profile";
 import { FollowButton } from "@/components/follow-button";
 import { ProfileNav } from "@/components/profile-nav";
 import { SnippetCard } from "@/components/snippet-card";
-import { Button } from "@/components/ui/button";
 import { db } from "@/db/drizzle";
 import { follows, snippets, users } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
@@ -37,14 +37,7 @@ export default async function ProfilePage({
 
   const user = await db
     .select({
-      id: users.id,
-      username: users.username,
-      first_name: users.first_name,
-      last_name: users.last_name,
-      image_url: users.image_url,
-      bio: users.bio,
-      createdAt: users.createdAt,
-      updatedAt: users.updatedAt,
+      users,
       followers: followersSubquery.count,
       following: followingSubquery.count,
     })
@@ -61,7 +54,7 @@ export default async function ProfilePage({
     );
   }
 
-  const author = user[0];
+  const author = user[0].users;
 
   const snippetsList = await db
     .select()
@@ -75,18 +68,18 @@ export default async function ProfilePage({
         .where(
           and(
             eq(follows.followerId, authenticatedUser.id),
-            eq(follows.followingId, user[0].id)
+            eq(follows.followingId, user[0].users.id)
           )
         )
     : [];
 
   return (
     <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
-      <section className="flex flex-col gap-4">
-        <div className="w-full aspect-square bg-neutral-600">
-          {user[0]?.image_url && (
+      <section className="flex flex-col gap-4 overflow-hidden">
+        <div className="aspect-square bg-neutral-600">
+          {author.image_url && (
             <Image
-              src={user[0]?.image_url as string}
+              src={author.image_url as string}
               width={1000}
               height={1000}
               alt="Profile"
@@ -94,15 +87,16 @@ export default async function ProfilePage({
             />
           )}
         </div>
-        {user[0].id !== authenticatedUser?.id && (
+        {author.id !== authenticatedUser?.id && (
           <FollowButton
-            id={user[0].id}
+            id={author.id}
             initialFollowed={followed.length > 0 ? true : false}
           />
         )}
-        <Button className="w-full" variant="secondary">
-          Edit profile
-        </Button>
+
+        {author.id === authenticatedUser?.id && (
+          <EditProfileForm user={author} />
+        )}
         <div>
           <span>{user[0].followers ? user[0].followers : 0} followers</span>
           <span className="ml-4">
@@ -111,15 +105,20 @@ export default async function ProfilePage({
         </div>
       </section>
       <div className="flex flex-col gap-4">
-        <ProfileNav username={user[0].username} active="profile" />
-        <h1 className="text-2xl font-bold">Snippets</h1>
+        <ProfileNav username={author.username} active="profile" />
+        <h1 className="text-2xl font-bold">Pinned</h1>
         {snippetsList.length > 0 ? (
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-2 gap-4">
             {snippetsList.map(
               (snippet) =>
                 (snippet.userId == authenticatedUser?.id ||
                   snippet.visibility === "public") && (
-                  <SnippetCard key={snippet.id} author={author} {...snippet} />
+                  <SnippetCard
+                    key={snippet.id}
+                    showCode={false}
+                    author={author}
+                    snippet={snippet}
+                  />
                 )
             )}
           </div>

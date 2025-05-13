@@ -5,11 +5,12 @@ import Editor, { OnMount } from "@monaco-editor/react";
 import CopyButton from "./copy-button";
 
 interface CodeReaderProps {
+  filename: string;
   language: string;
   code: string;
 }
 
-export function CodeReader({ language, code }: CodeReaderProps) {
+export function CodeReader({ filename, language, code }: CodeReaderProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleEditorDidMount: OnMount = (editor, monaco) => {
@@ -47,35 +48,40 @@ export function CodeReader({ language, code }: CodeReaderProps) {
   };
 
   return (
-    <div
-      ref={wrapperRef}
-      className="w-full bg-[#061626] py-2 pr-2 rounded-lg relative"
-    >
-      <CopyButton value={code} className="absolute z-50 right-3 top-3" />
-      <Editor
-        theme="nightOwl"
-        language={language}
-        defaultValue={code}
-        options={{
-          automaticLayout: true,
-          minimap: { enabled: false },
-          scrollbar: {
-            vertical: "hidden",
-            horizontal: "hidden",
-            useShadows: false,
-          },
-          stickyScroll: {
-            enabled: false,
-          },
-          overviewRulerLanes: 0,
-          overviewRulerBorder: false,
-          renderLineHighlight: "none",
-          fontSize: 14,
-          scrollBeyondLastLine: false,
-          readOnly: true,
-        }}
-        onMount={handleEditorDidMount}
-      />
+    <div>
+      <div className="px-4 bg-[#05121f] rounded-t-lg py-2 border-b border-b-primary/10">
+        {filename}
+      </div>
+      <div
+        ref={wrapperRef}
+        className="w-full bg-[#061626] py-2 pr-2 rounded-b-lg relative"
+      >
+        <CopyButton value={code} className="absolute z-50 right-3 top-3" />
+        <Editor
+          theme="nightOwl"
+          language={language}
+          defaultValue={code}
+          options={{
+            automaticLayout: true,
+            minimap: { enabled: false },
+            scrollbar: {
+              vertical: "hidden",
+              horizontal: "hidden",
+              useShadows: false,
+            },
+            stickyScroll: {
+              enabled: false,
+            },
+            overviewRulerLanes: 0,
+            overviewRulerBorder: false,
+            renderLineHighlight: "none",
+            fontSize: 14,
+            scrollBeyondLastLine: false,
+            readOnly: true,
+          }}
+          onMount={handleEditorDidMount}
+        />
+      </div>
     </div>
   );
 }

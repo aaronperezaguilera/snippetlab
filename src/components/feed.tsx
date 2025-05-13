@@ -57,7 +57,7 @@ export async function Feed() {
                   key={snippet.snippets.id}
                   author={snippet.users}
                   showAuthor
-                  {...snippet.snippets}
+                  snippet={snippet.snippets}
                 />
               )
           )
