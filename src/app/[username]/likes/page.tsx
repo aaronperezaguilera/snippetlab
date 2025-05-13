@@ -1,12 +1,11 @@
+import { Profile } from "@/components/profile";
 import { ProfileNav } from "@/components/profile-nav";
 import { SnippetCard } from "@/components/snippet-card";
-import { Button } from "@/components/ui/button";
 import { db } from "@/db/drizzle";
 import { likes, snippets, users } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function LikesPage({
@@ -45,25 +44,8 @@ export default async function LikesPage({
 
   return (
     <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
-      {/* … panel izquierdo con avatar y botón “Edit” … */}
-      <div className="flex flex-col gap-4 w-full">
-        <div className="w-full aspect-square bg-neutral-600">
-          {user.image_url && (
-            <Image
-              src={user.image_url}
-              width={1000}
-              height={1000}
-              alt="Profile"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          )}
-        </div>
-        <Button className="w-full" variant="secondary">
-          Edit profile
-        </Button>
-      </div>
+      <Profile username={username} />
 
-      {/* … lista de snippets … */}
       <div className="flex flex-col gap-4 overflow-hidden">
         <ProfileNav username={user.username} active="likes" />
         <h1 className="text-2xl font-bold">Liked snippets</h1>

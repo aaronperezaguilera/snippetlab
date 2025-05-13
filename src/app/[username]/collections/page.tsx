@@ -1,76 +1,81 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { PlusIcon } from "lucide-react";
+import { Profile } from "@/components/profile";
+import { ProfileNav } from "@/components/profile-nav";
+import { SnippetCard } from "@/components/snippet-card";
+import { db } from "@/db/drizzle";
+import { likes, snippets, users } from "@/db/schema";
+import { currentUser } from "@clerk/nextjs/server";
+import { eq } from "drizzle-orm";
+import { unstable_cache } from "next/cache";
 import Link from "next/link";
 
-export default function SnippetsPage() {
+export default async function LikesPage({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
+  const { username } = await params;
+
+  const authenticatedUser = await currentUser();
+
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(eq(users.username, username));
+
+  if (!user) {
+    return (
+      <div className="container mx-auto mt-16">
+        <h1 className="text-2xl font-bold">User not found</h1>
+      </div>
+    );
+  }
+
+  const getRows = unstable_cache(async () => {
+    return await db
+      .select()
+      .from(likes)
+      .leftJoin(snippets, eq(likes.snippetId, snippets.id))
+      .leftJoin(users, eq(snippets.userId, users.id))
+      .where(eq(likes.userId, user.id))
+      .groupBy(likes.id, snippets.id, users.id);
+  }, [`${username}-likes`]);
+
+  const rows = await getRows();
+
   return (
     <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
-      <div className="flex flex-col gap-4">
-        <div className="w-full aspect-square bg-neutral-600"></div>
-        <Button className="w-full" variant="secondary">
-          Edit profile
-        </Button>
-      </div>
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-2 border p-1 items-center w-fit">
-          <Link href="/user" className="px-2 border border-transparent">
-            Profile
-          </Link>
-          <Link
-            href="/user/snippets"
-            className="px-2 border border-transparent"
-          >
-            Snippets
-          </Link>
-          <Link href="/user/collections" className="px-2 border bg-neutral-900">
-            Collections
-          </Link>
-        </div>
-        <h1 className="text-2xl font-bold">Snippets</h1>
-        <div className="flex gap-2">
-          <Input placeholder="Find a snippet..." />
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button>
-            <PlusIcon /> Create
-          </Button>
-        </div>
+      <Profile username={username} />
+
+      <div className="flex flex-col gap-4 overflow-hidden">
+        <ProfileNav username={user.username} active="collections" />
+        <h1 className="text-2xl font-bold">Collections</h1>
+
+        {rows.length > 0 ? (
+          <div className="flex flex-col gap-4">
+            {rows.map(
+              (row) =>
+                row.snippets &&
+                row.users &&
+                (row.snippets.userId === authenticatedUser?.id ||
+                row.snippets.visibility === "public" ? (
+                  <SnippetCard
+                    key={row.snippets.id}
+                    author={row.users}
+                    {...row.snippets}
+                    snippet={row.snippets}
+                    showAuthor
+                  />
+                ) : null)
+            )}
+          </div>
+        ) : (
+          <p>
+            No liked snippets found.{" "}
+            <Link href="/explore" className="underline">
+              Start exploring
+            </Link>
+          </p>
+        )}
       </div>
     </main>
   );
