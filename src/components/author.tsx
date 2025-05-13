@@ -8,11 +8,11 @@ type User = InferSelectModel<typeof users>;
 
 export function Author({ author }: { author: User }) {
   return (
-    <div className="flex gap-3 items-center z-50">
+    <div className="flex gap-3 items-center">
       <Button
         variant="ghost"
         asChild
-        className="pr-4 pl-2 py-2 h-full -translate-x-2"
+        className="pr-4 pl-2 py-2 h-full -translate-x-2 w-fit z-50"
       >
         <Link href={`/${author.username}`} className="flex gap-3 items-center">
           {author.image_url && (

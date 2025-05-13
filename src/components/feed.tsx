@@ -2,7 +2,7 @@ import { db } from "@/db/drizzle";
 import { snippets, follows, users } from "@/db/schema";
 import { eq, inArray, desc, and } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs/server";
-import { SocialSnippetCard } from "./social-snippet-card";
+import { SnippetCard } from "./snippet-card";
 
 export async function Feed() {
   const authenticatedUser = await currentUser();
@@ -53,9 +53,10 @@ export async function Feed() {
           feedSnippets.map(
             (snippet) =>
               snippet.users && (
-                <SocialSnippetCard
+                <SnippetCard
                   key={snippet.snippets.id}
-                  user={snippet.users}
+                  author={snippet.users}
+                  showAuthor
                   {...snippet.snippets}
                 />
               )

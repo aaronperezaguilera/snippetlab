@@ -4,7 +4,7 @@ import { snippets, users } from "@/db/schema";
 import { eq, desc, and, ne, sql, asc } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs/server";
 import { ExploreFilters } from "@/components/explore-filters";
-import { SocialSnippetCard } from "@/components/social-snippet-card";
+import { SnippetCard } from "@/components/snippet-card";
 
 type SearchParams = {
   search?: string;
@@ -83,9 +83,10 @@ export default async function ExplorePage({
           {recientes.map(
             (snip) =>
               snip.users && (
-                <SocialSnippetCard
+                <SnippetCard
                   key={snip.snippets.id}
-                  user={snip.users}
+                  author={snip.users}
+                  showAuthor
                   {...snip.snippets}
                 />
               )

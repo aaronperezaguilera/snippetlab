@@ -148,8 +148,32 @@ export default function SignUpPage() {
                   <CardHeader>
                     <CardTitle>Continue registration</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <Clerk.Field name="username" className="space-y-2">
+                  <CardContent className="grid gap-y-4">
+                    <div className="flex gap-2">
+                      <Clerk.Field name="firstName" className="space-y-2">
+                        <Clerk.Label asChild>
+                          <Label>First name</Label>
+                        </Clerk.Label>
+                        <Clerk.Input required asChild>
+                          <Input />
+                        </Clerk.Input>
+                        <Clerk.FieldError className="block text-sm text-destructive" />
+                      </Clerk.Field>
+                      <Clerk.Field name="lastName" className="space-y-2">
+                        <Clerk.Label asChild>
+                          <Label>Last name</Label>
+                        </Clerk.Label>
+                        <Clerk.Input required asChild>
+                          <Input />
+                        </Clerk.Input>
+                        <Clerk.FieldError className="block text-sm text-destructive" />
+                      </Clerk.Field>
+                    </div>
+                    <Clerk.Field
+                      name="username"
+                      className="flex flex-col space-y-2"
+                      alwaysShow
+                    >
                       <Clerk.Label>
                         <Label>Username</Label>
                       </Clerk.Label>

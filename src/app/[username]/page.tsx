@@ -39,7 +39,12 @@ export default async function ProfilePage({
     .select({
       id: users.id,
       username: users.username,
+      first_name: users.first_name,
+      last_name: users.last_name,
       image_url: users.image_url,
+      bio: users.bio,
+      createdAt: users.createdAt,
+      updatedAt: users.updatedAt,
       followers: followersSubquery.count,
       following: followingSubquery.count,
     })
@@ -55,6 +60,8 @@ export default async function ProfilePage({
       </div>
     );
   }
+
+  const author = user[0];
 
   const snippetsList = await db
     .select()
@@ -112,12 +119,7 @@ export default async function ProfilePage({
               (snippet) =>
                 (snippet.userId == authenticatedUser?.id ||
                   snippet.visibility === "public") && (
-                  <SnippetCard
-                    isPinned
-                    key={snippet.id}
-                    username={username}
-                    {...snippet}
-                  />
+                  <SnippetCard key={snippet.id} author={author} {...snippet} />
                 )
             )}
           </div>

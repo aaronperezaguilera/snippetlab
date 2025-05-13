@@ -130,13 +130,7 @@ export default async function ProfilePage({
             {rows.map((snippet) =>
               snippet.userId === authenticatedUser?.id ||
               snippet.visibility === "public" ? (
-                <SnippetCard
-                  key={snippet.id}
-                  username={username}
-                  {...snippet}
-                  // marcamos “pin” solo si está pineado por este usuario
-                  isPinned={snippet.pinned}
-                />
+                <SnippetCard key={snippet.id} author={user} {...snippet} />
               ) : null
             )}
           </div>
