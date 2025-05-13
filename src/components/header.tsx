@@ -1,7 +1,7 @@
 import { Logo, LogoMuted } from "./logo";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { ChevronDown, Plus, Settings, User } from "lucide-react";
+import { Bug, ChevronDown, Plus, Settings, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,7 @@ import Image from "next/image";
 import { SidebarToggleButton } from "./sidebar";
 import { SignOutButton } from "./sign-out-button";
 import { CommandMenu } from "./command-menu";
+import { Icons } from "./ui/icons";
 
 export async function Header() {
   const user = await currentUser();
@@ -31,6 +32,15 @@ export async function Header() {
         <CommandMenu />
       </div>
       <div className="flex items-center gap-4">
+        <a
+          href="https://github.com/aaronperezaguilera/snippetlab"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button variant="ghost" size="icon">
+            <Icons.gitHub className="size-6" />
+          </Button>
+        </a>
         {user ? (
           <>
             <DropdownMenu>

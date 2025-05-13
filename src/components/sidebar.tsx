@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState } from "react";
 import {
   BookMarked,
+  Bug,
   Code2,
   Heart,
   Home,
@@ -129,6 +130,16 @@ export function Sidebar() {
                 <Heart className="size-4" /> Your loved snippets
               </Link>
             </li>
+            <div className="w-full h-px bg-border"></div>
+            <li>
+              <Link
+                href={`/explore`}
+                className="hover:underline flex items-center gap-2"
+              >
+                <Telescope className="size-4" />
+                QA Forum
+              </Link>
+            </li>
             <li>
               <Link
                 href={`/explore`}
@@ -147,6 +158,17 @@ export function Sidebar() {
                 <Settings className="size-4" />
                 Account settings
               </Link>
+            </li>
+            <li>
+              <a
+                href="https://github.com/aaronperezaguilera/snippetlab/issues/new"
+                className="hover:underline flex items-center gap-2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Bug className="size-4" />
+                Report a bug
+              </a>
             </li>
           </ul>
         </nav>
