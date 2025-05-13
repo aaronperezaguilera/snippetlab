@@ -31,14 +31,17 @@ export function ExploreFilters() {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  // Get initial values from URL params
   const [languageValue, setLanguageValue] = useState(
     searchParams.get("language") || ""
   );
   const [sortValue, setSortValue] = useState(searchParams.get("sort") || "");
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(
+    searchParams
+      .get("tags")
+      ?.split(",")
+      .map((t) => t.trim()) || []
+  );
 
-  // Update local state when URL params change
   useEffect(() => {
     setLanguageValue(searchParams.get("language") || "");
     setSortValue(searchParams.get("sort") || "");
@@ -72,7 +75,11 @@ export function ExploreFilters() {
     } else {
       params.delete("tags");
     }
-    replace(`${pathname}?${params.toString()}`);
+
+    const query = params.toString();
+    // Si query === "", vamos a pathname sin "?"
+    const newPath = query ? `${pathname}?${query}` : pathname;
+    replace(newPath);
   };
 
   const handleTagClick = (tag: string) => {
@@ -111,7 +118,7 @@ export function ExploreFilters() {
       </Select>
       <TagsInput
         value={tags}
-        onValueChange={setTags}
+        onValueChange={handleTagsChange}
         placeholder="Write or select a tag"
       />
       <div className="flex gap-2 flex-wrap">

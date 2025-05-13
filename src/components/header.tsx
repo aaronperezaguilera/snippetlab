@@ -1,6 +1,5 @@
 import { Logo, LogoMuted } from "./logo";
 import Link from "next/link";
-import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { ChevronDown, Plus, Settings, User } from "lucide-react";
 import {
@@ -14,6 +13,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { SidebarToggleButton } from "./sidebar";
 import { SignOutButton } from "./sign-out-button";
+import { CommandMenu } from "./command-menu";
 
 export async function Header() {
   const user = await currentUser();
@@ -27,8 +27,8 @@ export async function Header() {
           <span className="text-xl font-semibold">SnippetLab</span>
         </Link>
       </div>
-      <div>
-        <Input className="w-2xl" />
+      <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+        <CommandMenu />
       </div>
       <div className="flex items-center gap-4">
         {user ? (

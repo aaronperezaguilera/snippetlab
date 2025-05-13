@@ -91,8 +91,11 @@ export default async function SnippetLayout({
                   key={tag}
                   variant="secondary"
                   className="border border-neutral-700"
+                  asChild
                 >
-                  {tag}
+                  <Link href={`http://localhost:3000/explore?tags=${tag}`}>
+                    {tag}
+                  </Link>
                 </Badge>
               ))}
             </div>

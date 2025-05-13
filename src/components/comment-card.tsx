@@ -51,11 +51,11 @@ export default async function CommentCard({ comment }: { comment: Comment }) {
               </div>
             </Link>
           </Button>
-          <span className="text-muted-foreground">
-            <RelativeTime datetime={comment.createdAt}></RelativeTime>
-          </span>
         </div>
         <p className="mt-1">{comment.content}</p>
+        <span className="text-muted-foreground text-sm">
+          Created <RelativeTime datetime={comment.createdAt}></RelativeTime>
+        </span>
       </CardContent>
     </Card>
   );

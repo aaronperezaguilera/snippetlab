@@ -1,7 +1,7 @@
 // app/explorar/page.tsx
 import { db } from "@/db/drizzle";
 import { snippets, users } from "@/db/schema";
-import { eq, desc, and, ne, sql, asc } from "drizzle-orm";
+import { eq, desc, and, ne, sql, asc, arrayContains, or } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs/server";
 import { ExploreFilters } from "@/components/explore-filters";
 import { SnippetCard } from "@/components/snippet-card";
@@ -33,12 +33,30 @@ export default async function ExplorePage({
   const search = (params_search.search || "").trim().toLowerCase();
   const language = params_search.language || "";
   const sort = params_search.sort || "newest";
+  const tags = params_search.tags || "";
+
+  let tagsArray: string[] = [];
+
+  if (tags) {
+    tagsArray = tags.split(",").map((tag) => tag.trim());
+  }
+
+  const tagOrClause =
+    tagsArray.length > 0
+      ? or(
+          ...tagsArray.map((tag) =>
+            // this generates: snippets.tags @> ARRAY['tag']
+            arrayContains(snippets.tags, [tag])
+          )
+        )
+      : undefined;
 
   const whereClauses = [
     ...(search ? [sql`LOWER(${snippets.title}) LIKE ${`%${search}%`}`] : []),
     ...(language && language !== "all"
       ? [eq(snippets.language, language)]
       : []),
+    ...(tagOrClause ? [tagOrClause] : []),
   ];
 
   let orderByClause;

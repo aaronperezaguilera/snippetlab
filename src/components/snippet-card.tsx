@@ -61,7 +61,7 @@ export function SnippetCard({
           <div className="px-4 bg-[#05121f] rounded-t-lg py-2 border-b border-b-primary/10">
             {filename}
           </div>
-          <div className="relative rounded-lg overflow-hidden">
+          <div className="relative rounded-b-lg overflow-hidden">
             <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#061626] to-transparent z-40" />
             <CopyButton value={code} className="absolute z-50 right-3 top-3" />
 
@@ -78,7 +78,6 @@ export function SnippetCard({
                 whiteSpace: "pre-wrap",
                 wordBreak: "break-word",
                 fontSize: "14px",
-                borderRadius: "0.5rem",
               }}
             >
               {code}
