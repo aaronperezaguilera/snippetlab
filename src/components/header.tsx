@@ -1,7 +1,7 @@
 import { Logo, LogoMuted } from "./logo";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Bug, ChevronDown, Plus, Settings, User } from "lucide-react";
+import { ChevronDown, Plus, Settings, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
