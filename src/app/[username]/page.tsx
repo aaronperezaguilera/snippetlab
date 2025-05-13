@@ -1,12 +1,10 @@
-import { EditProfileForm } from "@/components/edit-profile";
-import { FollowButton } from "@/components/follow-button";
 import { ProfileNav } from "@/components/profile-nav";
 import { SnippetCard } from "@/components/snippet-card";
 import { db } from "@/db/drizzle";
-import { follows, snippets, users } from "@/db/schema";
+import { snippets, users } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
-import { and, eq, sql } from "drizzle-orm";
-import Image from "next/image";
+import { and, eq } from "drizzle-orm";
+import { Profile } from "@/components/profile";
 
 export default async function ProfilePage({
   params,
@@ -17,36 +15,12 @@ export default async function ProfilePage({
 
   const authenticatedUser = await currentUser();
 
-  const followersSubquery = db
-    .select({
-      followingId: follows.followingId,
-      count: sql<number>`COUNT(*)`.as("followers"),
-    })
-    .from(follows)
-    .groupBy(follows.followingId)
-    .as("followers_count");
-
-  const followingSubquery = db
-    .select({
-      followerId: follows.followerId,
-      count: sql<number>`COUNT(*)`.as("following"),
-    })
-    .from(follows)
-    .groupBy(follows.followerId)
-    .as("following_count");
-
-  const user = await db
-    .select({
-      users,
-      followers: followersSubquery.count,
-      following: followingSubquery.count,
-    })
+  const [user] = await db
+    .select()
     .from(users)
-    .leftJoin(followersSubquery, eq(users.id, followersSubquery.followingId))
-    .leftJoin(followingSubquery, eq(users.id, followingSubquery.followerId))
     .where(eq(users.username, username));
 
-  if (!user[0]) {
+  if (!user) {
     return (
       <div className="container mx-auto mt-16">
         <h1 className="text-2xl font-bold">User not found</h1>
@@ -54,58 +28,16 @@ export default async function ProfilePage({
     );
   }
 
-  const author = user[0].users;
-
   const snippetsList = await db
     .select()
     .from(snippets)
-    .where(eq(snippets.pinned, true));
-
-  const followed = authenticatedUser?.id
-    ? await db
-        .select()
-        .from(follows)
-        .where(
-          and(
-            eq(follows.followerId, authenticatedUser.id),
-            eq(follows.followingId, user[0].users.id)
-          )
-        )
-    : [];
+    .where(and(eq(snippets.pinned, true), eq(snippets.userId, user.id)));
 
   return (
     <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
-      <section className="flex flex-col gap-4 overflow-hidden">
-        <div className="aspect-square bg-neutral-600">
-          {author.image_url && (
-            <Image
-              src={author.image_url as string}
-              width={1000}
-              height={1000}
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-          )}
-        </div>
-        {author.id !== authenticatedUser?.id && (
-          <FollowButton
-            id={author.id}
-            initialFollowed={followed.length > 0 ? true : false}
-          />
-        )}
-
-        {author.id === authenticatedUser?.id && (
-          <EditProfileForm user={author} />
-        )}
-        <div>
-          <span>{user[0].followers ? user[0].followers : 0} followers</span>
-          <span className="ml-4">
-            {user[0].following ? user[0].following : 0} following
-          </span>
-        </div>
-      </section>
+      <Profile username={username} />
       <div className="flex flex-col gap-4">
-        <ProfileNav username={author.username} active="profile" />
+        <ProfileNav username={username} active="profile" />
         <h1 className="text-2xl font-bold">Pinned</h1>
         {snippetsList.length > 0 ? (
           <div className="grid grid-cols-2 gap-4">
@@ -116,7 +48,7 @@ export default async function ProfilePage({
                   <SnippetCard
                     key={snippet.id}
                     showCode={false}
-                    author={author}
+                    author={user}
                     snippet={snippet}
                   />
                 )

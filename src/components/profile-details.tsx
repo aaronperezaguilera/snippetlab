@@ -14,7 +14,7 @@ import { Icons } from "./ui/icons";
 
 type User = InferSelectModel<typeof users>;
 
-export function EditProfileForm({ user }: { user: User }) {
+export function ProfileDetails({ user }: { user: User }) {
   const [editing, setEditing] = useState(false);
 
   return (
@@ -29,7 +29,12 @@ export function EditProfileForm({ user }: { user: User }) {
             Edit profile
           </Button>
           <div className="flex flex-col gap-2">
-            {user.bio && <p>{user.bio}</p>}
+            {user.bio && (
+              <>
+                <span className="font-medium text-sm">Bio</span>
+                <p>{user.bio}</p>
+              </>
+            )}
             {user.website && (
               <a
                 href={`https://${user.website}`}
@@ -40,7 +45,6 @@ export function EditProfileForm({ user }: { user: User }) {
                 <Link className="size-4" /> Website
               </a>
             )}
-
             {user.github && (
               <a
                 href={`https://github.com/${user.github}`}

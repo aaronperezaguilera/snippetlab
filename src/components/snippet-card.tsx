@@ -98,7 +98,7 @@ export function SnippetCard({
 
       <Link
         href={`/${author.username}/snippets/${slug}`}
-        className="absolute inset-0 z-50"
+        className="absolute inset-0 z-40"
       />
     </div>
   );

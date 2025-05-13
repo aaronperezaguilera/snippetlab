@@ -6,7 +6,7 @@ export function ProfileNav({
   active,
 }: {
   username?: string;
-  active: "profile" | "snippets" | "collections";
+  active: "profile" | "snippets" | "collections" | "likes";
 }) {
   return (
     <div className="flex gap-2 items-center w-fit">
@@ -42,6 +42,17 @@ export function ProfileNav({
         )}
       >
         Collections
+      </Link>
+      <Link
+        href={`/${username}/likes`}
+        className={cn(
+          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors",
+          {
+            "border-foreground hover:bg-transparent": active === "likes",
+          }
+        )}
+      >
+        Likes
       </Link>
     </div>
   );

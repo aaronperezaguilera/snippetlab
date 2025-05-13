@@ -57,6 +57,7 @@ export const likes = pgTable("likes", {
   userId: varchar("user_id", { length: 191 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const follows = pgTable("follows", {
