@@ -13,6 +13,7 @@ import { PinButton } from "@/components/pin-button";
 import { StarButton } from "@/components/star-button";
 import { SnippetNav } from "@/components/snippet-nav";
 import { ForkButton } from "@/components/fork-button";
+import { SaveButton } from "@/components/save-button";
 
 export default async function SnippetPage({
   params,
@@ -23,19 +24,17 @@ export default async function SnippetPage({
 
   const authenticatedUser = await currentUser();
 
-  const author = await db
+  const [author] = await db
     .select()
     .from(users)
     .where(eq(users.username, username));
 
-  const snippet = await db
+  const [snippet] = await db
     .select()
     .from(snippets)
-    .where(and(eq(snippets.slug, slug), eq(snippets.userId, author[0].id)));
+    .where(and(eq(snippets.slug, slug), eq(snippets.userId, author.id)));
 
-  const currentSnippet = snippet[0];
-
-  if (snippet.length === 0) {
+  if (!snippet) {
     return (
       <div className="container mx-auto mt-16 ">
         <h1 className="text-2xl font-bold">Snippet not found</h1>
@@ -48,15 +47,12 @@ export default async function SnippetPage({
     .from(likes)
     .where(
       and(
-        eq(likes.snippetId, currentSnippet.id),
+        eq(likes.snippetId, snippet.id),
         eq(likes.userId, authenticatedUser?.id || "")
       )
     );
 
-  if (
-    currentSnippet.visibility === "private" &&
-    authenticatedUser?.id !== author[0].id
-  ) {
+  if (snippet.visibility === "private" && authenticatedUser?.id !== author.id) {
     return (
       <div className="container mx-auto mt-16">
         <h1 className="text-2xl font-bold">Snippet not found</h1>
@@ -64,86 +60,80 @@ export default async function SnippetPage({
     );
   }
 
-  const forkedFrom = currentSnippet.forkedFrom
+  const forkedFrom = snippet.forkedFrom
     ? await db
         .select()
         .from(snippets)
         .leftJoin(users, eq(users.id, snippets.userId))
-        .where(eq(snippets.id, currentSnippet.forkedFrom))
-        .then((result) => result[0])
+        .where(eq(snippets.id, snippet.forkedFrom))
+        .then((result) => result)
     : null;
 
   return (
     <section className="flex flex-col gap-4 px-16">
-      <SnippetNav
-        active="code"
-        username={username}
-        snippet={currentSnippet.slug}
-      />
+      <SnippetNav active="code" username={username} snippet={snippet.slug} />
       <header className="flex flex-col gap-2">
         <div className="flex justify-between items-center">
           <div className="flex gap-4 items-center">
-            <h1 className="text-2xl font-bold">{currentSnippet.title}</h1>
+            <h1 className="text-2xl font-bold">{snippet.title}</h1>
             <Badge variant="secondary" className="border border-neutral-700">
-              {currentSnippet.visibility.slice(0, 1).toUpperCase() +
-                currentSnippet.visibility.slice(1)}
+              {snippet.visibility.slice(0, 1).toUpperCase() +
+                snippet.visibility.slice(1)}
             </Badge>
           </div>
           <div className="flex gap-2">
-            {author[0].id === authenticatedUser?.id && (
-              <PinButton
-                id={currentSnippet.id}
-                initialPinned={currentSnippet.pinned}
-              />
+            {author.id === authenticatedUser?.id && (
+              <PinButton id={snippet.id} initialPinned={snippet.pinned} />
             )}
-            {author[0].id !== authenticatedUser?.id &&
-              currentSnippet.visibility === "public" && (
-                <ForkButton id={currentSnippet.id} />
-              )}
-            {currentSnippet.visibility === "public" && (
+
+            {author.id !== authenticatedUser?.id && (
+              <ForkButton id={snippet.id} />
+            )}
+
+            <SaveButton />
+
+            {snippet.visibility === "public" && (
               <>
                 <ShareButton />
                 <StarButton
-                  id={currentSnippet.id}
+                  id={snippet.id}
                   initialStarred={starredSnippets.length > 0}
-                  initiallikes={currentSnippet.likesCount}
+                  initiallikes={snippet.likesCount}
                 />
               </>
             )}
 
-            {author[0].id === authenticatedUser?.id && (
+            {author.id === authenticatedUser?.id && (
               <Button asChild>
-                <Link
-                  href={`/${username}/snippets/${currentSnippet.slug}/edit`}
-                >
+                <Link href={`/${username}/snippets/${snippet.slug}/edit`}>
                   <Edit /> Edit
                 </Link>
               </Button>
             )}
           </div>
         </div>
-        {currentSnippet.forkedFrom && (
+        {snippet.forkedFrom && forkedFrom && (
           <div className="flex gap-1 items-center text-sm text-muted-foreground">
             <GitFork size={16} />
             Forked from
             <Link
-              href={`/${forkedFrom?.users?.username}/snippets/${forkedFrom?.snippets.slug}`}
+              href={`/${forkedFrom[0].users?.username}/snippets/${forkedFrom[0].snippets.slug}`}
               className="hover:underline"
             >
-              {forkedFrom?.snippets.title}
+              {forkedFrom[0].snippets.title}
             </Link>
           </div>
         )}
         <div className="flex gap-2 items-center text-sm text-muted-foreground">
-          {LANGUAGE_ICON[currentSnippet.language]}
-          {currentSnippet.language.slice(0, 1).toUpperCase() +
-            currentSnippet.language.slice(1)}
+          {LANGUAGE_ICON[snippet.language]}
+          {snippet.language.slice(0, 1).toUpperCase() +
+            snippet.language.slice(1)}
         </div>
       </header>
       <CodeReader
-        filename={currentSnippet.filename}
-        language={currentSnippet.language}
-        code={currentSnippet.code}
+        filename={snippet.filename}
+        language={snippet.language}
+        code={snippet.code}
       />
     </section>
   );

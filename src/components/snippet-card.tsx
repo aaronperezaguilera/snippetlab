@@ -13,6 +13,7 @@ import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Author } from "./author";
 import { InferSelectModel } from "drizzle-orm";
 import { snippets, users } from "@/db/schema";
+import { useAuth } from "@clerk/nextjs";
 
 type Author = InferSelectModel<typeof users>;
 type Snippet = InferSelectModel<typeof snippets>;
@@ -40,6 +41,12 @@ export function SnippetCard({
     updatedAt,
     likesCount,
   } = snippet;
+
+  const user = useAuth();
+
+  if (visibility === "private" && user.userId !== author.id) {
+    return;
+  }
 
   return (
     <div className="p-4 flex flex-col relative rounded-lg gap-4 border hover:bg-accent/5 transition-colors">

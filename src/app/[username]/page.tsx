@@ -41,18 +41,14 @@ export default async function ProfilePage({
         <h1 className="text-2xl font-bold">Pinned</h1>
         {snippetsList.length > 0 ? (
           <div className="grid grid-cols-2 gap-4">
-            {snippetsList.map(
-              (snippet) =>
-                (snippet.userId == authenticatedUser?.id ||
-                  snippet.visibility === "public") && (
-                  <SnippetCard
-                    key={snippet.id}
-                    showCode={false}
-                    author={user}
-                    snippet={snippet}
-                  />
-                )
-            )}
+            {snippetsList.map((snippet) => (
+              <SnippetCard
+                key={snippet.id}
+                showCode={false}
+                author={user}
+                snippet={snippet}
+              />
+            ))}
           </div>
         ) : (
           <p>No snippets found</p>

@@ -55,9 +55,7 @@ export default async function LikesPage({
             {rows.map(
               (row) =>
                 row.snippets &&
-                row.users &&
-                (row.snippets.userId === authenticatedUser?.id ||
-                row.snippets.visibility === "public" ? (
+                row.users && (
                   <SnippetCard
                     key={row.snippets.id}
                     author={row.users}
@@ -65,7 +63,7 @@ export default async function LikesPage({
                     snippet={row.snippets}
                     showAuthor
                   />
-                ) : null)
+                )
             )}
           </div>
         ) : (
