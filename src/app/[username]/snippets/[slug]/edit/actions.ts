@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db/drizzle";
-import { snippets } from "@/db/schema";
+import { snippets, snippetVersions } from "@/db/schema";
 import { formatSlug } from "@/lib/utils";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
@@ -34,21 +34,19 @@ export async function updateSnippet(
   const userId = user.id;
   const username = user.username;
 
-  const snippet = await db.select().from(snippets).where(eq(snippets.id, id));
+  const [snippet] = await db.select().from(snippets).where(eq(snippets.id, id));
 
-  if (snippet.length === 0) {
+  if (!snippet) {
     throw new Error("Snippet not found");
   }
 
-  const currentSnippet = snippet[0];
-
-  if (userId !== currentSnippet.userId) {
+  if (userId !== snippet.userId) {
     throw new Error("You are not the owner of this snippet");
   }
 
   let slug;
 
-  if (currentSnippet.title !== title) {
+  if (snippet.title !== title) {
     const baseSlug = formatSlug(title as string);
     slug = baseSlug;
     // 4. Encontrar un slug único
@@ -71,8 +69,15 @@ export async function updateSnippet(
       slug = `${baseSlug}-${attempt}`;
     }
   } else {
-    slug = currentSnippet.slug;
+    slug = snippet.slug;
   }
+
+  await db.insert(snippetVersions).values([
+    {
+      snippetId: id,
+      code: snippet.code,
+    },
+  ]);
 
   await db
     .update(snippets)

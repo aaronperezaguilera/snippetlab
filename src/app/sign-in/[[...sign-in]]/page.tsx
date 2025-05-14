@@ -33,7 +33,7 @@ export default function SignInPage() {
                       <Clerk.Connection name="github" asChild>
                         <Button
                           size="sm"
-                          variant="outline"
+                          variant="secondary"
                           type="button"
                           disabled={isGlobalLoading}
                         >
@@ -54,7 +54,7 @@ export default function SignInPage() {
                       <Clerk.Connection name="google" asChild>
                         <Button
                           size="sm"
-                          variant="outline"
+                          variant="secondary"
                           type="button"
                           disabled={isGlobalLoading}
                         >

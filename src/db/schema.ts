@@ -69,6 +69,15 @@ export const snippets = pgTable("snippets", {
     .notNull(),
 });
 
+export const snippetVersions = pgTable("snippet_versions", {
+  id: serial("id").primaryKey(),
+  snippetId: serial("snippet_id")
+    .notNull()
+    .references(() => snippets.id, { onDelete: "cascade" }),
+  code: text("code").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const collections = pgTable("collections", {
   id: serial("id").primaryKey(),
   slug: varchar("slug").notNull(),

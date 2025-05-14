@@ -88,11 +88,11 @@ export function Sidebar() {
           </button>
         </div>
         <nav className="p-4">
-          <ul className="space-y-2">
+          <ul className="">
             <li>
               <Link
                 href="/"
-                className="hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
               >
                 <Home className="size-4" />
                 Home
@@ -101,7 +101,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}`}
-                className="hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
               >
                 <User className="size-4" />
                 Your profile
@@ -110,7 +110,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/snippets`}
-                className="hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
               >
                 <Code2 className="size-4" /> Your snippets
               </Link>
@@ -118,7 +118,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/collections`}
-                className="hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
               >
                 <Book className="size-4" /> Your collections
               </Link>
@@ -126,16 +126,16 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/likes`}
-                className="hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
               >
                 <Heart className="size-4" /> Your liked snippets
               </Link>
             </li>
-            <div className="w-full h-px bg-border"></div>
+            <div className="w-full h-px bg-border my-2"></div>
             <li>
               <Link
                 href={`/explore`}
-                className="hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
               >
                 <MessagesSquare className="size-4" />
                 Q&A Forum
@@ -144,17 +144,17 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/explore`}
-                className="hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
               >
                 <Telescope className="size-4" />
                 Explore
               </Link>
             </li>
-            <div className="w-full h-px bg-border"></div>
+            <div className="w-full h-px bg-border my-2"></div>
             <li>
               <Link
                 href={`/account`}
-                className="hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
               >
                 <Settings className="size-4" />
                 Account settings
@@ -163,7 +163,7 @@ export function Sidebar() {
             <li>
               <a
                 href="https://github.com/aaronperezaguilera/snippetlab/issues/new"
-                className="hover:underline flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
                 target="_blank"
                 rel="noopener noreferrer"
               >

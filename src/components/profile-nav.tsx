@@ -13,9 +13,9 @@ export function ProfileNav({
       <Link
         href={`/${username}`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors",
+          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
           {
-            "border-foreground hover:bg-transparent": active === "profile",
+            "border-accent hover:bg-transparent": active === "profile",
           }
         )}
       >
@@ -24,9 +24,9 @@ export function ProfileNav({
       <Link
         href={`/${username}/snippets`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors",
+          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
           {
-            "border-foreground hover:bg-transparent": active === "snippets",
+            "border-accent hover:bg-transparent": active === "snippets",
           }
         )}
       >
@@ -35,9 +35,9 @@ export function ProfileNav({
       <Link
         href={`/${username}/collections`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors",
+          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
           {
-            "border-foreground hover:bg-transparent": active === "collections",
+            "border-accent hover:bg-transparent": active === "collections",
           }
         )}
       >
@@ -46,9 +46,9 @@ export function ProfileNav({
       <Link
         href={`/${username}/likes`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors",
+          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
           {
-            "border-foreground hover:bg-transparent": active === "likes",
+            "border-accent hover:bg-transparent": active === "likes",
           }
         )}
       >

@@ -36,7 +36,7 @@ export default function CopyButton({
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
-            variant="outline"
+            variant="secondary"
             size="icon"
             className={cn("disabled:opacity-100", className)}
             onClick={handleCopy}

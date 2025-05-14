@@ -198,7 +198,7 @@ export function SnippetForm({
 
               <Button
                 type="button"
-                variant="outline"
+                variant="secondary"
                 size="icon"
                 onClick={() => removeExample(i)}
               >

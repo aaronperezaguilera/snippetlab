@@ -18,8 +18,8 @@ export function SnippetNav({
         className={cn(
           "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
-            "border-foreground hover:bg-transparent": active === "code",
-            "hover:bg-neutral-800": active && active !== "code",
+            "border-accent hover:bg-transparent": active === "code",
+            "hover:bg-accent/10": active && active !== "code",
           }
         )}
       >
@@ -30,8 +30,8 @@ export function SnippetNav({
         className={cn(
           "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
-            "border-foreground hover:bg-transparent": active === "versions",
-            "hover:bg-neutral-800": active && active !== "versions",
+            "border-accent hover:bg-transparent": active === "versions",
+            "hover:bg-accent/10": active && active !== "versions",
           }
         )}
       >
@@ -42,8 +42,8 @@ export function SnippetNav({
         className={cn(
           "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
-            "border-foreground hover:bg-transparent": active === "comments",
-            "hover:bg-neutral-800": active && active !== "comments",
+            "border-accent hover:bg-transparent": active === "comments",
+            "hover:bg-accent/10": active && active !== "comments",
           }
         )}
       >

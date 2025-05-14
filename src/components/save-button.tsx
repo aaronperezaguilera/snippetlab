@@ -53,7 +53,7 @@ export function SaveButton({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="secondary">
           <BookMarked /> Add to collection
         </Button>
       </DialogTrigger>
