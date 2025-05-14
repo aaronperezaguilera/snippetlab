@@ -231,8 +231,7 @@ export function SnippetForm({
               <div className="flex flex-col gap-2">
                 <span>Public</span>
                 <span className="font-normal text-muted-foreground">
-                  Anyone on the internet can see this repository. You choose who
-                  can commit.
+                  Anyone on the internet can see this snippet.
                 </span>
               </div>
             </Label>
@@ -244,7 +243,7 @@ export function SnippetForm({
               <div className="flex flex-col gap-2">
                 <span>Private</span>
                 <span className="font-normal text-muted-foreground">
-                  You choose who can see and commit to this repository.
+                  You are the only one who can see this snippet.
                 </span>
               </div>
             </Label>

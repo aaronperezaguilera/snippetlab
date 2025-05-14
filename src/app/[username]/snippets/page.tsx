@@ -123,7 +123,7 @@ export default async function ProfilePage({
             )}
           </div>
         ) : (
-          <p>No snippets found</p>
+          <p>No snippets found. Start by creating one.</p>
         )}
       </div>
     </main>

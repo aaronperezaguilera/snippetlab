@@ -9,6 +9,7 @@ import {
   integer,
   AnyPgColumn,
   json,
+  primaryKey,
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
@@ -67,6 +68,34 @@ export const snippets = pgTable("snippets", {
     .$onUpdate(() => new Date())
     .notNull(),
 });
+
+export const collections = pgTable("collections", {
+  id: serial("id").primaryKey(),
+  slug: varchar("slug").notNull(),
+  title: varchar("title", { length: 100 }).notNull(),
+  description: text("description"),
+  visibility: visibilityEnum().default("public").notNull(),
+  pinned: boolean("pinned").default(false).notNull(),
+  savedCount: integer("saved_count").default(0).notNull(),
+  userId: varchar("user_id", { length: 191 })
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const collectionSnippets = pgTable(
+  "collection_snippets",
+  {
+    collectionId: serial("collection_id")
+      .notNull()
+      .references(() => collections.id, { onDelete: "cascade" }),
+    snippetId: serial("snippet_id")
+      .notNull()
+      .references(() => snippets.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (table) => [primaryKey({ columns: [table.collectionId, table.snippetId] })]
+);
 
 export const likes = pgTable("likes", {
   id: serial("id").primaryKey(),
