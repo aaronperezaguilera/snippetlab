@@ -73,6 +73,7 @@ export async function updateStar(id: number, star: boolean) {
   }
 
   revalidatePath(`/${username}/snippets`);
+  revalidatePath(`/${username}/likes`);
 }
 
 export async function forkSnippet(snippetId: number) {

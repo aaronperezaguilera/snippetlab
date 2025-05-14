@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Language, LANGUAGE_ICON } from "@/config";
+import { EXAMPLE_SITE_ICONS, Language, LANGUAGE_ICON } from "@/config";
 import { createSnippet } from "@/app/[username]/snippets/new/actions";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -21,6 +21,12 @@ import { Bookmark, Loader2, Lock } from "lucide-react";
 import { updateSnippet } from "@/app/[username]/snippets/[slug]/edit/actions";
 import { DeleteSnippet } from "./delete-snippet";
 import { useFormStatus } from "react-dom";
+import { exampleSite } from "@/db/schema";
+
+export type Examples = {
+  website: keyof typeof exampleSite.enumValues;
+  url: string;
+}[];
 
 export function SnippetForm({
   id,
@@ -29,6 +35,7 @@ export function SnippetForm({
   code,
   defaultTags,
   summary,
+  defaultExamples,
   visibility,
   type,
 }: {
@@ -38,9 +45,13 @@ export function SnippetForm({
   code?: string;
   defaultTags?: string[];
   summary?: string;
+  defaultExamples?: Examples;
   visibility?: "public" | "private";
   type: "create" | "edit";
 }) {
+  const [examples, setExamples] = useState<
+    { website: keyof typeof exampleSite.enumValues; url: string }[]
+  >(defaultExamples || []);
   const [language, setLanguage] = useState<Language>(Language.TYPESCRIPT);
   const [value, setValue] = React.useState<string | undefined>(
     code || "// Some comment"
@@ -68,6 +79,29 @@ export function SnippetForm({
       textarea.removeEventListener("input", handleInput);
     };
   }, []);
+
+  const addExample = () => {
+    setExamples((prev) => [
+      ...prev,
+      { website: "codilink" as keyof typeof exampleSite.enumValues, url: "" },
+    ]);
+  };
+
+  const updateExample = (
+    idx: number,
+    field: "website" | "url",
+    value: string
+  ) => {
+    setExamples((prev) => {
+      const next = [...prev];
+      next[idx] = { ...next[idx], [field]: value };
+      return next;
+    });
+  };
+
+  const removeExample = (idx: number) => {
+    setExamples((prev) => prev.filter((_, i) => i !== idx));
+  };
 
   const createSnippetWithCode = createSnippet.bind(null, value, tags);
   const updateSnippetWithCode = updateSnippet.bind(null, value, tags, id || 0);
@@ -128,6 +162,62 @@ export function SnippetForm({
           name="summary"
           defaultValue={summary}
         />
+        <Label>Examples:</Label>
+        <div className="flex flex-col gap-2 w-full">
+          {examples.map((ex, i) => (
+            <div key={i} className="flex gap-2 items-end">
+              <Select
+                name={`example-site-${i}`}
+                value={ex.website.toString()}
+                onValueChange={(val) => updateExample(i, "website", val as any)}
+                key={i}
+              >
+                <SelectTrigger className="w-36">
+                  <SelectValue placeholder="Sitio" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.values(exampleSite.enumValues).map((site) => (
+                    <SelectItem key={site} value={site}>
+                      {EXAMPLE_SITE_ICONS[site]}{" "}
+                      {site.slice(0, 1).toUpperCase() + site.slice(1)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Input
+                name={`example-url-${i}`}
+                type="url"
+                placeholder="https://..."
+                value={ex.url}
+                onChange={(e) => updateExample(i, "url", e.currentTarget.value)}
+                className="flex-1"
+                required
+              />
+
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                onClick={() => removeExample(i)}
+              >
+                ×
+              </Button>
+            </div>
+          ))}
+
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={addExample}
+            className="mt-2"
+          >
+            + Add example
+          </Button>
+        </div>
+
+        <input type="hidden" name="examples" value={JSON.stringify(examples)} />
+
         <RadioGroup
           className="gap-6"
           name="visibility"

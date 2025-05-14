@@ -82,7 +82,7 @@ export function ProfileDetails({ user }: { user: User }) {
           <div className="flex gap-2 items-center">
             <Link className="size-4" />
             <Input
-              type="text"
+              type="url"
               placeholder="Website URL"
               className="w-full"
               name="website"

@@ -15,11 +15,12 @@ export async function updateSnippet(
   id: number,
   formData: FormData
 ) {
-  const rawFormData = {
+  const { title, language, visibility, summary, examples } = {
     title: formData.get("title"),
     language: formData.get("language"),
     visibility: formData.get("visibility"),
     summary: formData.get("summary"),
+    examples: formData.get("examples"),
   };
 
   const user = await currentUser();
@@ -47,8 +48,8 @@ export async function updateSnippet(
 
   let slug;
 
-  if (currentSnippet.title !== rawFormData.title) {
-    const baseSlug = formatSlug(rawFormData.title as string);
+  if (currentSnippet.title !== title) {
+    const baseSlug = formatSlug(title as string);
     slug = baseSlug;
     // 4. Encontrar un slug único
     let attempt = 0;
@@ -76,13 +77,14 @@ export async function updateSnippet(
   await db
     .update(snippets)
     .set({
-      title: rawFormData.title as string,
+      title: title as string,
       slug,
-      language: rawFormData.language as string,
+      language: language as string,
       code: value as string,
       tags: tags as string[],
-      summary: rawFormData.summary as string,
-      visibility: rawFormData.visibility as "public" | "private",
+      summary: summary as string,
+      visibility: visibility as "public" | "private",
+      examples: examples ? JSON.parse(examples as string) : [],
       userId: userId as string,
     })
     .where(eq(snippets.id, id));

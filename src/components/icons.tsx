@@ -1,3 +1,5 @@
+import { SVGProps } from "react";
+
 export const C = () => (
   <svg
     viewBox="0 0 306 345"
@@ -412,5 +414,106 @@ export const DEFAULT = () => (
       fill="#000"
     />
     <path d="M11.99 7H13v5h5v1h-6v6h-1v-6H7V12h4V7z" fill="#000" />
+  </svg>
+);
+
+export const CODEPEN = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    width="1em"
+    height="1em"
+    viewBox="0 0 32 32"
+  >
+    <path d="M 16 2.84375 L 15.4375 3.21875 L 3.4375 11.25 L 3 11.53125 L 3 20.46875 L 3.4375 20.75 L 15.4375 28.78125 L 16 29.15625 L 16.5625 28.78125 L 28.5625 20.75 L 29 20.46875 L 29 11.53125 L 28.5625 11.25 L 16.5625 3.21875 Z M 15 5.90625 L 15 11.34375 L 9.84375 14.8125 L 5.8125 12.09375 Z M 17 5.90625 L 26.1875 12.09375 L 22.15625 14.8125 L 17 11.34375 Z M 16 13.09375 L 20.34375 16 L 16 18.90625 L 11.65625 16 Z M 5 13.9375 L 8.0625 16 L 5 18.0625 Z M 27 13.9375 L 27 18.0625 L 23.9375 16 Z M 9.875 17.1875 L 15 20.65625 L 15 26.09375 L 5.8125 19.90625 Z M 22.125 17.1875 L 26.1875 19.90625 L 17 26.09375 L 17 20.65625 Z" />
+  </svg>
+);
+
+export const CODESANDBOX = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 600 600"
+    width="1em"
+    height="1em"
+  >
+    <path
+      fill="#DCFF50"
+      fillRule="evenodd"
+      d="M150 150h299.832v300H150V150Zm269.168 30.682v238.636H180.665V180.682h238.503Z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
+export const CODILINK = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.2"
+    viewBox="0 0 48 48"
+    width="48"
+    height="48"
+  >
+    <title>favicon</title>
+    <defs>
+      <image
+        width="42"
+        height="36"
+        id="img1"
+        href="data:image/png;base64,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"
+      />
+    </defs>
+    <style></style>
+    <use id="Background" href="#img1" x="3" y="5" />
+  </svg>
+);
+
+export const GLOBE = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+    <path d="M2 12h20" />
+  </svg>
+);
+
+export const STACKBLITZ = () => (
+  <svg
+    viewBox="0 0 256 368"
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    preserveAspectRatio="xMidYMid"
+  >
+    <path
+      fill="#49A2F8"
+      d="M109.586 217.013H0L200.34 0l-53.926 150.233H256L55.645 367.246l53.927-150.233z"
+    />
+  </svg>
+);
+
+export const V0 = () => (
+  <svg
+    height="1em"
+    xmlns="http://www.w3.org/2000/svg"
+    strokeLinejoin="round"
+    viewBox="0 0 16 16"
+    width="1em"
+  >
+    <path
+      clipRule="evenodd"
+      d="M9.50321 5.5H13.2532C13.3123 5.5 13.3704 5.5041 13.4273 5.51203L9.51242 9.42692C9.50424 9.36912 9.5 9.31006 9.5 9.25L9.5 5.5L8 5.5L8 9.25C8 10.7688 9.23122 12 10.75 12H14.5V10.5L10.75 10.5C10.6899 10.5 10.6309 10.4958 10.5731 10.4876L14.4904 6.57028C14.4988 6.62897 14.5032 6.68897 14.5032 6.75V10.5H16.0032V6.75C16.0032 5.23122 14.772 4 13.2532 4H9.50321V5.5ZM0 5V5.00405L5.12525 11.5307C5.74119 12.3151 7.00106 11.8795 7.00106 10.8822V5H5.50106V9.58056L1.90404 5H0Z"
+      fill="white"
+      fillRule="evenodd"
+    />
   </svg>
 );

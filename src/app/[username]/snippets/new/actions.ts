@@ -14,12 +14,13 @@ export async function createSnippet(
   tags: string[],
   formData: FormData
 ) {
-  const rawFormData = {
+  const { title, filename, language, visibility, summary, examples } = {
     title: formData.get("title"),
     filename: formData.get("filename"),
     language: formData.get("language"),
     visibility: formData.get("visibility"),
     summary: formData.get("summary"),
+    examples: formData.get("examples"),
   };
 
   const user = await currentUser();
@@ -34,7 +35,7 @@ export async function createSnippet(
   const username = user.username;
 
   // 3. Generar slug base
-  const baseSlug = formatSlug(rawFormData.title as string);
+  const baseSlug = formatSlug(title as string);
 
   // 4. Encontrar un slug único
   let slug = baseSlug;
@@ -58,14 +59,15 @@ export async function createSnippet(
   }
 
   await db.insert(snippets).values({
-    title: rawFormData.title as string,
-    filename: rawFormData.filename as string,
+    title: title as string,
+    filename: filename as string,
     slug,
-    language: rawFormData.language as string,
+    language: language as string,
     code: value as string,
     tags: tags as string[],
-    summary: rawFormData.summary as string,
-    visibility: rawFormData.visibility as "public" | "private",
+    summary: summary as string,
+    examples: examples ? JSON.parse(examples as string) : [],
+    visibility: visibility as "public" | "private",
     userId: userId as string,
   });
 

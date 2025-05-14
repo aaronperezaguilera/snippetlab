@@ -1,4 +1,4 @@
-import { SnippetForm } from "@/components/snippet-form";
+import { Examples, SnippetForm } from "@/components/snippet-form";
 import { db } from "@/db/drizzle";
 import { snippets } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
@@ -43,6 +43,17 @@ export default async function EditSnippet({
         defaultTags={currentSnippet.tags as string[]}
         visibility={currentSnippet.visibility}
         summary={currentSnippet.summary as string}
+        defaultExamples={
+          currentSnippet.examples.map((example) => ({
+            website: example.website as keyof [
+              "codilink",
+              "codepen",
+              "codesandbox",
+              "other"
+            ],
+            url: example.url,
+          })) as Examples
+        }
         type="edit"
       />
     </main>

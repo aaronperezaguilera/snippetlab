@@ -40,7 +40,7 @@ export function SnippetCard({
   } = snippet;
 
   return (
-    <div className="bg-[#05101b] p-4 flex flex-col relative rounded-lg gap-4 hover:bg-accent/5 transition-colors">
+    <div className=" p-4 flex flex-col relative rounded-lg gap-4 border hover:bg-accent/5 transition-colors">
       <div className="flex flex-col gap-2">
         {showAuthor && <Author author={author} />}
         <div className="flex justify-between items-center">
@@ -57,7 +57,7 @@ export function SnippetCard({
       </div>
 
       {showCode && (
-        <div>
+        <div className="shadow-lg shadow-background rounded-lg overflow-hidden border">
           <div className="px-4 bg-[#05121f] rounded-t-lg py-2 border-b border-b-primary/10">
             {filename}
           </div>

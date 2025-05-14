@@ -17,6 +17,12 @@ import {
   MARKDOWN,
   MYSQL,
   DEFAULT,
+  CODESANDBOX,
+  CODEPEN,
+  CODILINK,
+  GLOBE,
+  STACKBLITZ,
+  V0,
 } from "../components/icons";
 
 export enum Language {
@@ -135,4 +141,13 @@ export const LANGUAGE_ICON: Record<string, JSX.Element> = {
   [Language.VB]: DEFAULT(),
   [Language.XML]: DEFAULT(),
   [Language.YAML]: DEFAULT(),
+};
+
+export const EXAMPLE_SITE_ICONS: Record<string, JSX.Element> = {
+  codilink: CODILINK(),
+  codepen: CODEPEN(),
+  codesandbox: CODESANDBOX(),
+  stackblitz: STACKBLITZ(),
+  v0: V0(),
+  other: GLOBE(),
 };

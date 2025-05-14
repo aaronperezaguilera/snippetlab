@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
+import { EXAMPLE_SITE_ICONS } from "@/config";
+import { SquareArrowOutUpRight } from "lucide-react";
 
 export default async function SnippetLayout({
   children,
@@ -104,6 +106,33 @@ export default async function SnippetLayout({
       </section>
       {children}
       <section className="flex flex-col gap-4 pr-16 sticky top-16 h-fit">
+        {currentSnippet.examples && currentSnippet.examples.length > 0 && (
+          <>
+            <h2 className="text-2xl font-semibold">Examples</h2>
+            <div className="flex flex-wrap gap-2 w-fit">
+              {currentSnippet.examples.map((example, i) => (
+                <Badge
+                  key={i}
+                  variant="secondary"
+                  className="border border-neutral-700"
+                  asChild
+                >
+                  <a
+                    href={example.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {EXAMPLE_SITE_ICONS[example.website]}
+                    {(example.website as string) !== "other"
+                      ? example.website.slice(0, 1).toUpperCase() +
+                        example.website.slice(1)
+                      : "Example"}
+                  </a>
+                </Badge>
+              ))}
+            </div>
+          </>
+        )}
         <h2 className="text-2xl font-semibold">Summary</h2>
         <p>
           {currentSnippet.summary

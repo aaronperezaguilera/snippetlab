@@ -8,6 +8,7 @@ import {
   boolean,
   integer,
   AnyPgColumn,
+  json,
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
@@ -28,6 +29,15 @@ export const users = pgTable("users", {
 
 export const visibilityEnum = pgEnum("visibility", ["public", "private"]);
 
+export const exampleSite = pgEnum("example_site", [
+  "codilink",
+  "codepen",
+  "codesandbox",
+  "stackblitz",
+  "v0",
+  "other",
+]);
+
 export const snippets = pgTable("snippets", {
   id: serial("id").primaryKey(),
   slug: varchar("slug").notNull(),
@@ -37,6 +47,10 @@ export const snippets = pgTable("snippets", {
   code: text("code").notNull(),
   tags: text("tags").array(),
   summary: text("summary"),
+  examples: json("examples")
+    .$type<{ website: keyof typeof exampleSite; url: string }[]>()
+    .default([])
+    .notNull(),
   visibility: visibilityEnum().default("public").notNull(),
   userId: varchar("user_id", { length: 191 })
     .notNull()
