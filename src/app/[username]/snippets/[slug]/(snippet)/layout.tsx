@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { EXAMPLE_SITE_ICONS } from "@/config";
-import { SquareArrowOutUpRight } from "lucide-react";
 
 export default async function SnippetLayout({
   children,

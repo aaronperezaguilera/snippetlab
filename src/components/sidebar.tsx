@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
 import {
-  BookMarked,
+  Book,
   Bug,
   Code2,
   Heart,
@@ -120,7 +120,7 @@ export function Sidebar() {
                 href={`/${user.user?.username}/collections`}
                 className="hover:underline flex items-center gap-2"
               >
-                <BookMarked className="size-4" /> Your collections
+                <Book className="size-4" /> Your collections
               </Link>
             </li>
             <li>

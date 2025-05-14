@@ -2,7 +2,6 @@ import { ProfileNav } from "@/components/profile-nav";
 import { SnippetCard } from "@/components/snippet-card";
 import { db } from "@/db/drizzle";
 import { snippets, users } from "@/db/schema";
-import { currentUser } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import { Profile } from "@/components/profile";
 
@@ -12,8 +11,6 @@ export default async function ProfilePage({
   params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
-
-  const authenticatedUser = await currentUser();
 
   const [user] = await db
     .select()

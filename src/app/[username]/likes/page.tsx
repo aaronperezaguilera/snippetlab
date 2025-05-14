@@ -3,7 +3,6 @@ import { ProfileNav } from "@/components/profile-nav";
 import { SnippetCard } from "@/components/snippet-card";
 import { db } from "@/db/drizzle";
 import { likes, snippets, users } from "@/db/schema";
-import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
 import Link from "next/link";
@@ -14,8 +13,6 @@ export default async function LikesPage({
   params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
-
-  const authenticatedUser = await currentUser();
 
   const [user] = await db
     .select()

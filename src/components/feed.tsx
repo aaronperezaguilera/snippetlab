@@ -27,7 +27,7 @@ export async function Feed() {
   if (followedIds.length === 0) {
     return (
       <div className="flex flex-col gap-4 mt-8 ">
-        <h1 className="text-2xl font-bold">You don't follow anyone yet</h1>
+        <h1 className="text-2xl font-bold">You don&apos;t follow anyone yet</h1>
         <p className="text-muted-foreground">
           Follow some users to see their snippets here.
         </p>

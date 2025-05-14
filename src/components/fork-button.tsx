@@ -6,8 +6,6 @@ import { useFormStatus } from "react-dom";
 import { forkSnippet } from "@/app/[username]/snippets/actions";
 
 export function ForkButton({ id }: { id: number }) {
-  const { pending } = useFormStatus();
-
   const formAction = forkSnippet.bind(null, id);
 
   return (

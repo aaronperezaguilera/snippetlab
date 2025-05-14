@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { createSnippet } from "@/app/[username]/snippets/new/actions";
+import React, { useEffect, useRef } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
@@ -22,7 +21,7 @@ export function CollectionForm({
 }: {
   id?: number;
   title?: string;
-  description?: string;
+  description?: string | null;
   visibility?: "public" | "private";
   type: "create" | "edit";
 }) {
@@ -48,9 +47,6 @@ export function CollectionForm({
     };
   }, []);
 
-  const createSnippetWithCode = (formData: FormData) => {
-    return createCollection(formData);
-  };
   const updateCollectionWithID = (formData: FormData) => {
     return updateCollection(id || 0, formData);
   };
@@ -76,7 +72,7 @@ export function CollectionForm({
           ref={textareaRef}
           placeholder="Write a desription of your collection"
           name="description"
-          defaultValue={description}
+          defaultValue={description || ""}
           maxLength={300}
         />
 
@@ -116,7 +112,7 @@ export function CollectionForm({
           <SubmitButton
             type={type}
             formAction={
-              type === "create" ? createSnippetWithCode : updateCollectionWithID
+              type === "create" ? createCollection : updateCollectionWithID
             }
           />
         </div>

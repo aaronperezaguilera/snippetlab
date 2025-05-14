@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db/drizzle";
-import { collections, snippets } from "@/db/schema";
+import { collections } from "@/db/schema";
 import { formatSlug } from "@/lib/utils";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
@@ -11,9 +11,9 @@ import { upsertUser } from "@/db";
 
 export async function createCollection(formData: FormData) {
   const { title, visibility, description } = {
-    title: formData.get("title"),
-    description: formData.get("description"),
-    visibility: formData.get("visibility"),
+    title: formData.get("title") as string,
+    description: formData.get("description") as string | null,
+    visibility: formData.get("visibility") as string,
   };
 
   const user = await currentUser();
@@ -53,9 +53,9 @@ export async function createCollection(formData: FormData) {
 
   await db.insert(collections).values({
     slug,
-    title,
-    description,
-    visibility,
+    title: title as string,
+    description: description as string | null,
+    visibility: visibility as "public" | "private",
     userId,
   });
 

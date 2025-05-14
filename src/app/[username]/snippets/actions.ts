@@ -1,10 +1,10 @@
 "use server";
 
 import { db } from "@/db/drizzle";
-import { snippets, likes } from "@/db/schema";
+import { snippets, likes, collectionSnippets, collections } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
-import { and, count, eq } from "drizzle-orm";
+import { and, count, eq, inArray, not } from "drizzle-orm";
 import { upsertUser } from "@/db";
 import { formatSlug } from "@/lib/utils";
 import { redirect } from "next/navigation";
@@ -130,4 +130,50 @@ export async function forkSnippet(snippetId: number) {
 
   revalidatePath(`/${username}/snippets`);
   redirect(`/${username}/snippets/${slug}`);
+}
+
+export async function updateSnippetCollection(
+  snippetId: number,
+  formData: FormData
+) {
+  const user = await currentUser();
+
+  upsertUser(user);
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const username = user.username;
+
+  const ids = formData.getAll("collectionIds").map((i) => Number(i));
+
+  await db
+    .delete(collectionSnippets)
+    .where(
+      and(
+        eq(collectionSnippets.snippetId, snippetId),
+        not(inArray(collectionSnippets.collectionId, ids))
+      )
+    );
+
+  for (const colId of ids) {
+    await db
+      .insert(collectionSnippets)
+      .values({
+        snippetId,
+        collectionId: colId,
+      })
+      .onConflictDoNothing();
+  }
+
+  revalidatePath(`/${username}/collections`);
+  ids.forEach(async (id) => {
+    const [collection] = await db
+      .select()
+      .from(collections)
+      .where(eq(collections.id, id));
+
+    revalidatePath(`/${username}/collections/${collection.slug}`);
+  });
 }

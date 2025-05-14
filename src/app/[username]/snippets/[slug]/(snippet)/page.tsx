@@ -1,8 +1,14 @@
 import { CodeReader } from "@/components/code-reader";
 import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
-import { snippets, likes, users } from "@/db/schema";
-import { and, eq } from "drizzle-orm";
+import {
+  snippets,
+  likes,
+  users,
+  collections,
+  collectionSnippets,
+} from "@/db/schema";
+import { and, eq, sql } from "drizzle-orm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -69,6 +75,21 @@ export default async function SnippetPage({
         .then((result) => result)
     : null;
 
+  const collectionsList = await db
+    .select({
+      collections,
+      hasSnippet: sql<boolean>`
+      EXISTS (
+        SELECT 1
+        FROM ${collectionSnippets}
+        WHERE ${collectionSnippets.collectionId} = ${collections.id}
+          AND ${collectionSnippets.snippetId} = ${snippet.id}
+      )
+    `,
+    })
+    .from(collections)
+    .where(eq(collections.userId, authenticatedUser?.id || ""));
+
   return (
     <section className="flex flex-col gap-4 px-16">
       <SnippetNav active="code" username={username} snippet={snippet.slug} />
@@ -90,7 +111,11 @@ export default async function SnippetPage({
               <ForkButton id={snippet.id} />
             )}
 
-            <SaveButton />
+            <SaveButton
+              snippetId={snippet.id}
+              userId={authenticatedUser?.id}
+              collections={collectionsList}
+            />
 
             {snippet.visibility === "public" && (
               <>

@@ -1,18 +1,16 @@
-import { CodeReader } from "@/components/code-reader";
-import { LANGUAGE_ICON } from "@/config";
 import { db } from "@/db/drizzle";
-import { snippets, likes, users, collections } from "@/db/schema";
+import { users, collections, snippets, collectionSnippets } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Edit, GitFork } from "lucide-react";
+import { Edit } from "lucide-react";
 import { currentUser } from "@clerk/nextjs/server";
 import { ShareButton } from "@/components/share";
 import { PinButton } from "@/components/pin-button";
 import { StarButton } from "@/components/star-button";
-import { SnippetNav } from "@/components/snippet-nav";
 import { ForkButton } from "@/components/fork-button";
+import { SnippetCard } from "@/components/snippet-card";
 
 export default async function CollectionPage({
   params,
@@ -52,9 +50,21 @@ export default async function CollectionPage({
     );
   }
 
+  const collectionSnippetsList = await db
+    .select()
+    .from(snippets)
+    .innerJoin(
+      collectionSnippets,
+      and(
+        eq(collectionSnippets.collectionId, collection.id),
+        eq(collectionSnippets.snippetId, snippets.id)
+      )
+    )
+    .leftJoin(users, eq(users.id, snippets.userId));
+
   return (
-    <main className="container mx-auto gap-16 mt-16">
-      <section className="flex flex-col gap-4 px-16">
+    <main className="container mx-auto mt-16 flex flex-col gap-8">
+      <section className="flex flex-col gap-4">
         <header className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
@@ -88,7 +98,9 @@ export default async function CollectionPage({
 
               {author.id === authenticatedUser?.id && (
                 <Button asChild>
-                  <Link href={`/${username}/snippets/${collection.slug}/edit`}>
+                  <Link
+                    href={`/${username}/collections/${collection.slug}/edit`}
+                  >
                     <Edit /> Edit
                   </Link>
                 </Button>
@@ -96,6 +108,21 @@ export default async function CollectionPage({
             </div>
           </div>
         </header>
+      </section>
+      <section>
+        <div className="grid sm:grid-cols-2 gap-6">
+          {collectionSnippetsList.map(
+            (snip) =>
+              snip.users && (
+                <SnippetCard
+                  key={snip.snippets.id}
+                  author={snip.users}
+                  snippet={snip.snippets}
+                  showAuthor
+                />
+              )
+          )}
+        </div>
       </section>
     </main>
   );

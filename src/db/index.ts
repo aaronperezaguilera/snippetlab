@@ -1,5 +1,5 @@
-import { currentUser, User } from "@clerk/nextjs/server";
-import { follows, snippets, users } from "./schema";
+import { User } from "@clerk/nextjs/server";
+import { collections, follows, snippets, users } from "./schema";
 import { db } from "./drizzle";
 import { desc, eq, sum, and, isNull, ne } from "drizzle-orm";
 
@@ -64,4 +64,13 @@ export async function getFeaturedSnippets(authenticatedUserId: string) {
     .limit(3);
 
   return snippetsWithLikes;
+}
+
+export async function getUserCollections(userId: string) {
+  const collectionsList = await db
+    .select()
+    .from(collections)
+    .where(eq(collections.userId, userId));
+
+  return collectionsList;
 }

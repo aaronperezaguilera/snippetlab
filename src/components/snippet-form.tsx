@@ -170,7 +170,7 @@ export function SnippetForm({
               <Select
                 name={`example-site-${i}`}
                 value={ex.website.toString()}
-                onValueChange={(val) => updateExample(i, "website", val as any)}
+                onValueChange={(val) => updateExample(i, "website", val)}
                 key={i}
               >
                 <SelectTrigger className="w-36">

@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db/drizzle";
-import { snippets } from "@/db/schema";
+import { collections } from "@/db/schema";
 import { formatSlug } from "@/lib/utils";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
@@ -10,83 +10,58 @@ import { count, eq } from "drizzle-orm";
 import { upsertUser } from "@/db";
 
 export async function updateCollection(id: number, formData: FormData) {
-  const { title, language, visibility, summary, examples } = {
+  const { title, visibility, description } = {
     title: formData.get("title"),
-    language: formData.get("language"),
+    description: formData.get("description"),
     visibility: formData.get("visibility"),
-    summary: formData.get("summary"),
-    examples: formData.get("examples"),
   };
 
   const user = await currentUser();
 
+  upsertUser(user);
+
   if (!user) {
     throw new Error("User not found");
   }
 
-  upsertUser(user);
-
   const userId = user.id;
   const username = user.username;
 
-  const snippet = await db.select().from(snippets).where(eq(snippets.id, id));
+  const baseSlug = formatSlug(title as string);
 
-  if (snippet.length === 0) {
-    throw new Error("Snippet not found");
-  }
+  let slug = baseSlug;
+  let attempt = 0;
 
-  const currentSnippet = snippet[0];
+  while (true) {
+    const [{ count: existingCount }] = await db
+      .select({ count: count() })
+      .from(collections)
+      .where(eq(collections.slug, slug));
 
-  if (userId !== currentSnippet.userId) {
-    throw new Error("You are not the owner of this snippet");
-  }
-
-  let slug;
-
-  if (currentSnippet.title !== title) {
-    const baseSlug = formatSlug(title as string);
-    slug = baseSlug;
-    // 4. Encontrar un slug único
-    let attempt = 0;
-
-    while (true) {
-      // Contar cuántos snippets ya tienen este slug
-      const [{ count: existingCount }] = await db
-        .select({ count: count() })
-        .from(snippets)
-        .where(eq(snippets.slug, slug));
-
-      if (Number(existingCount) === 0) {
-        // No existe, lo podemos usar
-        break;
-      }
-
-      // Si existe, incrementamos y probamos con sufijo
-      attempt++;
-      slug = `${baseSlug}-${attempt}`;
+    if (Number(existingCount) === 0) {
+      break;
     }
-  } else {
-    slug = currentSnippet.slug;
+
+    attempt++;
+    slug = `${baseSlug}-${attempt}`;
   }
 
   await db
-    .update(snippets)
+    .update(collections)
     .set({
-      title: title as string,
       slug,
-      language: language as string,
-      summary: summary as string,
+      title: title as string,
+      description: description as string,
       visibility: visibility as "public" | "private",
-      examples: examples ? JSON.parse(examples as string) : [],
-      userId: userId as string,
+      userId,
     })
-    .where(eq(snippets.id, id));
+    .where(eq(collections.id, id));
 
-  revalidatePath(`/${username}/snippets`);
-  redirect(`/${username}/snippets/${slug}`);
+  revalidatePath(`/${username}/collections`);
+  redirect(`/${username}/collections/${slug}`);
 }
 
-export async function deleteSnippet(id: number) {
+export async function deleteCollection(id: number) {
   const user = await currentUser();
 
   if (!user) {
@@ -97,19 +72,20 @@ export async function deleteSnippet(id: number) {
 
   const userId = user.id;
 
-  const snippet = await db.select().from(snippets).where(eq(snippets.id, id));
+  const [collection] = await db
+    .select()
+    .from(collections)
+    .where(eq(collections.id, id));
 
-  if (snippet.length === 0) {
-    throw new Error("Snippet not found");
+  if (!collection) {
+    throw new Error("Collection not found");
   }
 
-  const currentSnippet = snippet[0];
-
-  if (userId !== currentSnippet.userId) {
-    throw new Error("You are not the owner of this snippet");
+  if (userId !== collection.userId) {
+    throw new Error("You are not the owner of this collection");
   }
 
-  await db.delete(snippets).where(eq(snippets.id, id));
-  revalidatePath(`/${user.username}/snippets`);
-  redirect(`/${user.username}/snippets`);
+  await db.delete(collections).where(eq(collections.id, id));
+  revalidatePath(`/${user.username}/collections`);
+  redirect(`/${user.username}/collections`);
 }
