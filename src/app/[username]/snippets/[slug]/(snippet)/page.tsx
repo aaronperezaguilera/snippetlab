@@ -6,12 +6,13 @@ import { and, eq } from "drizzle-orm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Edit } from "lucide-react";
+import { Edit, GitFork } from "lucide-react";
 import { currentUser } from "@clerk/nextjs/server";
 import { ShareButton } from "@/components/share";
 import { PinButton } from "@/components/pin-button";
 import { StarButton } from "@/components/star-button";
 import { SnippetNav } from "@/components/snippet-nav";
+import { ForkButton } from "@/components/fork-button";
 
 export default async function SnippetPage({
   params,
@@ -63,6 +64,15 @@ export default async function SnippetPage({
     );
   }
 
+  const forkedFrom = currentSnippet.forkedFrom
+    ? await db
+        .select()
+        .from(snippets)
+        .leftJoin(users, eq(users.id, snippets.userId))
+        .where(eq(snippets.id, currentSnippet.forkedFrom))
+        .then((result) => result[0])
+    : null;
+
   return (
     <section className="flex flex-col gap-4 px-16">
       <SnippetNav
@@ -86,6 +96,10 @@ export default async function SnippetPage({
                 initialPinned={currentSnippet.pinned}
               />
             )}
+            {author[0].id !== authenticatedUser?.id &&
+              currentSnippet.visibility === "public" && (
+                <ForkButton id={currentSnippet.id} />
+              )}
             {currentSnippet.visibility === "public" && (
               <>
                 <ShareButton />
@@ -108,6 +122,18 @@ export default async function SnippetPage({
             )}
           </div>
         </div>
+        {currentSnippet.forkedFrom && (
+          <div className="flex gap-1 items-center text-sm text-muted-foreground">
+            <GitFork size={16} />
+            Forked from
+            <Link
+              href={`/${forkedFrom?.users?.username}/snippets/${forkedFrom?.snippets.slug}`}
+              className="hover:underline"
+            >
+              {forkedFrom?.snippets.title}
+            </Link>
+          </div>
+        )}
         <div className="flex gap-2 items-center text-sm text-muted-foreground">
           {LANGUAGE_ICON[currentSnippet.language]}
           {currentSnippet.language.slice(0, 1).toUpperCase() +

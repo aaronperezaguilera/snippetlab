@@ -78,6 +78,8 @@ export function SnippetCard({
                 whiteSpace: "pre-wrap",
                 wordBreak: "break-word",
                 fontSize: "14px",
+                overflowX: "hidden",
+                overflowY: "hidden",
               }}
             >
               {code}

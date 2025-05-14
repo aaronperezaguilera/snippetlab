@@ -7,6 +7,7 @@ import {
   pgEnum,
   boolean,
   integer,
+  AnyPgColumn,
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
@@ -40,6 +41,10 @@ export const snippets = pgTable("snippets", {
   userId: varchar("user_id", { length: 191 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
+  forkedFrom: integer("forked_from").references(
+    (): AnyPgColumn => snippets.id,
+    { onDelete: "set null" }
+  ),
   pinned: boolean("pinned").default(false).notNull(),
   likesCount: integer("likes_count").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
