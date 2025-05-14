@@ -55,7 +55,11 @@ export async function Header() {
                     Create Snippet
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>Create Collection</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href={`/${user?.username}/collections/new`}>
+                    Create Collection
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <DropdownMenu>

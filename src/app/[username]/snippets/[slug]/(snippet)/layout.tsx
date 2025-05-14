@@ -95,9 +95,7 @@ export default async function SnippetLayout({
                   className="border border-neutral-700"
                   asChild
                 >
-                  <Link href={`http://localhost:3000/explore?tags=${tag}`}>
-                    {tag}
-                  </Link>
+                  <Link href={`/explore?tags=${tag}`}>{tag}</Link>
                 </Badge>
               ))}
             </div>
