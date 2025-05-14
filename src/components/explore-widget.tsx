@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { getFeaturedSnippets, getFeaturedUsers } from "@/db";
+import { getFeaturedSnippets } from "@/db";
 import { SnippetCard } from "./snippet-card";
 
 export async function ExploreWidget() {

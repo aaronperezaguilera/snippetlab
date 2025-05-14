@@ -1,5 +1,3 @@
-import { SVGProps } from "react";
-
 export const C = () => (
   <svg
     viewBox="0 0 306 345"
