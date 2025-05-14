@@ -27,7 +27,7 @@ export default async function NewCollectionPage({
   }
 
   return (
-    <main className="container mx-auto mt-16 max-w-6xl">
+    <main className="container mx-auto mt-16 max-w-6xl min-h-screen">
       <h1 className="text-2xl font-bold mb-8">Edit your collection</h1>
       <CollectionForm
         id={collection.id}

@@ -12,7 +12,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="mt-16 grid grid-cols-[1.2fr_2.8fr_1.2fr] gap-16 relative">
+    <main className="mt-16 grid grid-cols-[1.2fr_2.8fr_1.2fr] gap-16 relative min-h-screen">
       <SnippetsWidget />
       <section className="flex flex-col gap-8">
         <h1 className="text-4xl font-bold text-balance">

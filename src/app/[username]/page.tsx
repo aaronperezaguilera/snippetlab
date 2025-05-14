@@ -31,7 +31,7 @@ export default async function ProfilePage({
     .where(and(eq(snippets.pinned, true), eq(snippets.userId, user.id)));
 
   return (
-    <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
+    <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16 min-h-screen">
       <Profile username={username} />
       <div className="flex flex-col gap-4">
         <ProfileNav username={username} active="profile" />

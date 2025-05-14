@@ -51,7 +51,7 @@ export default async function SnippetLayout({
   }
 
   return (
-    <main className="mt-16 grid grid-cols-[1fr_3fr_1fr] gap-16 relative">
+    <main className="mt-16 grid grid-cols-[1fr_3fr_1fr] gap-16 relative min-h-screen">
       <section className="flex flex-col gap-4 pl-16 sticky top-16 h-fit">
         <h2 className="text-2xl font-semibold">About</h2>
         <span className="text-muted-foreground">Author</span>

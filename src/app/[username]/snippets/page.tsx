@@ -90,7 +90,7 @@ export default async function ProfilePage({
   const rows = await getRows();
 
   return (
-    <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16">
+    <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16 min-h-screen">
       <Profile username={username} />
 
       <div className="flex flex-col gap-4 overflow-hidden">

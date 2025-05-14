@@ -33,7 +33,7 @@ export default async function EditSnippet({
   }
 
   return (
-    <main className="container mx-auto mt-16 max-w-6xl">
+    <main className="container mx-auto mt-16 max-w-6xl min-h-screen">
       <h1 className="text-2xl font-bold mb-8">Edit your snippet</h1>
       <SnippetForm
         id={currentSnippet.id}

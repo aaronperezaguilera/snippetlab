@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="min-h-screen">
       <section className="h-screen grid grid-cols-2 items-center relative overflow-hidden">
         <div className="p-8 flex flex-col gap-8">
           <h1 className="text-6xl font-bold text-balance max-w-[20ch]">

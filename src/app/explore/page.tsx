@@ -89,7 +89,7 @@ export default async function ExplorePage({
     .limit(10);
 
   return (
-    <main className="px-16 mx-auto grid grid-cols-[300px_1fr] gap-16 mt-16">
+    <main className="px-16 mx-auto grid grid-cols-[300px_1fr] gap-16 mt-16 min-h-screen">
       <section>
         <h1 className="text-2xl font-semibold mb-4">Explore</h1>
         <div className="flex flex-col gap-2">

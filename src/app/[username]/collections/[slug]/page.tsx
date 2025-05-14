@@ -63,7 +63,7 @@ export default async function CollectionPage({
     .leftJoin(users, eq(users.id, snippets.userId));
 
   return (
-    <main className="container mx-auto mt-16 flex flex-col gap-8">
+    <main className="container mx-auto mt-16 flex flex-col gap-8 min-h-screen">
       <section className="flex flex-col gap-4">
         <header className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
