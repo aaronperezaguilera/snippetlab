@@ -88,10 +88,8 @@ export async function forkSnippet(snippetId: number) {
   const userId = user.id;
   const username = user.username;
 
-  const [{ id, title, filename, language, code, tags, summary }] = await db
-    .select()
-    .from(snippets)
-    .where(eq(snippets.id, snippetId));
+  const [{ id, title, filename, language, code, tags, summary, examples }] =
+    await db.select().from(snippets).where(eq(snippets.id, snippetId));
 
   if (!id) {
     throw new Error("Snippet not found");
@@ -124,6 +122,7 @@ export async function forkSnippet(snippetId: number) {
     code,
     tags,
     summary,
+    examples,
     visibility: "public",
     forkedFrom: id,
     userId: userId,

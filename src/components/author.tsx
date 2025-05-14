@@ -6,13 +6,19 @@ import { users } from "@/db/schema";
 
 type User = InferSelectModel<typeof users>;
 
-export function Author({ author }: { author: User }) {
+export function Author({
+  author,
+  clasName,
+}: {
+  author: User;
+  clasName?: string;
+}) {
   return (
     <div className="flex gap-3 items-center">
       <Button
         variant="ghost"
         asChild
-        className="pr-4 pl-2 py-2 h-full -translate-x-2 w-fit z-50"
+        className={`pr-4 pl-2 py-2 h-full -translate-x-2 w-fit z-50 ${clasName}`}
       >
         <Link href={`/${author.username}`} className="flex gap-3 items-center">
           {author.image_url && (

@@ -3,6 +3,8 @@ import { snippets, follows, users } from "@/db/schema";
 import { eq, inArray, desc, and } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs/server";
 import { SnippetCard } from "./snippet-card";
+import Link from "next/link";
+import { Button } from "./ui/button";
 
 export async function Feed() {
   const authenticatedUser = await currentUser();
@@ -23,7 +25,17 @@ export async function Feed() {
 
   // Si no hay seguidos, devuelve array vacío
   if (followedIds.length === 0) {
-    return [];
+    return (
+      <div className="flex flex-col gap-4 mt-8 ">
+        <h1 className="text-2xl font-bold">No one to follow yet</h1>
+        <p className="text-muted-foreground">
+          Follow some users to see their snippets here.
+        </p>
+        <Button className="w-fit" asChild>
+          <Link href="/explore">Start exploring</Link>
+        </Button>
+      </div>
+    );
   }
 
   // 2. Selecciona los snippets públicos de esos usuarios

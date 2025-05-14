@@ -7,6 +7,7 @@ import {
   Heart,
   Home,
   Menu,
+  MessagesSquare,
   Settings,
   Telescope,
   User,
@@ -136,8 +137,8 @@ export function Sidebar() {
                 href={`/explore`}
                 className="hover:underline flex items-center gap-2"
               >
-                <Telescope className="size-4" />
-                QA Forum
+                <MessagesSquare className="size-4" />
+                Q&A Forum
               </Link>
             </li>
             <li>

@@ -161,6 +161,7 @@ export function SnippetForm({
           placeholder="Write a summary of the snippet"
           name="summary"
           defaultValue={summary}
+          maxLength={600}
         />
         <Label>Examples:</Label>
         <div className="flex flex-col gap-2 w-full">
