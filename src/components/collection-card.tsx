@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { RelativeTime } from "./relative-time";
-import { Bookmark, Heart } from "lucide-react";
+import { Bookmark } from "lucide-react";
 
 import { Author } from "./author";
 import { InferSelectModel } from "drizzle-orm";
-import { collections, snippets, users } from "@/db/schema";
+import { collections, users } from "@/db/schema";
 
 type Author = InferSelectModel<typeof users>;
 type Collection = InferSelectModel<typeof collections>;
@@ -23,7 +23,7 @@ export function CollectionCard({
   showAuthor?: boolean;
   showUsername?: boolean;
 }) {
-  const { slug, title, visibility, savedCount, createdAt } = collection;
+  const { slug, title, visibility, bookmarksCount, createdAt } = collection;
 
   return (
     <div className="p-4 flex flex-col relative rounded-lg gap-4 border hover:bg-accent/5 transition-colors">
@@ -38,7 +38,7 @@ export function CollectionCard({
               </Badge>
             </div>
             <div className="flex gap-2 items-center text-muted-foreground text-sm">
-              <Bookmark size={16} /> {savedCount} times saved
+              <Bookmark size={16} /> {bookmarksCount} times saved
             </div>
           </div>
           {showUsername && (
