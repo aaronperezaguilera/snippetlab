@@ -55,9 +55,6 @@ export function DiffReader({
 
   return (
     <div>
-      <div className="px-4 bg-[#05121f] rounded-t-lg py-2 border-b border-b-primary/10">
-        {filename}
-      </div>
       <div
         ref={wrapperRef}
         className="w-full bg-[#061626] py-2 pr-2 rounded-b-lg relative"

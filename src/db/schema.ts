@@ -153,3 +153,28 @@ export const comments = pgTable("comments", {
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const questions = pgTable("questions", {
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 200 }).notNull(),
+  content: text("content").notNull(),
+  snippetId: serial("snippet_id").references(() => snippets.id, {
+    onDelete: "cascade",
+  }),
+  userId: varchar("user_id", { length: 191 })
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const answers = pgTable("answers", {
+  id: serial("id").primaryKey(),
+  questionId: serial("question_id")
+    .notNull()
+    .references(() => questions.id, { onDelete: "cascade" }),
+  userId: varchar("user_id", { length: 191 })
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});

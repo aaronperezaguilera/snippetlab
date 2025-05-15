@@ -7,10 +7,10 @@ import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Bookmark, Loader2, Lock } from "lucide-react";
-import { DeleteSnippet } from "./delete-snippet";
 import { useFormStatus } from "react-dom";
 import { updateCollection } from "@/app/[username]/collections/[slug]/edit/actions";
 import { createCollection } from "@/app/[username]/collections/new/actions";
+import { DeleteCollection } from "./delete-collection";
 
 export function CollectionForm({
   id,
@@ -108,7 +108,7 @@ export function CollectionForm({
         </RadioGroup>
 
         <div className="flex gap-4 justify-end w-full mt-4">
-          {type === "edit" && <DeleteSnippet id={id} />}
+          {type === "edit" && <DeleteCollection id={id} />}
           <SubmitButton
             type={type}
             formAction={

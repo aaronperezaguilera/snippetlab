@@ -134,7 +134,7 @@ export function Sidebar() {
             <div className="w-full h-px bg-border my-2"></div>
             <li>
               <Link
-                href={`/explore`}
+                href={`/forum`}
                 className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
               >
                 <MessagesSquare className="size-4" />
