@@ -10,12 +10,7 @@ interface CodeReaderProps {
   modified: string;
 }
 
-export function DiffReader({
-  filename,
-  language,
-  original,
-  modified,
-}: CodeReaderProps) {
+export function DiffReader({ language, original, modified }: CodeReaderProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleEditorDidMount: DiffOnMount = (editor, monaco) => {
