@@ -86,7 +86,7 @@ export function ProfileDetails({ profile }: { profile: User }) {
               maxLength={160}
               placeholder="Add a bio"
               name="bio"
-              className="max-h-24 h-full"
+              className="max-h-24 h-full resize-none"
               defaultValue={profile.bio || ""}
             />
           </div>

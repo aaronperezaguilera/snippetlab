@@ -7,9 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { Edit } from "lucide-react";
 import { currentUser } from "@clerk/nextjs/server";
 import { ShareButton } from "@/components/share";
-import { PinButton } from "@/components/pin-button";
-import { StarButton } from "@/components/star-button";
-import { ForkButton } from "@/components/fork-button";
 import { SnippetCard } from "@/components/snippet-card";
 
 export default async function CollectionPage({
@@ -63,67 +60,46 @@ export default async function CollectionPage({
     .leftJoin(users, eq(users.id, snippets.userId));
 
   return (
-    <main className="container mx-auto mt-16 flex flex-col gap-8 min-h-screen">
-      <section className="flex flex-col gap-4">
-        <header className="flex flex-col gap-2">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-4 items-center">
-              <h1 className="text-2xl font-bold">{collection.title}</h1>
-              <Badge variant="secondary" className="border border-neutral-700">
-                {collection.visibility.slice(0, 1).toUpperCase() +
-                  collection.visibility.slice(1)}
-              </Badge>
-            </div>
-            <div className="flex gap-2">
-              {author.id === authenticatedUser?.id && (
-                <PinButton
-                  id={collection.id}
-                  initialPinned={collection.pinned}
-                />
-              )}
-              {author.id !== authenticatedUser?.id &&
-                collection.visibility === "public" && (
-                  <ForkButton id={collection.id} />
-                )}
-              {collection.visibility === "public" && (
-                <>
-                  <ShareButton />
-                  <StarButton
-                    id={collection.id}
-                    initialStarred={false}
-                    initiallikes={collection.bookmarksCount}
-                  />
-                </>
-              )}
-
-              {author.id === authenticatedUser?.id && (
-                <Button asChild>
-                  <Link
-                    href={`/${username}/collections/${collection.slug}/edit`}
-                  >
-                    <Edit /> Edit
-                  </Link>
-                </Button>
-              )}
-            </div>
+    <section className="flex flex-col gap-4">
+      <header className="flex flex-col gap-2">
+        <div className="flex justify-between items-center">
+          <div className="flex gap-4 items-center">
+            <h1 className="text-2xl font-bold">{collection.title}</h1>
+            <Badge variant="secondary" className="border border-neutral-700">
+              {collection.visibility.slice(0, 1).toUpperCase() +
+                collection.visibility.slice(1)}
+            </Badge>
           </div>
-        </header>
-      </section>
-      <section>
-        <div className="grid sm:grid-cols-2 gap-6">
-          {collectionSnippetsList.map(
-            (snip) =>
-              snip.users && (
-                <SnippetCard
-                  key={snip.snippets.id}
-                  author={snip.users}
-                  snippet={snip.snippets}
-                  showAuthor
-                />
-              )
-          )}
+          <div className="flex gap-2">
+            {collection.visibility === "public" && (
+              <>
+                <ShareButton />
+              </>
+            )}
+
+            {author.id === authenticatedUser?.id && (
+              <Button asChild>
+                <Link href={`/${username}/collections/${collection.slug}/edit`}>
+                  <Edit /> Edit
+                </Link>
+              </Button>
+            )}
+          </div>
         </div>
-      </section>
-    </main>
+      </header>
+      <div className="grid sm:grid-cols-2 gap-6">
+        {collectionSnippetsList.map(
+          (snip) =>
+            snip.users && (
+              <SnippetCard
+                key={snip.snippets.id}
+                author={snip.users}
+                snippet={snip.snippets}
+                showAuthor
+              />
+            )
+        )}
+      </div>
+    </section>
   );
 }

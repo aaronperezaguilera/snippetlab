@@ -36,6 +36,9 @@ export function QuestionForm({ snippets }: { snippets: Snippet[] }) {
           <SelectValue placeholder="Select your snippet" />
         </SelectTrigger>
         <SelectContent>
+          <SelectItem value="none" className="text-muted-foreground">
+            None
+          </SelectItem>
           {snippets.map((snippet) => (
             <SelectItem key={snippet.id} value={String(snippet.id)}>
               {snippet.title}

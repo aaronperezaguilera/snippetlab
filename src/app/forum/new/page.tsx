@@ -2,7 +2,7 @@ import { QuestionForm } from "@/components/question-form";
 import { db } from "@/db/drizzle";
 import { snippets } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 
 export default async function NewQuestionPage() {
   const user = await currentUser();
@@ -20,7 +20,7 @@ export default async function NewQuestionPage() {
   const snippetOptions = await db
     .select()
     .from(snippets)
-    .where(eq(snippets.userId, user.id))
+    .where(and(eq(snippets.userId, user.id), eq(snippets.visibility, "public")))
     .orderBy(desc(snippets.createdAt));
 
   return (

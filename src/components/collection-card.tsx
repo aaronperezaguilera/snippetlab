@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { RelativeTime } from "./relative-time";
-import { Bookmark } from "lucide-react";
 
 import { Author } from "./author";
 import { InferSelectModel } from "drizzle-orm";
@@ -23,7 +22,7 @@ export function CollectionCard({
   showAuthor?: boolean;
   showUsername?: boolean;
 }) {
-  const { slug, title, visibility, bookmarksCount, createdAt } = collection;
+  const { slug, title, visibility, createdAt } = collection;
 
   return (
     <div className="p-4 flex flex-col relative gap-4 border hover:bg-accent/5 transition-colors">
@@ -36,9 +35,6 @@ export function CollectionCard({
               <Badge variant="secondary" className="border border-neutral-700">
                 {visibility[0].toUpperCase() + visibility.slice(1)}
               </Badge>
-            </div>
-            <div className="flex gap-2 items-center text-muted-foreground text-sm">
-              <Bookmark size={16} /> {bookmarksCount} times saved
             </div>
           </div>
           {showUsername && (

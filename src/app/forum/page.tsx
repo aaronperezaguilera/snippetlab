@@ -1,11 +1,9 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { Feed } from "@/components/feed";
 import { SnippetsWidget } from "@/components/snippets-widget";
-import { FeaturedUsers } from "@/components/featured-users";
-import { ExploreWidget } from "@/components/explore-widget";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import { ForumFeed } from "@/components/forum-feed";
 
 export default async function ForumPage() {
   const user = await currentUser();
@@ -32,12 +30,11 @@ export default async function ForumPage() {
             </Link>
           </Button>
         </header>
-        <Feed />
+        <ForumFeed />
       </section>
-      <div className="flex flex-col gap-8">
-        <ExploreWidget />
-        <FeaturedUsers />
-      </div>
+      <section className="flex flex-col gap-8">
+        <h2 className="text-xl font-bold">Your questions</h2>
+      </section>
     </main>
   );
 }

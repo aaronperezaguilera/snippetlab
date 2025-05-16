@@ -85,7 +85,6 @@ export const collections = pgTable("collections", {
   description: text("description"),
   visibility: visibilityEnum().default("public").notNull(),
   pinned: boolean("pinned").default(false).notNull(),
-  bookmarksCount: integer("bookmarks_count").default(0).notNull(),
   userId: varchar("user_id", { length: 191 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
@@ -117,20 +116,6 @@ export const likes = pgTable("likes", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-export const bookmarks = pgTable(
-  "bookmarks",
-  {
-    collectionId: serial("collection_id")
-      .notNull()
-      .references(() => collections.id, { onDelete: "cascade" }),
-    userId: varchar("user_id", { length: 191 })
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    createdAt: timestamp("created_at").defaultNow().notNull(),
-  },
-  (table) => [primaryKey({ columns: [table.collectionId, table.userId] })]
-);
-
 export const follows = pgTable("follows", {
   id: serial("id").primaryKey(),
   followerId: varchar("follower_id", { length: 191 })
@@ -158,9 +143,11 @@ export const questions = pgTable("questions", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 200 }).notNull(),
   content: text("content").notNull(),
-  snippetId: serial("snippet_id").references(() => snippets.id, {
-    onDelete: "cascade",
-  }),
+  snippetId: integer("snippet_id")
+    .$type<number | null>()
+    .references(() => snippets.id, {
+      onDelete: "cascade",
+    }),
   userId: varchar("user_id", { length: 191 })
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),

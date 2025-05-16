@@ -59,6 +59,19 @@ export function ProfileNav({ username = "" }: { username?: string }) {
       >
         Likes
       </Link>
+      <Link
+        href={`/${username}/questions`}
+        className={cn(
+          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
+          {
+            "border-accent hover:bg-transparent": pathname.includes(
+              `/${username}/questions`
+            ),
+          }
+        )}
+      >
+        Questions
+      </Link>
     </div>
   );
 }

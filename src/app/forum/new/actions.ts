@@ -20,7 +20,7 @@ export async function createQuestion(formData: FormData) {
       {
         title,
         content,
-        snippetId,
+        snippetId: snippetId ? snippetId : null,
         userId: user.id,
       },
     ])
