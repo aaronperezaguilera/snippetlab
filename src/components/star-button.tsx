@@ -2,7 +2,7 @@
 
 import { useOptimistic, useTransition } from "react";
 import { Button } from "./ui/button";
-import { updateStar } from "@/app/[username]/snippets/actions";
+import { updateStar } from "@/app/[username]/(layout)/snippets/actions";
 import { Heart } from "lucide-react";
 import { Badge } from "./ui/badge";
 

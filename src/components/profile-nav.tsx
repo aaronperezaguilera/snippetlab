@@ -1,13 +1,12 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export function ProfileNav({
-  username = "",
-  active,
-}: {
-  username?: string;
-  active: "profile" | "snippets" | "collections" | "likes";
-}) {
+export function ProfileNav({ username = "" }: { username?: string }) {
+  const pathname = usePathname();
+
   return (
     <div className="flex gap-2 items-center w-fit">
       <Link
@@ -15,7 +14,7 @@ export function ProfileNav({
         className={cn(
           "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
           {
-            "border-accent hover:bg-transparent": active === "profile",
+            "border-accent hover:bg-transparent": pathname === `/${username}`,
           }
         )}
       >
@@ -26,7 +25,9 @@ export function ProfileNav({
         className={cn(
           "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
           {
-            "border-accent hover:bg-transparent": active === "snippets",
+            "border-accent hover:bg-transparent": pathname.includes(
+              `/${username}/snippets`
+            ),
           }
         )}
       >
@@ -37,7 +38,9 @@ export function ProfileNav({
         className={cn(
           "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
           {
-            "border-accent hover:bg-transparent": active === "collections",
+            "border-accent hover:bg-transparent": pathname.includes(
+              `/${username}/collections`
+            ),
           }
         )}
       >
@@ -48,7 +51,9 @@ export function ProfileNav({
         className={cn(
           "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
           {
-            "border-accent hover:bg-transparent": active === "likes",
+            "border-accent hover:bg-transparent": pathname.includes(
+              `/${username}/likes`
+            ),
           }
         )}
       >

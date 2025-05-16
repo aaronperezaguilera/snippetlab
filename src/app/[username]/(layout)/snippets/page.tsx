@@ -1,5 +1,3 @@
-import { Profile } from "@/components/profile";
-import { ProfileNav } from "@/components/profile-nav";
 import { Search } from "@/components/search";
 import { SnippetCard } from "@/components/snippet-card";
 import { SnippetsFilter } from "@/components/snippets-filter";
@@ -90,42 +88,37 @@ export default async function ProfilePage({
   const rows = await getRows();
 
   return (
-    <main className="container mx-auto grid grid-cols-[1fr_3fr] gap-16 mt-16 min-h-screen">
-      <Profile username={username} />
+    <div className="flex flex-col gap-4 overflow-hidden">
+      <h1 className="text-2xl font-bold">Snippets</h1>
 
-      <div className="flex flex-col gap-4 overflow-hidden">
-        <ProfileNav username={user.username} active="snippets" />
-        <h1 className="text-2xl font-bold">Snippets</h1>
-
-        <div className="flex gap-2">
-          <Search placeholder="Search snippets..." />
-          <SnippetsFilter />
-          {authenticatedUser?.id === user.id && (
-            <Button asChild>
-              <Link href={`/${username}/snippets/new`}>
-                <PlusIcon /> Create
-              </Link>
-            </Button>
-          )}
-        </div>
-        {rows.length > 0 ? (
-          <div className="flex flex-col gap-4">
-            {rows.map((snippet) =>
-              snippet.userId === authenticatedUser?.id ||
-              snippet.visibility === "public" ? (
-                <SnippetCard
-                  key={snippet.id}
-                  author={user}
-                  {...snippet}
-                  snippet={snippet}
-                />
-              ) : null
-            )}
-          </div>
-        ) : (
-          <p>No snippets found. Start by creating one.</p>
+      <div className="flex gap-2">
+        <Search placeholder="Search snippets..." />
+        <SnippetsFilter />
+        {authenticatedUser?.id === user.id && (
+          <Button asChild>
+            <Link href={`/${username}/snippets/new`}>
+              <PlusIcon /> Create
+            </Link>
+          </Button>
         )}
       </div>
-    </main>
+      {rows.length > 0 ? (
+        <div className="flex flex-col">
+          {rows.map((snippet) =>
+            snippet.userId === authenticatedUser?.id ||
+            snippet.visibility === "public" ? (
+              <SnippetCard
+                key={snippet.id}
+                author={user}
+                {...snippet}
+                snippet={snippet}
+              />
+            ) : null
+          )}
+        </div>
+      ) : (
+        <p>No snippets found. Start by creating one.</p>
+      )}
+    </div>
   );
 }

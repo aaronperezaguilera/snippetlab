@@ -60,40 +60,27 @@ export async function Profile({ username }: { username: string }) {
         )
     : [];
   return (
-    <section className="flex flex-col gap-4 overflow-hidden">
-      <div className="aspect-square bg-neutral-600 rounded-lg overflow-hidden">
+    <section className="flex gap-8">
+      <div className="aspect-square bg-neutral-600 overflow-hidden w-64 h-64 flex-shrink-0">
         {author.image_url && (
           <Image
             src={author.image_url as string}
             width={1000}
             height={1000}
             alt="Profile"
-            className="w-full h-full object-cover"
+            className="object-cover object-center"
           />
         )}
       </div>
-      <div>
-        <h1 className="text-xl font-semibold">
-          {author.first_name} {author.last_name}
-        </h1>
-        <span className="text-muted-foreground">@{author.username}</span>
-      </div>
-      {author.id !== authenticatedUser?.id && (
-        <FollowButton
-          id={author.id}
-          initialFollowed={followed.length > 0 ? true : false}
-        />
-      )}
 
-      {author.id === authenticatedUser?.id && <ProfileDetails user={author} />}
-      <div>
-        <span>
-          <strong>{user.followers ? user.followers : 0}</strong> followers
-        </span>
-        <span> · </span>
-        <span>
-          <strong>{user.following ? user.following : 0}</strong> following
-        </span>
+      <div className="flex flex-col gap-4 w-full">
+        <ProfileDetails profile={author} />
+        {author.id !== authenticatedUser?.id && (
+          <FollowButton
+            id={author.id}
+            initialFollowed={followed.length > 0 ? true : false}
+          />
+        )}
       </div>
     </section>
   );

@@ -92,7 +92,7 @@ export function Sidebar() {
             <li>
               <Link
                 href="/"
-                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
               >
                 <Home className="size-4" />
                 Home
@@ -101,7 +101,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}`}
-                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
               >
                 <User className="size-4" />
                 Your profile
@@ -110,7 +110,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/snippets`}
-                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
               >
                 <Code2 className="size-4" /> Your snippets
               </Link>
@@ -118,7 +118,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/collections`}
-                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
               >
                 <Book className="size-4" /> Your collections
               </Link>
@@ -126,7 +126,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/likes`}
-                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
               >
                 <Heart className="size-4" /> Your liked snippets
               </Link>
@@ -135,7 +135,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/forum`}
-                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
               >
                 <MessagesSquare className="size-4" />
                 Q&A Forum
@@ -144,7 +144,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/explore`}
-                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
               >
                 <Telescope className="size-4" />
                 Explore
@@ -154,7 +154,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/account`}
-                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
               >
                 <Settings className="size-4" />
                 Account settings
@@ -163,7 +163,7 @@ export function Sidebar() {
             <li>
               <a
                 href="https://github.com/aaronperezaguilera/snippetlab/issues/new"
-                className="flex items-center gap-2 rounded-lg px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
                 target="_blank"
                 rel="noopener noreferrer"
               >

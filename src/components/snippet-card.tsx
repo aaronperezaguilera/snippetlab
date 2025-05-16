@@ -49,7 +49,7 @@ export function SnippetCard({
   }
 
   return (
-    <div className="p-4 flex flex-col relative rounded-lg gap-4 border hover:bg-accent/5 transition-colors">
+    <div className="p-4 border-b flex flex-col relative gap-4 hover:bg-accent/5 transition-colors">
       <div className="flex flex-col gap-2">
         {showAuthor && <Author author={author} />}
         <div className="flex flex-col">
@@ -73,11 +73,11 @@ export function SnippetCard({
       </div>
 
       {showCode && (
-        <div className="shadow-lg shadow-background rounded-lg overflow-hidden border">
-          <div className="px-4 bg-[#05121f] rounded-t-lg py-2 border-b border-b-primary/10">
+        <div className="shadow-lg shadow-background overflow-hidden border">
+          <div className="px-4 bg-[#05121f] py-2 border-b border-b-primary/10">
             {filename}
           </div>
-          <div className="relative rounded-b-lg overflow-hidden">
+          <div className="relative overflow-hidden">
             <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#061626] to-transparent z-40" />
             <CopyButton value={code} className="absolute z-50 right-3 top-3" />
 

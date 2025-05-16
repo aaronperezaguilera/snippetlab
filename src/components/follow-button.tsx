@@ -2,7 +2,7 @@
 
 import { useOptimistic, useTransition } from "react";
 import { Button } from "./ui/button";
-import { updateFollow } from "@/app/[username]/actions";
+import { updateFollow } from "@/app/[username]/(layout)/actions";
 import { cn } from "@/lib/utils";
 
 export function FollowButton({
@@ -35,7 +35,7 @@ export function FollowButton({
         type="submit"
         disabled={isPending}
         className={cn(
-          "w-full transition-colors",
+          "w-64 transition-colors",
           isFollowed &&
             "bg-transparent text-white hover:bg-destructive/80 border"
         )}

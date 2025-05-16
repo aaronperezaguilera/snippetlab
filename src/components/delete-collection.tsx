@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useFormStatus } from "react-dom";
 import { Loader2 } from "lucide-react";
-import { deleteCollection } from "@/app/[username]/collections/[slug]/edit/actions";
+import { deleteCollection } from "@/app/[username]/(layout)/collections/[slug]/edit/actions";
 
 export function DeleteCollection({ id }: { id: number | undefined }) {
   if (!id) {

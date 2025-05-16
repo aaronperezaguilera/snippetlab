@@ -54,7 +54,7 @@ export function CodeEditor({ language, code, onChange }: CodeEditorProps) {
   };
 
   return (
-    <div ref={wrapperRef} className="w-full bg-[#061626] py-2 pr-2 rounded-lg">
+    <div ref={wrapperRef} className="w-full bg-[#061626] py-2 pr-2">
       <div ref={containerRef} className="w-full min-h-48 max-h-[500px]">
         <Editor
           theme="nightOwl"

@@ -69,7 +69,7 @@ export async function Header() {
                   alt={`${user?.username || "User"}'s profile picture`}
                   width={100}
                   height={100}
-                  className="w-9 h-9 border rounded-lg"
+                  className="w-9 h-9 border"
                 />
               </DropdownMenuTrigger>
               <DropdownMenuContent side="bottom" align="end">

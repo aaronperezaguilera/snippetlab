@@ -40,7 +40,7 @@ export default async function CommentCard({ comment }: { comment: Comment }) {
                   width={1000}
                   height={1000}
                   alt="Profile"
-                  className="w-10 h-10 object-cover rounded-lg"
+                  className="w-10 h-10 object-cover"
                 />
               )}
               <div className="flex flex-col">

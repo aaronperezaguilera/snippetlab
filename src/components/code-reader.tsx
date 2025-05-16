@@ -49,13 +49,10 @@ export function CodeReader({ filename, language, code }: CodeReaderProps) {
 
   return (
     <div>
-      <div className="px-4 bg-[#05121f] rounded-t-lg py-2 border-b border-b-primary/10">
+      <div className="px-4 bg-[#05121f] py-2 border-b border-b-primary/10">
         {filename}
       </div>
-      <div
-        ref={wrapperRef}
-        className="w-full bg-[#061626] py-2 pr-2 rounded-b-lg relative"
-      >
+      <div ref={wrapperRef} className="w-full bg-[#061626] py-2 pr-2 relative">
         <CopyButton value={code} className="absolute z-50 right-3 top-3" />
         <Editor
           theme="nightOwl"

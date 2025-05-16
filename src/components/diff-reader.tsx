@@ -55,10 +55,7 @@ export function DiffReader({
 
   return (
     <div>
-      <div
-        ref={wrapperRef}
-        className="w-full bg-[#061626] py-2 pr-2 rounded-b-lg relative"
-      >
+      <div ref={wrapperRef} className="w-full bg-[#061626] py-2 pr-2 relative">
         <DiffEditor
           theme="nightOwl"
           language={language}

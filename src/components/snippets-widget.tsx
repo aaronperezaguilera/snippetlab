@@ -44,7 +44,7 @@ export async function SnippetsWidget() {
                   width={1000}
                   height={1000}
                   alt="Profile"
-                  className="w-12 h-12 object-cover rounded-lg"
+                  className="w-12 h-12 object-cover"
                 />
               )}
               <div className="flex flex-col">
