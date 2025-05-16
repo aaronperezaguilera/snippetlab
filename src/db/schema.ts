@@ -163,5 +163,7 @@ export const answers = pgTable("answers", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   content: text("content").notNull(),
+  language: varchar("language", { length: 50 }),
+  code: text("code"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

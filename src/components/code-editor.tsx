@@ -5,7 +5,7 @@ import React, { useRef } from "react";
 import Editor, { OnMount } from "@monaco-editor/react";
 
 interface CodeEditorProps {
-  language: string;
+  language?: string;
   code: string | undefined;
   onChange: (value: string | undefined) => void;
 }

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { updateProfile } from "@/app/[username]/(layout)/actions";
 import { useFormStatus } from "react-dom";
@@ -21,8 +20,8 @@ export function ProfileDetails({ profile }: { profile: User }) {
   const user = useUser();
 
   return (
-    <div className="flex justify-between w-full">
-      <div className="space-y-4">
+    <div className="flex justify-between w-full gap-8">
+      <div className="space-y-4 max-w-[60ch] text-pretty">
         <div>
           <h1 className="text-2xl font-bold">
             {profile.first_name} {profile.last_name}
@@ -80,19 +79,16 @@ export function ProfileDetails({ profile }: { profile: User }) {
 
       {editing && (
         <form action={updateProfile} className="flex gap-8">
-          <div className="space-y-2 w-80">
-            <Label htmlFor="bio">Bio</Label>
-            <Textarea
-              maxLength={160}
-              placeholder="Add a bio"
-              name="bio"
-              className="max-h-24 h-full resize-none"
-              defaultValue={profile.bio || ""}
-            />
-          </div>
+          <Textarea
+            maxLength={160}
+            placeholder="Add a bio"
+            name="bio"
+            className="max-h-31 w-80 h-full resize-none"
+            defaultValue={profile.bio || ""}
+          />
 
           <div className="flex flex-col gap-2 items-end">
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center w-64">
               <Link className="size-4" />
               <Input
                 type="url"
@@ -102,7 +98,7 @@ export function ProfileDetails({ profile }: { profile: User }) {
                 defaultValue={profile.website || ""}
               />
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center w-64">
               <Icons.gitHub className="size-4" />
               <Input
                 type="text"
@@ -112,7 +108,7 @@ export function ProfileDetails({ profile }: { profile: User }) {
                 defaultValue={profile.github || ""}
               />
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center w-64">
               <Icons.x className="size-4" />
               <Input
                 type="text"
@@ -122,11 +118,12 @@ export function ProfileDetails({ profile }: { profile: User }) {
                 defaultValue={profile.x || ""}
               />
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 w-64 justify-end">
               <SubmitButton onSuccess={() => setEditing(false)} />
               <Button
                 variant="secondary"
                 type="button"
+                className="w-24"
                 onClick={() => setEditing(false)}
               >
                 Cancel
@@ -156,7 +153,7 @@ function SubmitButton({ onSuccess }: { onSuccess: () => void }) {
   }, [pending, onSuccess]);
 
   return (
-    <Button type="submit" disabled={pending}>
+    <Button type="submit" disabled={pending} className="w-24">
       {pending && <Loader2 className="animate-spin mr-2" />}
       Save
     </Button>

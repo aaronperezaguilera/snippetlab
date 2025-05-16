@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import { ForumFeed } from "@/components/forum-feed";
+import { questions, users } from "@/db/schema";
+import { db } from "@/db/drizzle";
+import { desc, eq } from "drizzle-orm";
+import { QuestionCard } from "@/components/question-card";
 
 export default async function ForumPage() {
   const user = await currentUser();
@@ -17,6 +21,14 @@ export default async function ForumPage() {
       </div>
     );
   }
+
+  const yourQuestions = await db
+    .select()
+    .from(questions)
+    .leftJoin(users, eq(questions.userId, users.id))
+    .where(eq(questions.userId, user.id))
+    .orderBy(desc(questions.createdAt))
+    .limit(4);
 
   return (
     <main className="mt-16 grid grid-cols-[1.2fr_2.8fr_1.2fr] gap-16 relative min-h-screen">
@@ -32,8 +44,28 @@ export default async function ForumPage() {
         </header>
         <ForumFeed />
       </section>
-      <section className="flex flex-col gap-8">
-        <h2 className="text-xl font-bold">Your questions</h2>
+      <section className="flex flex-col pr-16">
+        <h2 className="text-xl font-bold mb-4">Your questions</h2>
+        {yourQuestions.length > 0 ? (
+          yourQuestions.map(
+            ({ questions, users }) =>
+              users && (
+                <QuestionCard
+                  key={questions.id}
+                  question={questions}
+                  author={users}
+                  showAuthor={false}
+                />
+              )
+          )
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full">
+            <h3 className="text-lg font-semibold">No questions found</h3>
+            <p className="text-gray-500">
+              You haven&apos;t asked any questions yet.
+            </p>
+          </div>
+        )}
       </section>
     </main>
   );

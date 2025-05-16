@@ -60,6 +60,9 @@ export async function Header() {
                     Create Collection
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href={`/forum/new`}>Create Question</Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <DropdownMenu>

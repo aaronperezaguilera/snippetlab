@@ -11,7 +11,6 @@ import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Author } from "./author";
 import { InferSelectModel } from "drizzle-orm";
 import { questions, snippets, users } from "@/db/schema";
-import { cn } from "@/lib/utils";
 
 type Author = InferSelectModel<typeof users>;
 type Snippet = InferSelectModel<typeof snippets>;
@@ -31,8 +30,8 @@ export function QuestionCard({
 }) {
   return (
     <div className="p-4 border-b flex flex-col relative gap-4 hover:bg-accent/5 transition-colors">
-      <div className="flex flex-col gap-2">
-        {showAuthor && author && <Author author={author} />}
+      {showAuthor && author && <Author author={author} />}
+      <div className="flex justify-between gap-2">
         <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
@@ -40,6 +39,10 @@ export function QuestionCard({
             </div>
           </div>
           <p>{question.content}</p>
+        </div>
+
+        <div className="text-sm text-muted-foreground">
+          Posted <RelativeTime datetime={question.createdAt} />
         </div>
       </div>
 
@@ -80,24 +83,14 @@ export function QuestionCard({
         </>
       )}
 
-      <div
-        className={cn(
-          "flex gap-1 items-center text-sm text-muted-foreground",
-          snippet && "justify-between"
-        )}
-      >
-        <div className="text-sm text-muted-foreground">
-          Posted <RelativeTime datetime={question.createdAt} />
+      {snippet && (
+        <div className="flex gap-1 items-center">
+          <div className="w-4 h-4">{LANGUAGE_ICON[snippet.language]}</div>
+          <span>
+            {snippet.language[0].toUpperCase() + snippet.language.slice(1)}
+          </span>
         </div>
-        {snippet && (
-          <div className="flex gap-1 items-center">
-            <div className="w-4 h-4">{LANGUAGE_ICON[snippet.language]}</div>
-            <span>
-              {snippet.language[0].toUpperCase() + snippet.language.slice(1)}
-            </span>
-          </div>
-        )}
-      </div>
+      )}
       <Link href={`/forum/${question.id}`} className="absolute inset-0 z-40" />
     </div>
   );

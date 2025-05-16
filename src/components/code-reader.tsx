@@ -5,7 +5,7 @@ import Editor, { OnMount } from "@monaco-editor/react";
 import CopyButton from "./copy-button";
 
 interface CodeReaderProps {
-  filename: string;
+  filename?: string;
   language: string;
   code: string;
 }
@@ -49,9 +49,11 @@ export function CodeReader({ filename, language, code }: CodeReaderProps) {
 
   return (
     <div>
-      <div className="px-4 bg-[#05121f] py-2 border-b border-b-primary/10">
-        {filename}
-      </div>
+      {filename && (
+        <div className="px-4 bg-[#05121f] py-2 border-b border-b-primary/10">
+          {filename}
+        </div>
+      )}
       <div ref={wrapperRef} className="w-full bg-[#061626] py-2 pr-2 relative">
         <CopyButton value={code} className="absolute z-50 right-3 top-3" />
         <Editor
