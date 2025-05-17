@@ -47,17 +47,25 @@ export default async function ForumPage() {
       <section className="flex flex-col pr-16">
         <h2 className="text-xl font-bold mb-4">Your questions</h2>
         {yourQuestions.length > 0 ? (
-          yourQuestions.map(
-            ({ questions, users }) =>
-              users && (
-                <QuestionCard
-                  key={questions.id}
-                  question={questions}
-                  author={users}
-                  showAuthor={false}
-                />
-              )
-          )
+          <>
+            {yourQuestions.map(
+              ({ questions, users }) =>
+                users && (
+                  <QuestionCard
+                    key={questions.id}
+                    question={questions}
+                    author={users}
+                    showAuthor={false}
+                  />
+                )
+            )}
+            <Link
+              href={`/${user.username}/questions`}
+              className=" hover:underline text-muted-foreground text-sm w-fit mt-4"
+            >
+              Show all your questions
+            </Link>
+          </>
         ) : (
           <div className="flex flex-col items-center justify-center h-full">
             <h3 className="text-lg font-semibold">No questions found</h3>

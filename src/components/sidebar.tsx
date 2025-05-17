@@ -7,6 +7,7 @@ import {
   Heart,
   Home,
   Menu,
+  MessageSquare,
   MessagesSquare,
   Settings,
   Telescope,
@@ -93,6 +94,7 @@ export function Sidebar() {
               <Link
                 href="/"
                 className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                onClick={closeSidebar}
               >
                 <Home className="size-4" />
                 Home
@@ -102,6 +104,7 @@ export function Sidebar() {
               <Link
                 href={`/${user.user?.username}`}
                 className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                onClick={closeSidebar}
               >
                 <User className="size-4" />
                 Your profile
@@ -111,6 +114,7 @@ export function Sidebar() {
               <Link
                 href={`/${user.user?.username}/snippets`}
                 className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                onClick={closeSidebar}
               >
                 <Code2 className="size-4" /> Your snippets
               </Link>
@@ -119,6 +123,7 @@ export function Sidebar() {
               <Link
                 href={`/${user.user?.username}/collections`}
                 className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                onClick={closeSidebar}
               >
                 <Book className="size-4" /> Your collections
               </Link>
@@ -127,8 +132,18 @@ export function Sidebar() {
               <Link
                 href={`/${user.user?.username}/likes`}
                 className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                onClick={closeSidebar}
               >
                 <Heart className="size-4" /> Your liked snippets
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${user.user?.username}/questions`}
+                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                onClick={closeSidebar}
+              >
+                <MessageSquare className="size-4" /> Your questions
               </Link>
             </li>
             <div className="w-full h-px bg-border my-2"></div>

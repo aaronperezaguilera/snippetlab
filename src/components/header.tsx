@@ -37,9 +37,7 @@ export async function Header() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Button variant="ghost" size="icon">
-            <Icons.gitHub className="size-6" />
-          </Button>
+          <Icons.gitHub className="size-6" />
         </a>
         {user ? (
           <>
@@ -66,7 +64,7 @@ export async function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
             <DropdownMenu>
-              <DropdownMenuTrigger className="cursor-pointer">
+              <DropdownMenuTrigger className="cursor-pointer ">
                 <Image
                   src={user?.imageUrl || "/default-avatar.png"}
                   alt={`${user?.username || "User"}'s profile picture`}

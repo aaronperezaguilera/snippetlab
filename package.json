@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^1.2.18",
     "@clerk/elements": "^0.23.25",
     "@clerk/nextjs": "^6.19.2",
     "@clerk/themes": "^2.2.43",
@@ -25,6 +26,7 @@
     "@radix-ui/react-separator": "^1.1.6",
     "@radix-ui/react-slot": "^1.2.2",
     "@radix-ui/react-tooltip": "^1.2.6",
+    "ai": "^4.3.15",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -38,7 +40,8 @@
     "react-syntax-highlighter": "^15.6.1",
     "svix": "^1.65.0",
     "tailwind-merge": "^3.2.0",
-    "use-debounce": "^10.0.4"
+    "use-debounce": "^10.0.4",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

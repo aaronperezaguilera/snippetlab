@@ -3,9 +3,9 @@ import { questions, snippets, users } from "@/db/schema";
 import { desc } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
-import { QuestionCard } from "./question-card";
+import { QuestionCard } from "@/components/question-card";
 
-export async function ForumFeed() {
+export default async function QuestionsPage() {
   const authenticatedUser = await currentUser();
   if (!authenticatedUser) {
     return (
@@ -20,12 +20,13 @@ export async function ForumFeed() {
     .from(questions)
     .leftJoin(snippets, eq(questions.snippetId, snippets.id))
     .leftJoin(users, eq(users.id, questions.userId))
+    .where(eq(questions.userId, authenticatedUser.id))
     .orderBy(desc(questions.createdAt));
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Latest questions</h1>
+        <h1 className="text-2xl font-bold">Your questions</h1>
       </div>
       <div className="flex flex-col">
         {questionsList.length > 0 ? (

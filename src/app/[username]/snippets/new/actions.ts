@@ -8,6 +8,10 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { count, eq } from "drizzle-orm";
 import { upsertUser } from "@/db";
+import { generateObject } from "ai";
+import { z } from "zod";
+import { google } from "@ai-sdk/google";
+import { Language } from "@/config";
 
 export async function createSnippet(
   value: string | undefined,
@@ -34,26 +38,21 @@ export async function createSnippet(
   const userId = user.id;
   const username = user.username;
 
-  // 3. Generar slug base
   const baseSlug = formatSlug(title as string);
 
-  // 4. Encontrar un slug único
   let slug = baseSlug;
   let attempt = 0;
 
   while (true) {
-    // Contar cuántos snippets ya tienen este slug
     const [{ count: existingCount }] = await db
       .select({ count: count() })
       .from(snippets)
       .where(eq(snippets.slug, slug));
 
     if (Number(existingCount) === 0) {
-      // No existe, lo podemos usar
       break;
     }
 
-    // Si existe, incrementamos y probamos con sufijo
     attempt++;
     slug = `${baseSlug}-${attempt}`;
   }
@@ -68,6 +67,70 @@ export async function createSnippet(
     summary: summary as string,
     examples: examples ? JSON.parse(examples as string) : [],
     visibility: visibility as "public" | "private",
+    userId: userId as string,
+  });
+
+  revalidatePath(`/${username}/snippets`);
+  redirect(`/${username}/snippets/${slug}`);
+}
+
+export async function createAISnippet(formData: FormData) {
+  const prompt = formData.get("prompt");
+
+  const user = await currentUser();
+
+  upsertUser(user);
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const userId = user.id;
+  const username = user.username;
+
+  const { object } = await generateObject({
+    model: google("gemini-2.0-flash"),
+    schema: z.object({
+      title: z.string(),
+      filename: z.string(),
+      language: z.nativeEnum(Language),
+      code: z.string(),
+      tags: z.array(z.string()),
+      summary: z.string(),
+    }),
+    prompt:
+      "Generate a snippet of code following the user indications: " + prompt,
+  });
+
+  const baseSlug = formatSlug(object.title);
+
+  let slug = baseSlug;
+  let attempt = 0;
+
+  while (true) {
+    const [{ count: existingCount }] = await db
+      .select({ count: count() })
+      .from(snippets)
+      .where(eq(snippets.slug, slug));
+
+    if (Number(existingCount) === 0) {
+      break;
+    }
+
+    attempt++;
+    slug = `${baseSlug}-${attempt}`;
+  }
+
+  await db.insert(snippets).values({
+    title: object.title,
+    filename: object.filename,
+    slug,
+    language: object.language,
+    code: object.code,
+    tags: object.tags,
+    summary: object.summary,
+    examples: [],
+    visibility: "public",
     userId: userId as string,
   });
 
