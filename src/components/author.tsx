@@ -14,7 +14,7 @@ export function Author({
   clasName?: string;
 }) {
   return (
-    <div className="flex gap-3 items-center">
+    <div className="flex items-center">
       <Button
         variant="ghost"
         asChild

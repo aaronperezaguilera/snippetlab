@@ -53,7 +53,7 @@ export default async function LikesPage({
     <div className="flex flex-col gap-4 overflow-hidden">
       <h1 className="text-2xl font-bold">Collections</h1>
       <div className="flex gap-2">
-        <Search placeholder="Search snippets..." />
+        <Search placeholder="Search collections..." />
         {authenticatedUser?.id === user.id && (
           <Button asChild>
             <Link href={`/${username}/collections/new`}>
