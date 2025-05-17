@@ -34,6 +34,14 @@ import {
   SOL,
   R,
   LESS,
+  PGSQL,
+  CLOJURE,
+  AZCLI,
+  FSHARP,
+  XML,
+  VB,
+  YAML,
+  APEX,
 } from "../components/icons";
 
 export enum Language {
@@ -96,18 +104,18 @@ export enum Language {
 }
 
 export const LANGUAGE_ICON: Record<string, JSX.Element> = {
-  [Language.APEX]: DEFAULT(),
-  [Language.AZCLI]: DEFAULT(),
+  [Language.APEX]: APEX(),
+  [Language.AZCLI]: AZCLI(),
   [Language.BAT]: DEFAULT(),
   [Language.C]: C(),
-  [Language.CLOJURE]: DEFAULT(),
+  [Language.CLOJURE]: CLOJURE(),
   [Language.COFFEESCRIPT]: DEFAULT(),
   [Language.CPP]: CPP(),
   [Language.CSHARP]: CSHARP(),
   [Language.CSP]: DEFAULT(),
   [Language.CSS]: CSS(),
   [Language.DOCKERFILE]: DOCKERFILE(),
-  [Language.FSHARP]: DEFAULT(),
+  [Language.FSHARP]: FSHARP(),
   [Language.GO]: GO(),
   [Language.GRAPHQL]: GRAPHQL(),
   [Language.HANDLEBARS]: DEFAULT(),
@@ -125,7 +133,7 @@ export const LANGUAGE_ICON: Record<string, JSX.Element> = {
   [Language.OBJECTIVE_C]: DEFAULT(),
   [Language.PASCAL]: DEFAULT(),
   [Language.PERL]: DEFAULT(),
-  [Language.PGSQL]: DEFAULT(),
+  [Language.PGSQL]: PGSQL(),
   [Language.PHP]: PHP(),
   [Language.PLAINTEXT]: DEFAULT(),
   [Language.POSTIATS]: DEFAULT(),
@@ -149,9 +157,9 @@ export const LANGUAGE_ICON: Record<string, JSX.Element> = {
   [Language.SWIFT]: SWIFT(),
   [Language.TCL]: DEFAULT(),
   [Language.TYPESCRIPT]: TYPESCRIPT(),
-  [Language.VB]: DEFAULT(),
-  [Language.XML]: DEFAULT(),
-  [Language.YAML]: DEFAULT(),
+  [Language.VB]: VB(),
+  [Language.XML]: XML(),
+  [Language.YAML]: YAML(),
 };
 
 export const EXAMPLE_SITE_ICONS: Record<string, JSX.Element> = {
