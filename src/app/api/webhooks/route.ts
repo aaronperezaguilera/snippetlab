@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
         updatedAt: new Date(evt.data.updated_at),
       });
       revalidatePath(`/${evt.data.username}`);
+      revalidatePath(`/`);
     }
     if (evt.type === "user.updated") {
       const [user] = await db
@@ -38,6 +39,7 @@ export async function POST(req: NextRequest) {
         })
         .where(eq(users.id, evt.data.id));
       revalidatePath(`/${evt.data.username}`);
+      revalidatePath(`/`);
     }
     if (evt.type === "user.deleted") {
       if (evt.data.id) {
