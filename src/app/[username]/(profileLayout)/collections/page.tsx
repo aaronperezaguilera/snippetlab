@@ -63,7 +63,7 @@ export default async function LikesPage({
         )}
       </div>
       {rows.length > 0 ? (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col">
           {rows.map((row) => (
             <CollectionCard key={row.id} collection={row} author={user} />
           ))}

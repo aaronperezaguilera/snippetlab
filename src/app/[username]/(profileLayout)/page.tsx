@@ -26,25 +26,45 @@ export default async function ProfilePage({
   const snippetsList = await db
     .select()
     .from(snippets)
-    .where(and(eq(snippets.pinned, true), eq(snippets.userId, user.id)));
+    .where(and(eq(snippets.pinned, true), eq(snippets.userId, user.id)))
+    .limit(4);
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Pinned</h1>
-      {snippetsList.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4">
-          {snippetsList.map((snippet) => (
-            <SnippetCard
-              key={snippet.id}
-              showCode={false}
-              author={user}
-              snippet={snippet}
-            />
-          ))}
-        </div>
-      ) : (
-        <p>No snippets found</p>
-      )}
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
+        <h2 className="text-2xl font-bold">Pinned snippets</h2>
+        {snippetsList.length > 0 ? (
+          <div className="grid grid-cols-2 gap-4">
+            {snippetsList.map((snippet) => (
+              <SnippetCard
+                key={snippet.id}
+                showCode={false}
+                author={user}
+                snippet={snippet}
+              />
+            ))}
+          </div>
+        ) : (
+          <p>No snippets found</p>
+        )}
+      </div>
+      <div className="flex flex-col gap-4">
+        <h2 className="text-2xl font-bold">Pinned collections</h2>
+        {snippetsList.length > 0 ? (
+          <div className="grid grid-cols-2 gap-4">
+            {snippetsList.map((snippet) => (
+              <SnippetCard
+                key={snippet.id}
+                showCode={false}
+                author={user}
+                snippet={snippet}
+              />
+            ))}
+          </div>
+        ) : (
+          <p>No snippets found</p>
+        )}
+      </div>
     </div>
   );
 }

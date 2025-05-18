@@ -8,8 +8,8 @@ import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Bookmark, Loader2, Lock } from "lucide-react";
 import { useFormStatus } from "react-dom";
-import { updateCollection } from "@/app/[username]/(profileLayout)/collections/[slug]/edit/actions";
-import { createCollection } from "@/app/[username]/(profileLayout)/collections/new/actions";
+import { updateCollection } from "@/app/[username]/collections/[slug]/edit/actions";
+import { createCollection } from "@/app/[username]/collections/new/actions";
 import { DeleteCollection } from "./delete-collection";
 
 export function CollectionForm({
@@ -52,72 +52,70 @@ export function CollectionForm({
   };
 
   return (
-    <>
-      <form
-        className="flex flex-col items-start w-full gap-4"
-        id="collection-form"
+    <form
+      className="flex flex-col items-start w-full gap-4"
+      id="collection-form"
+    >
+      <Label>Title:</Label>
+      <Input
+        type="text"
+        placeholder="Collection Title"
+        defaultValue={title}
+        name="title"
+        required
+      />
+
+      <Label>Description:</Label>
+      <Textarea
+        className="resize-none max-h-[500px]"
+        ref={textareaRef}
+        placeholder="Write a desription of your collection"
+        name="description"
+        defaultValue={description || ""}
+        maxLength={300}
+      />
+
+      <RadioGroup
+        className="gap-6"
+        name="visibility"
+        defaultValue={visibility || "public"}
       >
-        <Label>Title:</Label>
-        <Input
-          type="text"
-          placeholder="Collection Title"
-          defaultValue={title}
-          name="title"
-          required
-        />
-
-        <Label>Description:</Label>
-        <Textarea
-          className="resize-none max-h-[500px]"
-          ref={textareaRef}
-          placeholder="Write a desription of your collection"
-          name="description"
-          defaultValue={description || ""}
-          maxLength={300}
-        />
-
-        <RadioGroup
-          className="gap-6"
-          name="visibility"
-          defaultValue={visibility || "public"}
-        >
-          <div className="flex items-center space-x-4">
-            <RadioGroupItem value="public" id="public" />
-            <Label htmlFor="public" className="flex gap-4 items-center">
-              <Bookmark />
-              <div className="flex flex-col gap-2">
-                <span>Public</span>
-                <span className="font-normal text-muted-foreground">
-                  Anyone on the internet can see this collection.
-                </span>
-              </div>
-            </Label>
-          </div>
-          <div className="flex items-center space-x-4">
-            <RadioGroupItem value="private" id="private" />
-            <Label htmlFor="private" className="flex gap-4 items-center">
-              <Lock />
-              <div className="flex flex-col gap-2">
-                <span>Private</span>
-                <span className="font-normal text-muted-foreground">
-                  You are the only one who can see this collection.
-                </span>
-              </div>
-            </Label>
-          </div>
-        </RadioGroup>
-
-        <div className="flex gap-4 justify-end w-full mt-4">
-          {type === "edit" && <DeleteCollection id={id} />}
-          <SubmitButton
-            type={type}
-            formAction={
-              type === "create" ? createCollection : updateCollectionWithID
-            }
-          />
+        <div className="flex items-center space-x-4">
+          <RadioGroupItem value="public" id="public" />
+          <Label htmlFor="public" className="flex gap-4 items-center">
+            <Bookmark />
+            <div className="flex flex-col gap-2">
+              <span>Public</span>
+              <span className="font-normal text-muted-foreground">
+                Anyone on the internet can see this collection.
+              </span>
+            </div>
+          </Label>
         </div>
-      </form>
-    </>
+        <div className="flex items-center space-x-4">
+          <RadioGroupItem value="private" id="private" />
+          <Label htmlFor="private" className="flex gap-4 items-center">
+            <Lock />
+            <div className="flex flex-col gap-2">
+              <span>Private</span>
+              <span className="font-normal text-muted-foreground">
+                You are the only one who can see this collection.
+              </span>
+            </div>
+          </Label>
+        </div>
+      </RadioGroup>
+
+      <div className="flex gap-4 justify-end w-full mt-4">
+        {type === "edit" && <DeleteCollection id={id} />}
+        <SubmitButton
+          type={type}
+          formAction={
+            type === "create" ? createCollection : updateCollectionWithID
+          }
+        />
+      </div>
+    </form>
   );
 }
 
