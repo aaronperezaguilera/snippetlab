@@ -36,19 +36,21 @@ export default async function QuestionPage({
     .orderBy(desc(answers.createdAt));
 
   return (
-    <main className="container mx-auto mt-16 flex flex-col gap-8 min-h-screen">
+    <main className="container mx-auto mt-16 flex flex-col gap-4 min-h-screen">
       {data.users && <Author author={data.users} />}
-      <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">{data.questions.title}</h1>
-        <p>{data.questions.content}</p>
+      <div className="flex flex-col gap-4 pb-4 border-b">
+        <div className="flex flex-col gap-4">
+          <h1 className="text-2xl font-bold">{data.questions.title}</h1>
+          <p>{data.questions.content}</p>
+        </div>
+        {data.snippets && (
+          <CodeReader
+            filename={data.snippets.filename}
+            language={data.snippets.language}
+            code={data.snippets.code}
+          />
+        )}
       </div>
-      {data.snippets && (
-        <CodeReader
-          filename={data.snippets.filename}
-          language={data.snippets.language}
-          code={data.snippets.code}
-        />
-      )}
       <AnswerForm
         snippet={data.snippets || undefined}
         questionId={data.questions.id}
