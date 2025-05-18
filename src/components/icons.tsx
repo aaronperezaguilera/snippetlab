@@ -394,16 +394,16 @@ export const INI = () => (
   >
     <path
       stroke="#fff"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
       d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
     />
     <path
       stroke="#fff"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
       d="M12.905 3.06C12.699 3 12.465 3 12 3c-.466 0-.699 0-.905.06a1.5 1.5 0 0 0-.76.515c-.133.169-.22.385-.392.818a1.265 1.265 0 0 1-1.574.73l-.571-.19c-.405-.135-.608-.203-.806-.214a1.5 1.5 0 0 0-.835.197c-.172.099-.323.25-.625.552-.32.32-.481.48-.583.664a1.5 1.5 0 0 0-.181.884c.021.208.105.418.274.84.264.66.01 1.413-.6 1.778l-.277.167c-.425.255-.637.382-.791.558a1.5 1.5 0 0 0-.303.534C3 11.116 3 11.366 3 11.866c0 .593 0 .89.095 1.143a1.5 1.5 0 0 0 .396.586c.2.182.473.29 1.018.508.556.223.843.841.653 1.41l-.215.645c-.149.447-.223.671-.23.89a1.5 1.5 0 0 0 .179.759c.104.193.27.36.604.693.333.333.5.5.693.604a1.5 1.5 0 0 0 .758.18c.22-.008.444-.082.89-.231l.528-.176a1.265 1.265 0 0 1 1.574.73c.173.433.26.65.392.818a1.5 1.5 0 0 0 .76.515c.206.06.44.06.905.06.466 0 .699 0 .905-.06a1.5 1.5 0 0 0 .76-.515c.133-.169.22-.385.392-.818a1.265 1.265 0 0 1 1.574-.73l.527.176c.447.149.67.223.89.23a1.5 1.5 0 0 0 .758-.179c.194-.104.36-.27.694-.604.333-.333.5-.5.604-.693a1.5 1.5 0 0 0 .179-.758c-.007-.22-.082-.444-.23-.89l-.216-.646a1.133 1.133 0 0 1 .654-1.41c.545-.217.817-.326 1.018-.508a1.5 1.5 0 0 0 .396-.586c.095-.254.095-.55.095-1.143 0-.5 0-.75-.071-.973a1.5 1.5 0 0 0-.302-.534c-.155-.176-.367-.303-.792-.558l-.278-.167a1.447 1.447 0 0 1-.6-1.778c.17-.422.253-.632.275-.84a1.5 1.5 0 0 0-.181-.884c-.102-.183-.263-.344-.583-.664-.302-.302-.453-.453-.625-.552a1.5 1.5 0 0 0-.835-.197c-.199.011-.401.079-.806.214l-.57.19a1.265 1.265 0 0 1-1.575-.73c-.173-.433-.26-.65-.392-.818a1.5 1.5 0 0 0-.76-.515Z"
     />
   </svg>
@@ -678,8 +678,8 @@ export const PASCAL = () => (
       y2="44.703"
       gradientUnits="userSpaceOnUse"
     >
-      <stop offset="0" stop-color="#0077d2" />
-      <stop offset="1" stop-color="#0b59a2" />
+      <stop offset="0" stopColor="#0077d2" />
+      <stop offset="1" stopColor="#0b59a2" />
     </linearGradient>
     <path
       fill="url(#aPASCAL)"
@@ -881,7 +881,7 @@ export const POWERQUERY = () => (
   >
     <defs>
       <filter id="filter0_f_84_430">
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -894,7 +894,7 @@ export const POWERQUERY = () => (
         />
       </filter>
       <filter id="filter1_f_84_430">
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -914,8 +914,8 @@ export const POWERQUERY = () => (
         y2="96"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#159455" />
-        <stop offset="1" stop-color="#3FBDA9" />
+        <stop stopColor="#159455" />
+        <stop offset="1" stopColor="#3FBDA9" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_84_430"
@@ -925,9 +925,9 @@ export const POWERQUERY = () => (
         y2="31.3167"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#23A794" />
-        <stop offset="0.568447" stop-color="#007A84" />
-        <stop offset="1" stop-color="#005158" />
+        <stop stopColor="#23A794" />
+        <stop offset="0.568447" stopColor="#007A84" />
+        <stop offset="1" stopColor="#005158" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_84_430"
@@ -937,9 +937,9 @@ export const POWERQUERY = () => (
         y2="12.5"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#004A8B" />
-        <stop offset="0.405563" stop-color="#105DA8" stop-opacity="0.500243" />
-        <stop offset="1" stop-color="#2170C6" stop-opacity="0" />
+        <stop stopColor="#004A8B" />
+        <stop offset="0.405563" stopColor="#105DA8" stopOpacity="0.500243" />
+        <stop offset="1" stopColor="#2170C6" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint3_linear_84_430"
@@ -949,10 +949,10 @@ export const POWERQUERY = () => (
         y2="62"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#7FD9A2" />
-        <stop offset="0.196063" stop-color="#47BF79" />
-        <stop offset="0.713946" stop-color="#009280" />
-        <stop offset="1" stop-color="#007A84" />
+        <stop stopColor="#7FD9A2" />
+        <stop offset="0.196063" stopColor="#47BF79" />
+        <stop offset="0.713946" stopColor="#009280" />
+        <stop offset="1" stopColor="#007A84" />
       </linearGradient>
       <linearGradient
         id="paint4_linear_84_430"
@@ -962,9 +962,9 @@ export const POWERQUERY = () => (
         y2="43"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#A8E47C" stop-opacity="0.86" />
-        <stop offset="0.367474" stop-color="#87D152" stop-opacity="0.2" />
-        <stop offset="1" stop-color="#58BE5A" stop-opacity="0" />
+        <stop stopColor="#A8E47C" stopOpacity="0.86" />
+        <stop offset="0.367474" stopColor="#87D152" stopOpacity="0.2" />
+        <stop offset="1" stopColor="#58BE5A" stopOpacity="0" />
       </linearGradient>
     </defs>
     <mask
@@ -998,14 +998,14 @@ export const POWERQUERY = () => (
         <path
           d="M62.7295 58.4H10.4213C7.71219 58.4 5.23554 59.9303 4.02347 62.3531L17.0227 36.3546C18.2345 33.931 20.7116 32.4 23.4213 32.4H75.7264C81.4004 32.4 86.5887 29.1986 89.1333 24.1273L90 22.4L76.1459 50.1082C73.605 55.19 68.4111 58.4 62.7295 58.4Z"
           fill="black"
-          fill-opacity="0.24"
+          fillOpacity="0.24"
         />
       </g>
       <g filter="url(#filter1_f_84_430)">
         <path
           d="M62.7295 60H10.4213C7.71219 60 5.23554 61.5303 4.02347 63.9531L17.0227 37.9545C18.2345 35.5309 20.7116 34 23.4213 34H75.7264C81.4004 34 86.5887 30.7985 89.1333 25.7272L90 24L76.1459 51.7082C73.605 56.79 68.4111 60 62.7295 60Z"
           fill="black"
-          fill-opacity="0.32"
+          fillOpacity="0.32"
         />
       </g>
       <path
@@ -1211,13 +1211,7 @@ export const PUG = () => (
 );
 
 export const PYTHON = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="800"
-    height="800"
-    fill="none"
-    viewBox="0 0 32 32"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32">
     <path
       fill="url(#aPY)"
       fillRule="evenodd"
@@ -1239,8 +1233,8 @@ export const PYTHON = () => (
         y2="22.741"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#327EBD" />
-        <stop offset="1" stop-color="#1565A7" />
+        <stop stopColor="#327EBD" />
+        <stop offset="1" stopColor="#1565A7" />
       </linearGradient>
       <linearGradient
         id="bPY"
@@ -1250,8 +1244,8 @@ export const PYTHON = () => (
         y2="30"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FFDA4B" />
-        <stop offset="1" stop-color="#F9C600" />
+        <stop stopColor="#FFDA4B" />
+        <stop offset="1" stopColor="#F9C600" />
       </linearGradient>
     </defs>
   </svg>
@@ -1620,12 +1614,12 @@ export const SB = () => (
       style={{ fill: "#fff" }}
     />
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M48.3 29.1v14.1h-6.4V29.1zM55.1 53.6v-6.4h19.7v6.4z"
       style={{ fill: "#fff" }}
     />
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M58.5 29.5v41.4h-6.4V29.5z"
       style={{ fill: "#fff" }}
     />
@@ -1637,7 +1631,7 @@ export const SCHEME = () => (
     <circle cx="256" cy="256" r="235" fill="#fff" />
     <path
       stroke="#000"
-      stroke-width="5"
+      strokeWidth="5"
       d="M255.56 20.008A235.975 235.975 0 0 0 89.26 89c-92.236 92.091-92.353 241.52-.262 333.75 92.09 92.236 241.52 92.353 333.75.262 92.236-92.091 92.353-241.52.262-333.75a236 236 0 0 0-167.45-69.254zm2.281 1.006c59.934.485 119.39 23.809 164.46 68.953 91.701 91.845 91.585 240.64-.259 332.34-45.922 45.85-120.32 45.793-166.17-.13-45.851-45.921-45.793-120.32.129-166.17 46.412-46.338 46.471-121.53.13-167.94-37.084-37.14-94.457-46.552-140.66-21.657 42.416-31.541 92.711-45.798 142.37-45.396zm-190.84 130.26h40c9.943 42.147 25.204 79.418 40.75 116.43 15.9-41.326 33.203-81.25 55.25-116.43h40c-48.928 97.364-102.19 164.06-24 250h-40c-47.567-77.243-82.439-147.67-112-250z"
     />
     <path d="M293 110.72c78.194 85.936 24.928 152.64-24 250h40c22.047-35.179 39.35-75.102 55.25-116.43 15.546 37.01 30.807 74.282 40.75 116.43h40c-29.561-102.33-64.433-172.76-112-250z" />
