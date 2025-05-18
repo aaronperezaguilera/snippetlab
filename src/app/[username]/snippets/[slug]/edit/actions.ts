@@ -95,7 +95,7 @@ export async function updateSnippet(
     .where(eq(snippets.id, id));
 
   revalidatePath(`/${username}/snippets`);
-  redirect(`/${username}/snippets/${slug}`);
+  redirect(`/${username}/snippets/${slug}?updated=true`);
 }
 
 export async function deleteSnippet(id: number) {

@@ -71,7 +71,7 @@ export async function createSnippet(
   });
 
   revalidatePath(`/${username}/snippets`);
-  redirect(`/${username}/snippets/${slug}`);
+  redirect(`/${username}/snippets/${slug}?created=true`);
 }
 
 export async function createAISnippet(formData: FormData) {
@@ -135,5 +135,5 @@ export async function createAISnippet(formData: FormData) {
   });
 
   revalidatePath(`/${username}/snippets`);
-  redirect(`/${username}/snippets/${slug}`);
+  redirect(`/${username}/snippets/${slug}?created=true`);
 }

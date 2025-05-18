@@ -5,7 +5,12 @@ import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { QuestionCard } from "@/components/question-card";
 
-export default async function QuestionsPage() {
+export default async function QuestionsPage({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
+  const { username } = await params;
   const authenticatedUser = await currentUser();
   if (!authenticatedUser) {
     return (
@@ -15,18 +20,23 @@ export default async function QuestionsPage() {
     );
   }
 
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(eq(users.username, username));
+
   const questionsList = await db
     .select()
     .from(questions)
     .leftJoin(snippets, eq(questions.snippetId, snippets.id))
     .leftJoin(users, eq(users.id, questions.userId))
-    .where(eq(questions.userId, authenticatedUser.id))
+    .where(eq(questions.userId, user.id))
     .orderBy(desc(questions.createdAt));
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Your questions</h1>
+        <h1 className="text-2xl font-bold">Questions</h1>
       </div>
       <div className="flex flex-col">
         {questionsList.length > 0 ? (
@@ -44,7 +54,7 @@ export default async function QuestionsPage() {
           )
         ) : (
           <div className="text-center">
-            <p className="text-muted-foreground">No snippets found</p>
+            <p className="text-muted-foreground">No questions found</p>
           </div>
         )}
       </div>

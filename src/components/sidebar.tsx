@@ -151,6 +151,7 @@ export function Sidebar() {
               <Link
                 href={`/forum`}
                 className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                onClick={closeSidebar}
               >
                 <MessagesSquare className="size-4" />
                 Q&A Forum
@@ -160,6 +161,7 @@ export function Sidebar() {
               <Link
                 href={`/explore`}
                 className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                onClick={closeSidebar}
               >
                 <Telescope className="size-4" />
                 Explore
@@ -170,6 +172,7 @@ export function Sidebar() {
               <Link
                 href={`/account`}
                 className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                onClick={closeSidebar}
               >
                 <Settings className="size-4" />
                 Account settings
@@ -181,6 +184,7 @@ export function Sidebar() {
                 className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={closeSidebar}
               >
                 <Bug className="size-4" />
                 Report a bug

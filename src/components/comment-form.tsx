@@ -3,6 +3,7 @@ import { addComment } from "@/app/[username]/snippets/[slug]/(snippet)/comments/
 import { useState, FormEvent } from "react";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 export default function CommentForm({ snippetId }: { snippetId: number }) {
   const [content, setContent] = useState("");
@@ -15,6 +16,7 @@ export default function CommentForm({ snippetId }: { snippetId: number }) {
     await addComment(snippetId, content);
     setContent("");
     setLoading(false);
+    toast.success("Comment added successfully");
   }
 
   return (

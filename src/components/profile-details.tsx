@@ -11,6 +11,7 @@ import { users } from "@/db/schema";
 import { InferSelectModel } from "drizzle-orm";
 import { Icons } from "./ui/icons";
 import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 type User = InferSelectModel<typeof users>;
 
@@ -119,7 +120,12 @@ export function ProfileDetails({ profile }: { profile: User }) {
               />
             </div>
             <div className="flex gap-2 w-64 justify-end">
-              <SubmitButton onSuccess={() => setEditing(false)} />
+              <SubmitButton
+                onSuccess={() => {
+                  setEditing(false);
+                  toast.success("Profile updated successfully");
+                }}
+              />
               <Button
                 variant="secondary"
                 type="button"

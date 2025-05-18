@@ -20,13 +20,17 @@ import { StarButton } from "@/components/star-button";
 import { SnippetNav } from "@/components/snippet-nav";
 import { ForkButton } from "@/components/fork-button";
 import { SaveButton } from "@/components/save-button";
+import { Toast } from "@/components/toast";
 
 export default async function SnippetPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ username: string; slug: string }>;
+  searchParams?: Promise<{ created?: boolean; updated?: boolean }>;
 }) {
   const { username, slug } = await params;
+  const { created, updated } = (await searchParams) || {};
 
   const authenticatedUser = await currentUser();
 
@@ -160,6 +164,8 @@ export default async function SnippetPage({
         language={snippet.language}
         code={snippet.code}
       />
+      {created && <Toast message={"Snippet created successfully!"} />}
+      {updated && <Toast message={"Snippet updated successfully!"} />}
     </section>
   );
 }

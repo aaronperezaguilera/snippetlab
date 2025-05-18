@@ -93,7 +93,9 @@ export function CommandMenu({ ...props }: DialogProps) {
                 forceMount
                 value={`search-users:${search}`}
                 onSelect={() => {
-                  runCommand(() => router.push("/"));
+                  runCommand(() =>
+                    router.push(`/search/users?search=${search}`)
+                  );
                 }}
               >
                 <User className="size-4" /> Search
@@ -106,7 +108,9 @@ export function CommandMenu({ ...props }: DialogProps) {
                 forceMount
                 value={`search-snippets:${search}`}
                 onSelect={() => {
-                  runCommand(() => router.push("/"));
+                  runCommand(() =>
+                    router.push(`/search/snippets?search=${search}`)
+                  );
                 }}
               >
                 <Code2 className="size-4" /> Search

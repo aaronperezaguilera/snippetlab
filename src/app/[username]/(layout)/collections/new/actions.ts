@@ -51,14 +51,17 @@ export async function createCollection(formData: FormData) {
     slug = `${baseSlug}-${attempt}`;
   }
 
-  await db.insert(collections).values({
-    slug,
-    title: title as string,
-    description: description as string | null,
-    visibility: visibility as "public" | "private",
-    userId,
-  });
+  const [collection] = await db
+    .insert(collections)
+    .values({
+      slug,
+      title: title as string,
+      description: description as string | null,
+      visibility: visibility as "public" | "private",
+      userId,
+    })
+    .returning();
 
   revalidatePath(`/${username}/collections`);
-  redirect(`/${username}/collections`);
+  redirect(`/${username}/collections/${collection.slug}?created=true`);
 }

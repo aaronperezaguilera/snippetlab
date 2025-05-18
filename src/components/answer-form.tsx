@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { Language, LANGUAGE_ICON } from "@/config";
 import { Label } from "./ui/label";
+import { toast } from "sonner";
 
 type Snippet = InferSelectModel<typeof snippets>;
 
@@ -48,6 +49,7 @@ export function AnswerForm({
     setAddAnswer(false);
     setAddCode(false);
     setValue(snippet?.code || "");
+    toast.success("Answer submitted successfully");
   };
 
   return (

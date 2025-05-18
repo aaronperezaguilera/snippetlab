@@ -43,7 +43,7 @@ function SubmitButton() {
       size="icon"
       type="submit"
       disabled={pending}
-      className="absolute top-3 right-3 bg-gradient-to-br from-primary via-blue-700/80 to-purple-800 text-white hover:from-blue-800/80 hover:to-purple-800/80 transition-colors duration-500"
+      className="absolute top-3 right-3 hover:bg-gradient-to-br border bg-background text-white hover:from-blue-800/80 hover:to-purple-800/80 transition-colors"
     >
       {pending ? (
         <Loader2 className="animate-spin"></Loader2>

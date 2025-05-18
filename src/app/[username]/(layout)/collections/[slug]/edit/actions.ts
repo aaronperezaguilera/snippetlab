@@ -58,7 +58,7 @@ export async function updateCollection(id: number, formData: FormData) {
     .where(eq(collections.id, id));
 
   revalidatePath(`/${username}/collections`);
-  redirect(`/${username}/collections/${slug}`);
+  redirect(`/${username}/collections/${slug}?updated=true`);
 }
 
 export async function deleteCollection(id: number) {

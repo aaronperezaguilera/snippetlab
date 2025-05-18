@@ -4,6 +4,7 @@ import { useOptimistic, useTransition } from "react";
 import { Button } from "./ui/button";
 import { updateFollow } from "@/app/[username]/(layout)/actions";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 export function FollowButton({
   id,
@@ -26,6 +27,11 @@ export function FollowButton({
       const nextState = !isFollowed;
       addOptimisticFollow(nextState);
       updateFollow(id, nextState);
+      if (nextState) {
+        toast.success("You are now following this user");
+      } else {
+        toast.success("You have unfollowed this user");
+      }
     });
   };
 

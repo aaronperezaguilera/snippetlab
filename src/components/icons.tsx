@@ -1,8 +1,8 @@
 export const APEX = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     viewBox="0 0 32 32"
   >
     <path
@@ -246,8 +246,8 @@ export const CSP = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     viewBox="0 0 214.27 214.27"
     fill="#fff"
   >
@@ -259,8 +259,8 @@ export const CSP = () => (
 export const CSS = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="1000"
-    height="1000"
+    width="1em"
+    height="1em"
     aria-labelledby="css-logo-title css-logo-description"
     viewBox="0 0 1000 1000"
     className="h-4 w-4"
@@ -353,8 +353,8 @@ export const GRAPHQL = () => (
 export const HANDLEBARS = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     preserveAspectRatio="xMidYMid"
     viewBox="0 -194 512 512"
   >
@@ -387,8 +387,8 @@ export const HTML = () => (
 export const INI = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     fill="none"
     viewBox="0 0 24 24"
   >
@@ -442,8 +442,8 @@ export const JAVA = () => (
 export const JAVASCRIPT = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="2500"
-    height="2500"
+    width="1em"
+    height="1em"
     viewBox="0 0 1052 1052"
     className="h-4 w-4"
   >
@@ -835,8 +835,8 @@ export const PLAINTEXT = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     viewBox="0 0 32 32"
     fill="#ffffff"
   >
@@ -849,8 +849,8 @@ export const POSTIATS = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     version="1.0"
-    width="400.000000pt"
-    height="400.000000pt"
+    width="1em"
+    height="1em"
     viewBox="0 0 400.000000 400.000000"
     preserveAspectRatio="xMidYMid meet"
   >
@@ -873,8 +873,8 @@ export const POSTIATS = () => (
 
 export const POWERQUERY = () => (
   <svg
-    width="96"
-    height="96"
+    width="1em"
+    height="1em"
     viewBox="0 0 96 96"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -1655,8 +1655,8 @@ export const SCSS = () => (
 export const SHELL = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     preserveAspectRatio="xMidYMid"
     viewBox="-16 0 256 256"
   >
@@ -1723,8 +1723,8 @@ export const SOL = () => (
 export const SQL = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     viewBox="-8.78 0 70 70"
   >
     <path
@@ -1737,8 +1737,8 @@ export const SQL = () => (
 export const ST = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     viewBox="0 0 32 32"
     fill="#fff"
   >
@@ -1833,8 +1833,8 @@ export const XML = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     viewBox="0 0 56 56"
   >
     <path
@@ -1868,8 +1868,8 @@ export const XML = () => (
 export const YAML = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="800"
-    height="800"
+    width="1em"
+    height="1em"
     viewBox="0 0 16 16"
   >
     <g fill="none" fillRule="evenodd">
@@ -1933,8 +1933,8 @@ export const CODILINK = () => (
     xmlns="http://www.w3.org/2000/svg"
     version="1.2"
     viewBox="0 0 48 48"
-    width="48"
-    height="48"
+    width="1em"
+    height="1em"
   >
     <title>favicon</title>
     <defs>
@@ -1952,8 +1952,8 @@ export const CODILINK = () => (
 export const GLOBE = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
+    width="1em"
+    height="1em"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"

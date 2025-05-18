@@ -7,6 +7,7 @@ import { Header } from "@/components/header";
 import { Sidebar, SidebarProvider } from "@/components/sidebar";
 import { currentUser } from "@clerk/nextjs/server";
 import { Footer } from "@/components/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,6 +45,7 @@ export default async function RootLayout({
             {user && <Sidebar />}
             {children}
             <Footer />
+            <Toaster />
           </SidebarProvider>
         </body>
       </html>

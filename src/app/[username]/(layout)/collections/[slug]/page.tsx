@@ -8,13 +8,17 @@ import { Edit } from "lucide-react";
 import { currentUser } from "@clerk/nextjs/server";
 import { ShareButton } from "@/components/share";
 import { SnippetCard } from "@/components/snippet-card";
+import { Toast } from "@/components/toast";
 
 export default async function CollectionPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ username: string; slug: string }>;
+  searchParams?: Promise<{ created?: boolean; updated?: boolean }>;
 }) {
   const { username, slug } = await params;
+  const { created, updated } = (await searchParams) || {};
 
   const authenticatedUser = await currentUser();
 
@@ -100,6 +104,8 @@ export default async function CollectionPage({
             )
         )}
       </div>
+      {created && <Toast message="Collection created successfully!" />}
+      {updated && <Toast message="Collection updated successfully!" />}
     </section>
   );
 }

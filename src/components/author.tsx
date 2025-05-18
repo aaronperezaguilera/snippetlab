@@ -9,9 +9,11 @@ type User = InferSelectModel<typeof users>;
 export function Author({
   author,
   clasName,
+  showBio = false,
 }: {
   author: User;
   clasName?: string;
+  showBio?: boolean;
 }) {
   return (
     <div className="flex items-center">
@@ -27,7 +29,7 @@ export function Author({
               width={1000}
               height={1000}
               alt="Profile"
-              className="w-12 h-12 object-cover"
+              className={`${showBio ? "w-20 h-20" : "w-12 h-12"} object-cover`}
             />
           )}
           <div className="flex flex-col">
@@ -35,6 +37,15 @@ export function Author({
               {author.first_name} {author.last_name}
             </span>
             <span>@{author.username}</span>
+            {showBio && (
+              <p className="text-sm text-muted-foreground mt-2">
+                {author.bio
+                  ? author.bio.length > 50
+                    ? `${author.bio.slice(0, 50)}...`
+                    : author.bio
+                  : "No bio"}
+              </p>
+            )}
           </div>
         </Link>
       </Button>
