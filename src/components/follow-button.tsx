@@ -2,7 +2,7 @@
 
 import { useOptimistic, useTransition } from "react";
 import { Button } from "./ui/button";
-import { updateFollow } from "@/app/[username]/(layout)/actions";
+import { updateFollow } from "@/app/[username]/(profileLayout)/actions";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 

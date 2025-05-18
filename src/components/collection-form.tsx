@@ -8,8 +8,8 @@ import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Bookmark, Loader2, Lock } from "lucide-react";
 import { useFormStatus } from "react-dom";
-import { updateCollection } from "@/app/[username]/(layout)/collections/[slug]/edit/actions";
-import { createCollection } from "@/app/[username]/(layout)/collections/new/actions";
+import { updateCollection } from "@/app/[username]/(profileLayout)/collections/[slug]/edit/actions";
+import { createCollection } from "@/app/[username]/(profileLayout)/collections/new/actions";
 import { DeleteCollection } from "./delete-collection";
 
 export function CollectionForm({

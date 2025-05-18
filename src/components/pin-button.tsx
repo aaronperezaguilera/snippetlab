@@ -2,7 +2,7 @@
 
 import { useOptimistic, useTransition } from "react";
 import { Button } from "./ui/button";
-import { updatePin } from "@/app/[username]/(layout)/snippets/actions";
+import { updatePin } from "@/app/[username]/(profileLayout)/snippets/actions";
 import { Pin } from "lucide-react";
 
 export function PinButton({

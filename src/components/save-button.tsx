@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { BookMarked, Loader2 } from "lucide-react";
 import { Checkbox } from "./ui/checkbox";
-import { updateSnippetCollection } from "@/app/[username]/(layout)/snippets/actions";
+import { updateSnippetCollection } from "@/app/[username]/(profileLayout)/snippets/actions";
 import { collections } from "@/db/schema";
 import { InferSelectModel } from "drizzle-orm";
 import { useState } from "react";

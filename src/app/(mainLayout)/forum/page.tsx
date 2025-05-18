@@ -1,5 +1,4 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { SnippetsWidget } from "@/components/snippets-widget";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -31,8 +30,7 @@ export default async function ForumPage() {
     .limit(4);
 
   return (
-    <main className="mt-16 grid grid-cols-[1.2fr_2.8fr_1.2fr] gap-16 relative min-h-screen">
-      <SnippetsWidget />
+    <>
       <section className="flex flex-col gap-8">
         <header className="flex justify-between items-center">
           <h1 className="text-4xl font-bold text-balance">Q&A Forum</h1>
@@ -75,6 +73,6 @@ export default async function ForumPage() {
           </div>
         )}
       </section>
-    </main>
+    </>
   );
 }

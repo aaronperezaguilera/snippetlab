@@ -5,7 +5,7 @@ import { Link, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { updateProfile } from "@/app/[username]/(layout)/actions";
+import { updateProfile } from "@/app/[username]/(profileLayout)/actions";
 import { useFormStatus } from "react-dom";
 import { users } from "@/db/schema";
 import { InferSelectModel } from "drizzle-orm";
