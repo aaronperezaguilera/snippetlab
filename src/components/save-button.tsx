@@ -15,8 +15,9 @@ import { Checkbox } from "./ui/checkbox";
 import { updateSnippetCollection } from "@/app/[username]/(profileLayout)/snippets/actions";
 import { collections } from "@/db/schema";
 import { InferSelectModel } from "drizzle-orm";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { toast } from "sonner";
 
 type Collection = InferSelectModel<typeof collections>;
 
@@ -40,15 +41,7 @@ export function SaveButton({
     return null;
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    await updateSnippetCollection(snippetId, formData);
-
-    setOpen(false);
-  };
+  const formAction = updateSnippetCollection.bind(null, snippetId);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -58,7 +51,7 @@ export function SaveButton({
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={handleSubmit}>
+        <form action={formAction}>
           <DialogHeader>
             <DialogTitle>Add to collection</DialogTitle>
             <DialogDescription>
@@ -98,7 +91,12 @@ export function SaveButton({
                 Cancel
               </Button>
             </DialogTrigger>
-            <SubmitButton />
+            <SubmitButton
+              onSuccess={() => {
+                setOpen(false);
+                toast.success("Collection updated successfully!");
+              }}
+            />
           </DialogFooter>
         </form>
       </DialogContent>
@@ -106,8 +104,21 @@ export function SaveButton({
   );
 }
 
-function SubmitButton() {
+function SubmitButton({ onSuccess }: { onSuccess: () => void }) {
   const { pending } = useFormStatus();
+
+  const wasPending = useRef(false);
+
+  useEffect(() => {
+    if (pending) {
+      wasPending.current = true;
+    }
+
+    if (wasPending.current && !pending) {
+      wasPending.current = false;
+      onSuccess();
+    }
+  }, [pending, onSuccess]);
 
   return (
     <Button disabled={pending} className="w-24">
