@@ -19,12 +19,15 @@ export default function Loading() {
             placeholder="Write or select a tag"
             disabled
           />
+          <div className="flez gap-2 flex-wrap"></div>
         </div>
       </section>
       <section>
         <div className="grid sm:grid-cols-2 gap-6">
           <SnippetCardSkeleton />
-          <div className="flez gap-2 flex-wrap"></div>
+          <SnippetCardSkeleton />
+          <SnippetCardSkeleton />
+          <SnippetCardSkeleton />
         </div>
       </section>
     </main>
