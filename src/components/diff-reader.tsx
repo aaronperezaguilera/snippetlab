@@ -14,16 +14,6 @@ export function DiffReader({ language, original, modified }: CodeReaderProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleEditorDidMount: DiffOnMount = (editor, monaco) => {
-    import("monaco-themes/themes/Night Owl.json").then((data) => {
-      monaco.editor.defineTheme("nightOwl", {
-        base: "vs-dark",
-        inherit: data.inherit,
-        rules: data.rules,
-        colors: data.colors,
-      });
-      monaco.editor.setTheme("nightOwl");
-    });
-
     const lineHeight = editor
       .getOriginalEditor()
       .getOption(monaco.editor.EditorOption.lineHeight);
@@ -56,9 +46,9 @@ export function DiffReader({ language, original, modified }: CodeReaderProps) {
 
   return (
     <div>
-      <div ref={wrapperRef} className="w-full bg-[#061626] py-2 pr-2 relative">
+      <div ref={wrapperRef} className="w-full bg-[#1e1e1e] py-2 pr-2 relative">
         <DiffEditor
-          theme="nightOwl"
+          theme="vs-dark"
           language={language}
           original={original}
           modified={modified}

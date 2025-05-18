@@ -95,7 +95,7 @@ export default async function VersionsPage({
       {stepsReversed.map(({ original, modified, key, label, id }) => (
         <div key={key}>
           <h3 className="text-lg font-medium mb-2">{label}</h3>
-          <div className="px-4 bg-[#05121f] py-2 border-b border-b-primary/10">
+          <div className="px-4 bg-[#28292c] py-2 border-b border-b-primary/10">
             {snippet.filename}
           </div>
           <div className="relative">

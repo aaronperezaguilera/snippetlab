@@ -15,16 +15,6 @@ export function CodeEditor({ language, code, onChange }: CodeEditorProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleEditorDidMount: OnMount = (editor, monaco) => {
-    import("monaco-themes/themes/Night Owl.json").then((data) => {
-      monaco.editor.defineTheme("nightOwl", {
-        base: "vs-dark",
-        inherit: data.inherit,
-        rules: data.rules,
-        colors: data.colors,
-      });
-      monaco.editor.setTheme("nightOwl");
-    });
-
     const lineHeight = editor.getOption(monaco.editor.EditorOption.lineHeight);
 
     // 2) desactivar scroll vertical para no tener barras
@@ -54,10 +44,10 @@ export function CodeEditor({ language, code, onChange }: CodeEditorProps) {
   };
 
   return (
-    <div ref={wrapperRef} className="w-full bg-[#061626] py-2 pr-2">
+    <div ref={wrapperRef} className="w-full bg-[#1e1e1e] py-2 pr-2">
       <div ref={containerRef} className="w-full min-h-48 max-h-[500px]">
         <Editor
-          theme="nightOwl"
+          theme="vs-dark"
           language={language}
           defaultValue={code}
           onChange={(value) => onChange(value)}

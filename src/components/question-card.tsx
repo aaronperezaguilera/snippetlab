@@ -7,7 +7,7 @@ import CopyButton from "./copy-button";
 
 // Import sólo lectura
 import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Author } from "./author";
 import { InferSelectModel } from "drizzle-orm";
 import { questions, snippets, users } from "@/db/schema";
@@ -48,12 +48,12 @@ export function QuestionCard({
 
       {snippet && (
         <>
-          <div className="shadow-lg shadow-background overflow-hidden border">
-            <div className="px-4 bg-[#05121f] py-2 border-b border-b-primary/10">
+          <div className="shadow-lg shadow-background overflow-hidden">
+            <div className="px-4 bg-[#28292c] py-2 border-b border-b-primary/10">
               {snippet.filename}
             </div>
             <div className="relative overflow-hidden">
-              <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#061626] to-transparent z-40" />
+              <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#1e1e1e] to-transparent z-40" />
               <CopyButton
                 value={snippet.code}
                 className="absolute z-50 right-3 top-3"
@@ -61,7 +61,7 @@ export function QuestionCard({
 
               <SyntaxHighlighter
                 language={snippet.language}
-                style={nightOwl}
+                style={vscDarkPlus}
                 showLineNumbers={false}
                 customStyle={{
                   margin: 0,
