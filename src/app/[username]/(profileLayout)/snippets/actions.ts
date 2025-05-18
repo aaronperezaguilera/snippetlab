@@ -165,6 +165,13 @@ export async function updateSnippetCollection(
         collectionId: colId,
       })
       .onConflictDoNothing();
+
+    const [collection] = await db
+      .select()
+      .from(collections)
+      .where(eq(collections.id, colId));
+
+    revalidatePath(`/${username}/collections/${collection.slug}`);
   }
 
   revalidatePath(`/${username}/collections`);

@@ -74,7 +74,11 @@ export async function Profile({ username }: { username: string }) {
       </div>
 
       <div className="flex flex-col gap-4 w-full">
-        <ProfileDetails profile={author} />
+        <ProfileDetails
+          profile={author}
+          followers={user.followers}
+          following={user.following}
+        />
         {author.id !== authenticatedUser?.id && (
           <FollowButton
             id={author.id}

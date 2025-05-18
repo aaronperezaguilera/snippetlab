@@ -15,7 +15,15 @@ import { toast } from "sonner";
 
 type User = InferSelectModel<typeof users>;
 
-export function ProfileDetails({ profile }: { profile: User }) {
+export function ProfileDetails({
+  profile,
+  followers,
+  following,
+}: {
+  profile: User;
+  followers: number;
+  following: number;
+}) {
   const [editing, setEditing] = useState(false);
 
   const user = useUser();
@@ -30,6 +38,10 @@ export function ProfileDetails({ profile }: { profile: User }) {
           <p className="text-muted-foreground">@{profile.username}</p>
         </div>
         <p>{profile.bio}</p>
+
+        <div className="text-muted-foreground">
+          {followers || 0} followers · {following || 0} following
+        </div>
       </div>
 
       {!editing && (

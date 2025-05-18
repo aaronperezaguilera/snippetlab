@@ -36,9 +36,13 @@ export function DiffReader({ language, original, modified }: CodeReaderProps) {
     }
 
     const updateWrapperHeight = () => {
-      const contentHeight = editor.getOriginalEditor().getContentHeight();
-      // nunca menos que MIN, ni más que MAX
-      const h = Math.min(Math.max(contentHeight, MIN_HEIGHT));
+      const contentHeight = editor.getModifiedEditor().getContentHeight();
+
+      const MIN = MIN_HEIGHT;
+      const MAX = 800; // por ejemplo, límite máximo en píxeles
+
+      const h = Math.min(Math.max(contentHeight, MIN), MAX);
+
       if (wrapperRef.current) {
         wrapperRef.current.style.height = `${h + 20}px`;
         wrapperRef.current.style.overflowY = "hidden";
@@ -46,6 +50,8 @@ export function DiffReader({ language, original, modified }: CodeReaderProps) {
     };
 
     updateWrapperHeight();
+    editor.getOriginalEditor().onDidContentSizeChange(updateWrapperHeight);
+    editor.getModifiedEditor().onDidContentSizeChange(updateWrapperHeight);
   };
 
   return (
