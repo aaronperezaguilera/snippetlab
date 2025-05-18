@@ -1,6 +1,7 @@
+import { CollectionCard } from "@/components/collection-card";
 import { SnippetCard } from "@/components/snippet-card";
 import { db } from "@/db/drizzle";
-import { snippets, users } from "@/db/schema";
+import { collections, snippets, users } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 
 export default async function ProfilePage({
@@ -10,12 +11,12 @@ export default async function ProfilePage({
 }) {
   const { username } = await params;
 
-  const [user] = await db
+  const [author] = await db
     .select()
     .from(users)
     .where(eq(users.username, username));
 
-  if (!user) {
+  if (!author) {
     return (
       <div className="container mx-auto mt-16">
         <h1 className="text-2xl font-bold">User not found</h1>
@@ -26,7 +27,13 @@ export default async function ProfilePage({
   const snippetsList = await db
     .select()
     .from(snippets)
-    .where(and(eq(snippets.pinned, true), eq(snippets.userId, user.id)))
+    .where(and(eq(snippets.pinned, true), eq(snippets.userId, author.id)))
+    .limit(4);
+
+  const collectionsList = await db
+    .select()
+    .from(collections)
+    .where(and(eq(collections.pinned, true), eq(collections.userId, author.id)))
     .limit(4);
 
   return (
@@ -39,7 +46,7 @@ export default async function ProfilePage({
               <SnippetCard
                 key={snippet.id}
                 showCode={false}
-                author={user}
+                author={author}
                 snippet={snippet}
               />
             ))}
@@ -50,14 +57,13 @@ export default async function ProfilePage({
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-bold">Pinned collections</h2>
-        {snippetsList.length > 0 ? (
+        {collectionsList.length > 0 ? (
           <div className="grid grid-cols-2 gap-4">
-            {snippetsList.map((snippet) => (
-              <SnippetCard
-                key={snippet.id}
-                showCode={false}
-                author={user}
-                snippet={snippet}
+            {collectionsList.map((collection) => (
+              <CollectionCard
+                key={collection.id}
+                author={author}
+                collection={collection}
               />
             ))}
           </div>

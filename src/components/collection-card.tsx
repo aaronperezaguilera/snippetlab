@@ -7,6 +7,7 @@ import { RelativeTime } from "./relative-time";
 import { Author } from "./author";
 import { InferSelectModel } from "drizzle-orm";
 import { collections, users } from "@/db/schema";
+import { useAuth } from "@clerk/nextjs";
 
 type Author = InferSelectModel<typeof users>;
 type Collection = InferSelectModel<typeof collections>;
@@ -23,6 +24,12 @@ export function CollectionCard({
   showUsername?: boolean;
 }) {
   const { slug, title, visibility, createdAt } = collection;
+
+  const user = useAuth();
+
+  if (visibility === "private" && user.userId !== author.id) {
+    return;
+  }
 
   return (
     <div className="p-4 flex flex-col relative gap-4 border-b hover:bg-accent/5 transition-colors">

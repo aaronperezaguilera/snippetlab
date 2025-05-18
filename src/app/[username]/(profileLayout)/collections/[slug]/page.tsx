@@ -9,6 +9,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { ShareButton } from "@/components/share";
 import { SnippetCard } from "@/components/snippet-card";
 import { Toast } from "@/components/toast";
+import { PinCollectionButton } from "@/components/pin-collection-button";
 
 export default async function CollectionPage({
   params,
@@ -75,6 +76,12 @@ export default async function CollectionPage({
             </Badge>
           </div>
           <div className="flex gap-2">
+            {author.id === authenticatedUser?.id && (
+              <PinCollectionButton
+                id={collection.id}
+                initialPinned={collection.pinned}
+              />
+            )}
             {collection.visibility === "public" && (
               <>
                 <ShareButton />

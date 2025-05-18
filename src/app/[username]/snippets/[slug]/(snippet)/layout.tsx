@@ -17,7 +17,7 @@ import { SnippetNav } from "@/components/snippet-nav";
 import { LANGUAGE_ICON } from "@/config";
 import { Edit, GitFork } from "lucide-react";
 import { ShareButton } from "@/components/share";
-import { PinButton } from "@/components/pin-button";
+import { PinSnippetButton } from "@/components/pin-snippet-button";
 import { StarButton } from "@/components/star-button";
 import { ForkButton } from "@/components/fork-button";
 import { SaveButton } from "@/components/save-button";
@@ -157,7 +157,10 @@ export default async function SnippetLayout({
             </div>
             <div className="flex gap-2">
               {author.id === authenticatedUser?.id && (
-                <PinButton id={snippet.id} initialPinned={snippet.pinned} />
+                <PinSnippetButton
+                  id={snippet.id}
+                  initialPinned={snippet.pinned}
+                />
               )}
 
               {author.id !== authenticatedUser?.id && (

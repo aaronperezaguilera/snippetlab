@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { updatePin } from "@/app/[username]/(profileLayout)/snippets/actions";
 import { Pin } from "lucide-react";
 
-export function PinButton({
+export function PinSnippetButton({
   id,
   initialPinned,
 }: {
