@@ -5,12 +5,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectTrigger } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
-import { Bookmark, Lock } from "lucide-react";
+import { Bookmark, Lock, Sparkles } from "lucide-react";
 
 export default function Loading() {
   return (
     <main className="container mx-auto mt-16 max-w-6xl min-h-screen">
-      <h1 className="text-2xl font-bold mb-8">Edit your snippet</h1>
+      <h1 className="text-2xl font-bold mb-8">Create a new snippet</h1>
       <form
         className="flex flex-col items-start w-full gap-4"
         id="snippet-form"
@@ -87,18 +87,32 @@ export default function Loading() {
         </RadioGroup>
 
         <div className="flex gap-4 justify-end w-full mt-4">
-          <Button
-            variant="ghost"
-            className="text-destructive font-normal hover:bg-destructive/10 hover:text-destructive"
-            disabled
-          >
-            Delete Snippet
-          </Button>
           <Button type="submit" form="snippet-form" disabled>
-            Update Snippet
+            Create Snippet
           </Button>
         </div>
       </form>
+      <div className="mt-4">
+        <h2 className="text-xl font-bold mb-4">Or generate with AI</h2>
+        <div className="relative">
+          <Textarea
+            placeholder="Describe your snippet"
+            className="resize-none pr-16 max-h-24 h-full"
+            maxLength={300}
+            name="prompt"
+            required
+          />
+          <Button
+            size="icon"
+            type="submit"
+            disabled
+            className="absolute top-3 right-3 hover:bg-gradient-to-br border bg-background text-white hover:from-blue-800/80 hover:to-purple-800/80 transition-colors"
+          >
+            {" "}
+            <Sparkles className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
     </main>
   );
 }

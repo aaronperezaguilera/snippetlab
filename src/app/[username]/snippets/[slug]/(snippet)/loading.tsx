@@ -1,9 +1,9 @@
-import { SnippetNav } from "@/components/snippet-nav";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
     <section className="flex flex-col gap-4 px-16">
-      <SnippetNav />
+      <Skeleton className="h-50 w-full" />
     </section>
   );
 }

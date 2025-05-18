@@ -107,160 +107,151 @@ export function SnippetForm({
   const updateSnippetWithCode = updateSnippet.bind(null, value, tags, id || 0);
 
   return (
-    <>
-      <form
-        className="flex flex-col items-start w-full gap-4"
-        id="snippet-form"
+    <form className="flex flex-col items-start w-full gap-4" id="snippet-form">
+      <Label>Title:</Label>
+      <Input
+        type="text"
+        placeholder="Snippet Title"
+        defaultValue={title}
+        name="title"
+        required
+      />
+      <Label>Language:</Label>
+      <Select
+        defaultValue={defaultLanguage || language}
+        onValueChange={(val) => setLanguage(val as Language)}
+        name="language"
       >
-        <Label>Title:</Label>
-        <Input
-          type="text"
-          placeholder="Snippet Title"
-          defaultValue={title}
-          name="title"
-          required
-        />
-        <Label>Language:</Label>
-        <Select
-          defaultValue={defaultLanguage || language}
-          onValueChange={(val) => setLanguage(val as Language)}
-          name="language"
-        >
-          <SelectTrigger className="w-48">
-            <SelectValue placeholder="Language" />
-          </SelectTrigger>
-          <SelectContent>
-            {Object.values(Language).map((lang) => (
-              <SelectItem key={lang} value={lang}>
-                {LANGUAGE_ICON[lang]}
-                {lang.slice(0, 1).toUpperCase() + lang.slice(1)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Label>File name:</Label>
-        <Input
-          type="text"
-          placeholder="filename.ts"
-          defaultValue={title}
-          name="filename"
-          required
-        />
-        <Label>Code:</Label>
-        <CodeEditor code={value} language={language} onChange={setValue} />
-        <Label>Tags:</Label>
-        <TagsInput
-          value={tags}
-          onValueChange={setTags}
-          placeholder="Add a tag"
-        />
-        <Label>Summary:</Label>
-        <Textarea
-          className="resize-none max-h-[500px]"
-          ref={textareaRef}
-          placeholder="Write a summary of the snippet"
-          name="summary"
-          defaultValue={summary}
-          maxLength={600}
-        />
-        <Label>Examples:</Label>
-        <div className="flex flex-col gap-2 w-full">
-          {examples.map((ex, i) => (
-            <div key={i} className="flex gap-2 items-end">
-              <Select
-                name={`example-site-${i}`}
-                value={ex.website.toString()}
-                onValueChange={(val) => updateExample(i, "website", val)}
-                key={i}
-              >
-                <SelectTrigger className="w-36">
-                  <SelectValue placeholder="Sitio" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.values(exampleSite.enumValues).map((site) => (
-                    <SelectItem key={site} value={site}>
-                      {EXAMPLE_SITE_ICONS[site]}{" "}
-                      {site.slice(0, 1).toUpperCase() + site.slice(1)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Input
-                name={`example-url-${i}`}
-                type="url"
-                placeholder="https://..."
-                value={ex.url}
-                onChange={(e) => updateExample(i, "url", e.currentTarget.value)}
-                className="flex-1"
-                required
-              />
-
-              <Button
-                type="button"
-                variant="secondary"
-                size="icon"
-                onClick={() => removeExample(i)}
-              >
-                ×
-              </Button>
-            </div>
+        <SelectTrigger className="w-48">
+          <SelectValue placeholder="Language" />
+        </SelectTrigger>
+        <SelectContent>
+          {Object.values(Language).map((lang) => (
+            <SelectItem key={lang} value={lang}>
+              {LANGUAGE_ICON[lang]}
+              {lang.slice(0, 1).toUpperCase() + lang.slice(1)}
+            </SelectItem>
           ))}
+        </SelectContent>
+      </Select>
+      <Label>File name:</Label>
+      <Input
+        type="text"
+        placeholder="filename.ts"
+        defaultValue={title}
+        name="filename"
+        required
+      />
+      <Label>Code:</Label>
+      <CodeEditor code={value} language={language} onChange={setValue} />
+      <Label>Tags:</Label>
+      <TagsInput value={tags} onValueChange={setTags} placeholder="Add a tag" />
+      <Label>Summary:</Label>
+      <Textarea
+        className="resize-none max-h-[500px]"
+        ref={textareaRef}
+        placeholder="Write a summary of the snippet"
+        name="summary"
+        defaultValue={summary}
+        maxLength={600}
+      />
+      <Label>Examples:</Label>
+      <div className="flex flex-col gap-2 w-full">
+        {examples.map((ex, i) => (
+          <div key={i} className="flex gap-2 items-end">
+            <Select
+              name={`example-site-${i}`}
+              value={ex.website.toString()}
+              onValueChange={(val) => updateExample(i, "website", val)}
+              key={i}
+            >
+              <SelectTrigger className="w-36">
+                <SelectValue placeholder="Sitio" />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.values(exampleSite.enumValues).map((site) => (
+                  <SelectItem key={site} value={site}>
+                    {EXAMPLE_SITE_ICONS[site]}
+                    {site.slice(0, 1).toUpperCase() + site.slice(1)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={addExample}
-            className="mt-2"
-          >
-            + Add example
-          </Button>
-        </div>
+            <Input
+              name={`example-url-${i}`}
+              type="url"
+              placeholder="https://..."
+              value={ex.url}
+              onChange={(e) => updateExample(i, "url", e.currentTarget.value)}
+              className="flex-1"
+              required
+            />
 
-        <input type="hidden" name="examples" value={JSON.stringify(examples)} />
+            <Button
+              type="button"
+              variant="secondary"
+              size="icon"
+              onClick={() => removeExample(i)}
+            >
+              ×
+            </Button>
+          </div>
+        ))}
 
-        <RadioGroup
-          className="gap-6"
-          name="visibility"
-          defaultValue={visibility || "public"}
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={addExample}
+          className="mt-2"
         >
-          <div className="flex items-center space-x-4">
-            <RadioGroupItem value="public" id="public" />
-            <Label htmlFor="public" className="flex gap-4 items-center">
-              <Bookmark />
-              <div className="flex flex-col gap-2">
-                <span>Public</span>
-                <span className="font-normal text-muted-foreground">
-                  Anyone on the internet can see this snippet.
-                </span>
-              </div>
-            </Label>
-          </div>
-          <div className="flex items-center space-x-4">
-            <RadioGroupItem value="private" id="private" />
-            <Label htmlFor="private" className="flex gap-4 items-center">
-              <Lock />
-              <div className="flex flex-col gap-2">
-                <span>Private</span>
-                <span className="font-normal text-muted-foreground">
-                  You are the only one who can see this snippet.
-                </span>
-              </div>
-            </Label>
-          </div>
-        </RadioGroup>
+          + Add example
+        </Button>
+      </div>
 
-        <div className="flex gap-4 justify-end w-full mt-4">
-          {type === "edit" && <DeleteSnippet id={id} />}
-          <SubmitButton
-            type={type}
-            formAction={
-              type === "create" ? createSnippetWithCode : updateSnippetWithCode
-            }
-          />
+      <input type="hidden" name="examples" value={JSON.stringify(examples)} />
+
+      <RadioGroup
+        className="gap-6"
+        name="visibility"
+        defaultValue={visibility || "public"}
+      >
+        <div className="flex items-center space-x-4">
+          <RadioGroupItem value="public" id="public" />
+          <Label htmlFor="public" className="flex gap-4 items-center">
+            <Bookmark />
+            <div className="flex flex-col gap-2">
+              <span>Public</span>
+              <span className="font-normal text-muted-foreground">
+                Anyone on the internet can see this snippet.
+              </span>
+            </div>
+          </Label>
         </div>
-      </form>
-    </>
+        <div className="flex items-center space-x-4">
+          <RadioGroupItem value="private" id="private" />
+          <Label htmlFor="private" className="flex gap-4 items-center">
+            <Lock />
+            <div className="flex flex-col gap-2">
+              <span>Private</span>
+              <span className="font-normal text-muted-foreground">
+                You are the only one who can see this snippet.
+              </span>
+            </div>
+          </Label>
+        </div>
+      </RadioGroup>
+
+      <div className="flex gap-4 justify-end w-full mt-4">
+        {type === "edit" && <DeleteSnippet id={id} />}
+        <SubmitButton
+          type={type}
+          formAction={
+            type === "create" ? createSnippetWithCode : updateSnippetWithCode
+          }
+        />
+      </div>
+    </form>
   );
 }
 

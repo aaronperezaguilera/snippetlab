@@ -59,7 +59,7 @@ export default async function LikesPage({
         </div>
       ) : (
         <p>
-          No liked snippets found.{" "}
+          No liked snippets found.
           <Link href="/explore" className="underline">
             Start exploring
           </Link>

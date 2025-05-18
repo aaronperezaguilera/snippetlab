@@ -5,14 +5,13 @@ import { currentUser } from "@clerk/nextjs/server";
 import { eq, desc } from "drizzle-orm";
 import CommentCard from "@/components/comment-card";
 import CommentForm from "@/components/comment-form";
-import { SnippetNav } from "@/components/snippet-nav";
 
 export default async function EditSnippet({
   params,
 }: {
   params: Promise<{ username: string; slug: string }>;
 }) {
-  const { username, slug } = await params;
+  const { slug } = await params;
 
   const authenticatedUser = await currentUser();
 
@@ -42,12 +41,7 @@ export default async function EditSnippet({
     .orderBy(desc(comments.createdAt));
 
   return (
-    <section className="flex flex-col gap-4 px-16">
-      <SnippetNav
-        username={username}
-        snippet={currentSnippet.slug}
-        active="comments"
-      />
+    <div className="flex flex-col gap-4 px-16 mt-4">
       <h1 className="text-2xl font-bold">Comments</h1>
       <CommentForm snippetId={currentSnippet.id} />
       {snippetComments.length === 0 ? (
@@ -57,6 +51,6 @@ export default async function EditSnippet({
       ) : (
         snippetComments.map((c) => <CommentCard key={c.id} comment={c} />)
       )}
-    </section>
+    </div>
   );
 }

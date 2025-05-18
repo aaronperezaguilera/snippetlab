@@ -1,25 +1,29 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Code, History, MessageSquare } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function SnippetNav({
   username = "",
   snippet,
-  active,
 }: {
   username?: string;
   snippet?: string;
-  active?: "code" | "versions" | "comments";
 }) {
+  const pathname = usePathname();
   return (
-    <div className="flex gap-2 items-center w-fit">
+    <div className="flex gap-2 items-center w-fit px-16">
       <Link
         href={`/${username}/snippets/${snippet}`}
         className={cn(
           "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
-            "border-accent hover:bg-transparent": active === "code",
-            "hover:bg-accent/10": active && active !== "code",
+            "border-accent hover:bg-transparent":
+              !pathname.includes("versions") && !pathname.includes("comments"),
+            "hover:bg-accent/10":
+              pathname.includes("versions") || pathname.includes("comments"),
           }
         )}
       >
@@ -30,8 +34,8 @@ export function SnippetNav({
         className={cn(
           "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
-            "border-accent hover:bg-transparent": active === "versions",
-            "hover:bg-accent/10": active && active !== "versions",
+            "border-accent hover:bg-transparent": pathname.includes("versions"),
+            "hover:bg-accent/10": !pathname.includes("versions"),
           }
         )}
       >
@@ -42,8 +46,8 @@ export function SnippetNav({
         className={cn(
           "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
-            "border-accent hover:bg-transparent": active === "comments",
-            "hover:bg-accent/10": active && active !== "comments",
+            "border-accent hover:bg-transparent": pathname.includes("comments"),
+            "hover:bg-accent/10": !pathname.includes("comments"),
           }
         )}
       >
