@@ -17,7 +17,6 @@ import { collections } from "@/db/schema";
 import { InferSelectModel } from "drizzle-orm";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import { toast } from "sonner";
 
 type Collection = InferSelectModel<typeof collections>;
 
@@ -49,7 +48,6 @@ export function SaveButton({
     await updateSnippetCollection(snippetId, formData);
 
     setOpen(false);
-    toast.success("Collection updated successfully");
   };
 
   return (

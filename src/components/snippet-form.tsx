@@ -52,7 +52,9 @@ export function SnippetForm({
   const [examples, setExamples] = useState<
     { website: keyof typeof exampleSite.enumValues; url: string }[]
   >(defaultExamples || []);
-  const [language, setLanguage] = useState<Language>(Language.TYPESCRIPT);
+  const [language, setLanguage] = useState<Language>(
+    (defaultLanguage as Language) || Language.TYPESCRIPT
+  );
   const [value, setValue] = React.useState<string | undefined>(
     code || "// Some comment"
   );
