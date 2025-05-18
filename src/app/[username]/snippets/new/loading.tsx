@@ -108,7 +108,6 @@ export default function Loading() {
             disabled
             className="absolute top-3 right-3 hover:bg-gradient-to-br border bg-background text-white hover:from-blue-800/80 hover:to-purple-800/80 transition-colors"
           >
-            {" "}
             <Sparkles className="h-4 w-4" />
           </Button>
         </div>

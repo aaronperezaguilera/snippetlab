@@ -167,7 +167,6 @@ export async function updateSnippetCollection(
       .onConflictDoNothing();
   }
 
-  revalidatePath(`/${username}/collections`);
   ids.forEach(async (id) => {
     const [collection] = await db
       .select()
@@ -176,4 +175,5 @@ export async function updateSnippetCollection(
 
     revalidatePath(`/${username}/collections/${collection.slug}`);
   });
+  revalidatePath(`/${username}/collections`);
 }
