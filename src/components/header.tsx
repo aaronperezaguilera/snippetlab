@@ -27,7 +27,7 @@ export async function Header() {
       <div className="flex items-center gap-4">
         {user && <SidebarToggleButton />}
         <Link href="/" className="flex gap-2 items-center">
-          <Logo />
+          <Logo className="size-8" />
           <span className="text-xl font-semibold">SnippetLab</span>
         </Link>
       </div>
