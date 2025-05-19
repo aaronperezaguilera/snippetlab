@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export function Footer() {
   return (
     <footer className="flex flex-col gap-4 p-4 bg-popover border-t">
