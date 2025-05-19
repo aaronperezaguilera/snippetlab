@@ -13,7 +13,7 @@ export default async function ForumPage() {
   if (!user) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">You need to be logged in</h1>
+        <h1 className="text-2xl font-semibold">You need to be logged in</h1>
         <p className="mt-4">
           Please log in to view your snippets and explore the community.
         </p>
@@ -33,7 +33,7 @@ export default async function ForumPage() {
     <>
       <section className="flex flex-col gap-8 py-8">
         <header className="flex justify-between items-center">
-          <h1 className="text-4xl font-bold text-balance">Q&A Forum</h1>
+          <h1 className="text-4xl font-semibold text-balance">Q&A Forum</h1>
           <Button>
             <Link href="/forum/new" className="flex items-center gap-2">
               <Plus /> Create a question
@@ -43,7 +43,7 @@ export default async function ForumPage() {
         <ForumFeed />
       </section>
       <section className="flex flex-col bg-popover border-l px-8 pt-8">
-        <h2 className="text-xl font-bold mb-4">Your questions</h2>
+        <h2 className="text-xl font-semibold mb-4">Your questions</h2>
         {yourQuestions.length > 0 ? (
           <>
             {yourQuestions.map(

@@ -38,7 +38,7 @@ export function CollectionCard({
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
-              <h2 className="text-lg font-bold">{title}</h2>
+              <h2 className="text-lg font-semibold">{title}</h2>
               <Badge variant="secondary" className="border border-neutral-700">
                 {visibility[0].toUpperCase() + visibility.slice(1)}
               </Badge>

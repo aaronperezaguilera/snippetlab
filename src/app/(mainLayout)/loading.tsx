@@ -8,9 +8,11 @@ export default function Loading() {
   return (
     <>
       <section className="flex flex-col gap-8 overflow-hidden pt-8">
-        <h1 className="text-4xl font-bold text-balance">Welcome back</h1>
+        <h1 className="text-4xl font-semibold text-balance">Welcome back</h1>
         <div className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold">Generate your snippet with AI</h2>
+          <h2 className="text-xl font-semibold">
+            Generate your snippet with AI
+          </h2>
           <div className="relative">
             <Textarea
               placeholder="Describe your snippet"
@@ -31,7 +33,7 @@ export default function Loading() {
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">Feed</h1>
+            <h1 className="text-2xl font-semibold">Feed</h1>
           </div>
           <div className="flex flex-col gap-4">
             <SnippetCardSkeleton />
@@ -42,7 +44,7 @@ export default function Loading() {
       </section>
       <div className="flex flex-col gap-8 pt-8 bg-popover border-l px-8">
         <section className="flex flex-col gap-4 pr-16">
-          <h2 className="text-xl font-bold">Featured snippets</h2>
+          <h2 className="text-xl font-semibold">Featured snippets</h2>
           <div className="flex flex-col gap-2">
             <div className="p-4 flex flex-col gap-4 border-b relative">
               <Skeleton className="h-7 w-1/2" />
@@ -66,7 +68,7 @@ export default function Loading() {
           </div>
         </section>
         <section className="flex flex-col gap-4 pr-16">
-          <h2 className="text-xl font-bold">Featured users</h2>
+          <h2 className="text-xl font-semibold">Featured users</h2>
           <div className="flex flex-col gap-2">
             <div className="flex items-center">
               <Button

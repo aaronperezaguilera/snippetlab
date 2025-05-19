@@ -11,7 +11,9 @@ export async function Feed() {
   if (!authenticatedUser) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">Please log in to see the feed</h1>
+        <h1 className="text-2xl font-semibold">
+          Please log in to see the feed
+        </h1>
       </div>
     );
   }
@@ -27,7 +29,9 @@ export async function Feed() {
   if (followedIds.length === 0) {
     return (
       <div className="flex flex-col gap-4 mt-8 ">
-        <h1 className="text-2xl font-bold">You don&apos;t follow anyone yet</h1>
+        <h1 className="text-2xl font-semibold">
+          You don&apos;t follow anyone yet
+        </h1>
         <p className="text-muted-foreground">
           Follow some users to see their snippets here.
         </p>
@@ -54,7 +58,7 @@ export async function Feed() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Feed</h1>
+        <h1 className="text-2xl font-semibold">Feed</h1>
       </div>
       <div className="flex flex-col gap-4">
         {feedSnippets.length === 0 ? (

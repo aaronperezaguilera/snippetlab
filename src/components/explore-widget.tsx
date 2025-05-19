@@ -15,7 +15,7 @@ export async function ExploreWidget() {
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-xl font-bold">Featured snippets</h2>
+      <h2 className="text-xl font-semibold">Featured snippets</h2>
       <div>
         {featuredSnippets.map(
           ({ snippets, users }) =>

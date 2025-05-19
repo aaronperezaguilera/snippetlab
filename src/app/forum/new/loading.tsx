@@ -8,7 +8,7 @@ import { Send } from "lucide-react";
 export default function Loading() {
   return (
     <main className="container mx-auto mt-16 min-h-screen">
-      <h1 className="text-2xl font-bold">New Question</h1>
+      <h1 className="text-2xl font-semibold">New Question</h1>
       <form className="flex flex-col gap-4 mt-4">
         <Label htmlFor="title">Title</Label>
         <Input

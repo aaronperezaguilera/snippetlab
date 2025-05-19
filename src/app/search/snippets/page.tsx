@@ -19,7 +19,7 @@ export default async function SnippetsSearchPage({
 
   return (
     <section className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">
+      <h1 className="text-2xl font-semibold">
         Search {params_search.search} in snippets
       </h1>
       {snippetList.length > 0 ? (

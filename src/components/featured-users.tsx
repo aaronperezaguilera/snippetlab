@@ -14,7 +14,7 @@ export async function FeaturedUsers() {
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-xl font-bold">Featured users</h2>
+      <h2 className="text-xl font-semibold">Featured users</h2>
       <div className="flex flex-col gap-2">
         {featuredUsers.map(({ user }) => (
           <Author author={user} key={user.id} clasName="w-full justify-start" />

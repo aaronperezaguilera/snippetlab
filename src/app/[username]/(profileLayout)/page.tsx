@@ -19,7 +19,7 @@ export default async function ProfilePage({
   if (!author) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">User not found</h1>
+        <h1 className="text-2xl font-semibold">User not found</h1>
       </div>
     );
   }
@@ -39,7 +39,7 @@ export default async function ProfilePage({
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-bold">Pinned snippets</h2>
+        <h2 className="text-2xl font-semibold">Pinned snippets</h2>
         {snippetsList.length > 0 ? (
           <div className="grid grid-cols-2 gap-4">
             {snippetsList.map((snippet) => (
@@ -56,7 +56,7 @@ export default async function ProfilePage({
         )}
       </div>
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-bold">Pinned collections</h2>
+        <h2 className="text-2xl font-semibold">Pinned collections</h2>
         {collectionsList.length > 0 ? (
           <div className="grid grid-cols-2 gap-4">
             {collectionsList.map((collection) => (

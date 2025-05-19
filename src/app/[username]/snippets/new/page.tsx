@@ -4,10 +4,10 @@ import { SnippetForm } from "@/components/snippet-form";
 export default async function NewSnippet() {
   return (
     <main className="container mx-auto mt-16 max-w-6xl min-h-screen">
-      <h1 className="text-2xl font-bold mb-8">Create a new snippet</h1>
+      <h1 className="text-2xl font-semibold mb-8">Create a new snippet</h1>
       <SnippetForm type="create" />
       <div className="mt-4">
-        <h2 className="text-xl font-bold mb-4">Or generate with AI</h2>
+        <h2 className="text-xl font-semibold mb-4">Or generate with AI</h2>
         <GenerateAISnippet />
       </div>
     </main>

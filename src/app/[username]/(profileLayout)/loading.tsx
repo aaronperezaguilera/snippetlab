@@ -4,7 +4,7 @@ export default function Loading() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-bold">Pinned snippets</h2>
+        <h2 className="text-2xl font-semibold">Pinned snippets</h2>
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
             <div className="p-4 flex flex-col gap-4 border-b relative">
@@ -37,7 +37,7 @@ export default function Loading() {
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-bold">Pinned collections</h2>
+        <h2 className="text-2xl font-semibold">Pinned collections</h2>
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
             <div className="p-4 flex flex-col gap-4 border-b relative">

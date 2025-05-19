@@ -27,14 +27,14 @@ export default async function EditSnippet({
   ) {
     return (
       <div className="container mx-auto mt-16 ">
-        <h1 className="text-2xl font-bold">Snippet not found</h1>
+        <h1 className="text-2xl font-semibold">Snippet not found</h1>
       </div>
     );
   }
 
   return (
     <main className="container mx-auto mt-16 max-w-6xl min-h-screen">
-      <h1 className="text-2xl font-bold mb-8">Edit your snippet</h1>
+      <h1 className="text-2xl font-semibold mb-8">Edit your snippet</h1>
       <SnippetForm
         id={currentSnippet.id}
         title={currentSnippet.title}

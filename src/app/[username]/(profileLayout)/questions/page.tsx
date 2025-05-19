@@ -15,7 +15,9 @@ export default async function QuestionsPage({
   if (!authenticatedUser) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">Please log in to see the feed</h1>
+        <h1 className="text-2xl font-semibold">
+          Please log in to see the feed
+        </h1>
       </div>
     );
   }
@@ -36,7 +38,7 @@ export default async function QuestionsPage({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Questions</h1>
+        <h1 className="text-2xl font-semibold">Questions</h1>
       </div>
       <div className="flex flex-col">
         {questionsList.length > 0 ? (

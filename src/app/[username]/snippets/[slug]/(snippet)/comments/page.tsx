@@ -28,7 +28,7 @@ export default async function EditSnippet({
   ) {
     return (
       <div className="container mx-auto mt-16 ">
-        <h1 className="text-2xl font-bold">Snippet not found</h1>
+        <h1 className="text-2xl font-semibold">Snippet not found</h1>
       </div>
     );
   }
@@ -42,7 +42,7 @@ export default async function EditSnippet({
 
   return (
     <div className="flex flex-col gap-4 px-8 mt-4">
-      <h1 className="text-2xl font-bold">Comments</h1>
+      <h1 className="text-2xl font-semibold">Comments</h1>
       <CommentForm snippetId={currentSnippet.id} />
       {snippetComments.length === 0 ? (
         <p className="text-muted-foreground mt-4">

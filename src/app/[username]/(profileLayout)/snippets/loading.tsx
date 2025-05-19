@@ -7,7 +7,7 @@ import { PlusIcon } from "lucide-react";
 export default function Loading() {
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
-      <h1 className="text-2xl font-bold">Snippets</h1>
+      <h1 className="text-2xl font-semibold">Snippets</h1>
 
       <div className="flex gap-2">
         <Input disabled className="w-full" placeholder="Search snippets..." />

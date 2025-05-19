@@ -20,7 +20,7 @@ export default async function LikesPage({
   if (!user) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">User not found</h1>
+        <h1 className="text-2xl font-semibold">User not found</h1>
       </div>
     );
   }
@@ -39,7 +39,7 @@ export default async function LikesPage({
 
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
-      <h1 className="text-2xl font-bold">Liked snippets</h1>
+      <h1 className="text-2xl font-semibold">Liked snippets</h1>
 
       {rows.length > 0 ? (
         <div className="flex flex-col gap-4">

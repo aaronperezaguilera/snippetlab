@@ -12,7 +12,7 @@ export default async function SearchPage({
   if (!user) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">Please log in to search</h1>
+        <h1 className="text-2xl font-semibold">Please log in to search</h1>
       </div>
     );
   }

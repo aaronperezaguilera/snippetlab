@@ -23,7 +23,7 @@ export default async function ExplorePage({
   if (!authenticatedUser) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-2xl font-semibold">
           You need to be logged in to explore snippets
         </h1>
       </div>

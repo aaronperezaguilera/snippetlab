@@ -30,7 +30,7 @@ export default async function SnippetPage({
   if (!snippet) {
     return (
       <div className="container mx-auto mt-16 ">
-        <h1 className="text-2xl font-bold">Snippet not found</h1>
+        <h1 className="text-2xl font-semibold">Snippet not found</h1>
       </div>
     );
   }
@@ -38,7 +38,7 @@ export default async function SnippetPage({
   if (snippet.visibility === "private" && authenticatedUser?.id !== author.id) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">Snippet not found</h1>
+        <h1 className="text-2xl font-semibold">Snippet not found</h1>
       </div>
     );
   }

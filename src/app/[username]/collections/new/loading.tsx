@@ -8,7 +8,7 @@ import { Bookmark, Lock } from "lucide-react";
 export default function Loading() {
   return (
     <main className="container mx-auto mt-16 max-w-6xl min-h-screen">
-      <h1 className="text-2xl font-bold mb-8">Create a new collection</h1>
+      <h1 className="text-2xl font-semibold mb-8">Create a new collection</h1>
       <form
         className="flex flex-col items-start w-full gap-4"
         id="collection-form"

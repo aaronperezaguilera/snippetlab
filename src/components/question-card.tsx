@@ -34,7 +34,9 @@ export function QuestionCard({
       <div className="flex justify-between gap-2">
         <div className="flex flex-col gap-2">
           <div className="flex gap-4 items-center justify-between">
-            <h2 className="text-lg font-bold line-clamp-1">{question.title}</h2>
+            <h2 className="text-lg font-semibold line-clamp-1">
+              {question.title}
+            </h2>
 
             <div className="text-sm text-muted-foreground text-nowrap">
               Posted <RelativeTime datetime={question.createdAt} />

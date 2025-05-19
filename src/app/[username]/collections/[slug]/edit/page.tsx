@@ -21,14 +21,14 @@ export default async function NewCollectionPage({
   if (!collection || authenticatedUser?.id !== collection.userId) {
     return (
       <div className="container mx-auto mt-16 ">
-        <h1 className="text-2xl font-bold">Collection not found</h1>
+        <h1 className="text-2xl font-semibold">Collection not found</h1>
       </div>
     );
   }
 
   return (
     <main className="container mx-auto mt-16 max-w-6xl min-h-screen">
-      <h1 className="text-2xl font-bold mb-8">Edit your collection</h1>
+      <h1 className="text-2xl font-semibold mb-8">Edit your collection</h1>
       <CollectionForm
         id={collection.id}
         title={collection.title}

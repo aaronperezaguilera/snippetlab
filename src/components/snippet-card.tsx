@@ -71,7 +71,7 @@ export function SnippetCard({
         <div className="flex flex-col">
           <div className="flex justify-between gap-4 items-center">
             <div className="flex gap-4 items-center ">
-              <h2 className="text-lg font-bold line-clamp-1">{title}</h2>
+              <h2 className="text-lg font-semibold line-clamp-1">{title}</h2>
               {showVisibility && (
                 <Badge
                   variant="secondary"

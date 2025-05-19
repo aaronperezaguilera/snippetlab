@@ -42,7 +42,7 @@ export default async function ProfilePage({
   if (!user) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">User not found</h1>
+        <h1 className="text-2xl font-semibold">User not found</h1>
       </div>
     );
   }
@@ -89,7 +89,7 @@ export default async function ProfilePage({
 
   return (
     <div className="flex flex-col gap-4 overflow-hidden pb-8">
-      <h1 className="text-2xl font-bold">Snippets</h1>
+      <h1 className="text-2xl font-semibold">Snippets</h1>
 
       <div className="flex gap-2">
         <Search placeholder="Search snippets..." />

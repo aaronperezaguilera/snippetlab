@@ -32,7 +32,7 @@ export function ProfileDetails({
     <div className="flex justify-between w-full gap-8">
       <div className="space-y-4 max-w-[60ch] text-pretty">
         <div>
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-2xl font-semibold">
             {profile.first_name} {profile.last_name}
           </h1>
           <p className="text-muted-foreground">@{profile.username}</p>

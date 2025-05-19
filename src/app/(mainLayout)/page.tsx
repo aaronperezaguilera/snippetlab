@@ -14,11 +14,13 @@ export default async function Home() {
   return (
     <>
       <section className="flex flex-col gap-8 overflow-hidden py-8">
-        <h1 className="text-4xl font-bold text-balance">
+        <h1 className="text-4xl font-semibold text-balance">
           Welcome back, {user.firstName}
         </h1>
         <div className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold">Generate your snippet with AI</h2>
+          <h2 className="text-xl font-semibold">
+            Generate your snippet with AI
+          </h2>
           <GenerateAISnippet />
         </div>
         <Feed />

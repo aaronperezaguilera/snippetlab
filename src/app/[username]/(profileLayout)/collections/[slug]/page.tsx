@@ -36,7 +36,7 @@ export default async function CollectionPage({
   if (!collection) {
     return (
       <div className="container mx-auto mt-16 ">
-        <h1 className="text-2xl font-bold">Collection not found</h1>
+        <h1 className="text-2xl font-semibold">Collection not found</h1>
       </div>
     );
   }
@@ -47,7 +47,7 @@ export default async function CollectionPage({
   ) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">Collection not found</h1>
+        <h1 className="text-2xl font-semibold">Collection not found</h1>
       </div>
     );
   }
@@ -69,7 +69,7 @@ export default async function CollectionPage({
       <header className="flex flex-col gap-2">
         <div className="flex justify-between items-center">
           <div className="flex gap-4 items-center">
-            <h1 className="text-2xl font-bold">{collection.title}</h1>
+            <h1 className="text-2xl font-semibold">{collection.title}</h1>
             <Badge variant="secondary" className="border border-neutral-700">
               {collection.visibility.slice(0, 1).toUpperCase() +
                 collection.visibility.slice(1)}

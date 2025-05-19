@@ -23,7 +23,7 @@ export default async function QuestionPage({
   if (!data.questions) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">Question not found</h1>
+        <h1 className="text-2xl font-semibold">Question not found</h1>
       </div>
     );
   }
@@ -40,7 +40,7 @@ export default async function QuestionPage({
       {data.users && <Author author={data.users} />}
       <div className="flex flex-col gap-4 pb-4 border-b">
         <div className="flex flex-col gap-4">
-          <h1 className="text-2xl font-bold">{data.questions.title}</h1>
+          <h1 className="text-2xl font-semibold">{data.questions.title}</h1>
           <p>{data.questions.content}</p>
         </div>
         {data.snippets && (

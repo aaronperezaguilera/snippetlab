@@ -10,7 +10,7 @@ export default async function NewQuestionPage() {
   if (!user) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-2xl font-semibold">
           You must be logged in to create a question
         </h1>
       </div>
@@ -25,7 +25,7 @@ export default async function NewQuestionPage() {
 
   return (
     <main className="container mx-auto mt-16 min-h-screen">
-      <h1 className="text-2xl font-bold">New Question</h1>
+      <h1 className="text-2xl font-semibold">New Question</h1>
       <QuestionForm snippets={snippetOptions} />
     </main>
   );

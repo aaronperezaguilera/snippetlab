@@ -41,7 +41,7 @@ export async function Profile({ username }: { username: string }) {
   if (!user) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">User not found</h1>
+        <h1 className="text-2xl font-semibold">User not found</h1>
       </div>
     );
   }

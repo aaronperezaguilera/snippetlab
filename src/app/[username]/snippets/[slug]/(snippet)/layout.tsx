@@ -46,7 +46,7 @@ export default async function SnippetLayout({
   if (!snippet) {
     return (
       <div className="container mx-auto mt-16 ">
-        <h1 className="text-2xl font-bold">Snippet not found</h1>
+        <h1 className="text-2xl font-semibold">Snippet not found</h1>
       </div>
     );
   }
@@ -64,7 +64,7 @@ export default async function SnippetLayout({
   if (snippet.visibility === "private" && authenticatedUser?.id !== author.id) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">Snippet not found</h1>
+        <h1 className="text-2xl font-semibold">Snippet not found</h1>
       </div>
     );
   }
@@ -151,7 +151,7 @@ export default async function SnippetLayout({
         <header className="flex flex-col gap-2 px-8">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
-              <h1 className="text-2xl font-bold">{snippet.title}</h1>
+              <h1 className="text-2xl font-semibold">{snippet.title}</h1>
               <Badge variant="secondary" className="border border-neutral-700">
                 {snippet.visibility.slice(0, 1).toUpperCase() +
                   snippet.visibility.slice(1)}

@@ -13,7 +13,7 @@ export async function SnippetsWidget() {
   if (!user) {
     return (
       <div className="container mx-auto mt-16">
-        <h1 className="text-2xl font-bold">User not found</h1>
+        <h1 className="text-2xl font-semibold">User not found</h1>
       </div>
     );
   }
@@ -34,7 +34,7 @@ export async function SnippetsWidget() {
           <Author author={author} />
         </div>
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold">Your Snippets</h2>
+          <h2 className="text-xl font-semibold">Your Snippets</h2>
           <Button asChild>
             <Link href={`/${user.username}/snippets/new`}>
               <PlusIcon /> Create

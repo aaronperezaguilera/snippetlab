@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 export default function Loading() {
   return (
     <div className="flex flex-col gap-4 px-8 mt-4">
-      <h1 className="text-2xl font-bold">Comments</h1>
+      <h1 className="text-2xl font-semibold">Comments</h1>
       <div className="mt-4 flex flex-col">
         <Textarea disabled rows={3} placeholder="Write a comment..." required />
         <Button type="submit" disabled className="mt-2 self-end btn-primary">
