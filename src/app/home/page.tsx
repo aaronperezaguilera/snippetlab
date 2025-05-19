@@ -4,27 +4,29 @@ import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      <section className="h-[calc(100vh-calc(var(--spacing)*4)-calc(var(--spacing)*16))] flex items-center relative overflow-hidden">
-        <div className="p-32 flex flex-col gap-8 z-20">
-          <h1 className="text-6xl font-bold text-balance max-w-[20ch]">
-            Create, share and discover code snippets
-          </h1>
-          <p className="text-muted-foreground text-xl">
-            Your collaborative snippet repository for programmers
-          </p>
-          <Button className="w-fit" asChild>
-            <Link href="/sign-up">Sign up for SnippetLab</Link>
-          </Button>
-        </div>
-        <div className="shadow-xl scale-100 sm:scale-100 md:scale-[0.9] lg:scale-[0.7] xl:scale-70 2xl:scale-90 mt-10 md:mt-0 lg:absolute -right-[420px] -top-[100px] md:top-[0px] 2xl:top-[100px] z-10">
-          <Image
-            src="/hero.png"
-            width={1920}
-            height={1080}
-            alt="Preview image"
-            className="-right-80 pointer-events-none"
-          />
+    <main className="overflow-hidden">
+      <section className="max-w-[1800px] mx-auto px-4 overflow-hidden md:overflow-visible">
+        <div className="mt-[60px] min-h-[530px] relative xl:h-[calc(100vh-300px)] flex flex-col justify-center">
+          <div className="relative flex flex-col gap-4 items-center xl:items-start xl:gap-8 z-10">
+            <h1 className="text-4xl lg:text-6xl font-bold text-balance max-w-[20ch] text-center xl:text-left">
+              Create, share and discover code snippets
+            </h1>
+            <p className="text-muted-foreground text-xl text-balance text-center xl:text-left">
+              Your collaborative snippet repository for programmers
+            </p>
+            <Button className="w-fit" asChild>
+              <Link href="/sign-up">Sign up for SnippetLab</Link>
+            </Button>
+          </div>
+          <div className="scale-100 xl:scale-90 mt-10 xl:mt-0 xl:absolute -right-[900px] top-40 xl:-rotate-x-24 xl:rotate-y-24 xl:rotate-z-24">
+            <Image
+              src="/hero.png"
+              width={1920}
+              height={1080}
+              alt="Preview image"
+              className="pointer-events-none shadow-2xl"
+            />
+          </div>
         </div>
       </section>
     </main>

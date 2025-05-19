@@ -28,9 +28,11 @@ export async function Header() {
           <span className="text-xl font-semibold">SnippetLab</span>
         </Link>
       </div>
-      <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
-        <CommandMenu />
-      </div>
+      {user && (
+        <div className="hidden w-full flex-1 lg:flex lg:w-auto lg:flex-none">
+          <CommandMenu />
+        </div>
+      )}
       <div className="flex items-center gap-4">
         <a
           href="https://github.com/aaronperezaguilera/snippetlab"
