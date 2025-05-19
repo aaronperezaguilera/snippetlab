@@ -57,14 +57,13 @@ export function SnippetCard({
     <div className="flex flex-col gap-4">
       {showAuthor && (
         <div className="px-2">
-          {" "}
           <Author author={author} />
         </div>
       )}
 
       <div
         className={cn(
-          "border bg-[#1C1C1C] rounded-sm p-4 flex flex-col relative gap-4 hover:bg-[#212121] transition-colors",
+          "border bg-card rounded-sm p-4 flex flex-col relative gap-4 hover:bg-[#212121] transition-colors",
           className
         )}
       >

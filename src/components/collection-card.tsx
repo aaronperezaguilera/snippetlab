@@ -8,6 +8,7 @@ import { Author } from "./author";
 import { InferSelectModel } from "drizzle-orm";
 import { collections, users } from "@/db/schema";
 import { useAuth } from "@clerk/nextjs";
+import { Folder } from "lucide-react";
 
 type Author = InferSelectModel<typeof users>;
 type Collection = InferSelectModel<typeof collections>;
@@ -32,29 +33,34 @@ export function CollectionCard({
   }
 
   return (
-    <div className="p-4 flex flex-col relative gap-4 border-b hover:bg-neutral-800 transition-colors">
-      <div className="flex flex-col gap-2">
-        {showAuthor && <Author author={author} />}
-        <div className="flex flex-col">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-4 items-center">
-              <h2 className="text-lg font-semibold">{title}</h2>
-              <Badge variant="secondary" className="border border-neutral-700">
-                {visibility[0].toUpperCase() + visibility.slice(1)}
-              </Badge>
+    <div className="p-4 flex items-center relative gap-4 rounded-sm border bg-card hover:bg-neutral-800 transition-colors">
+      <Folder className="size-10 fill-[#fafafa]" />
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          {showAuthor && <Author author={author} />}
+          <div className="flex flex-col">
+            <div className="flex justify-between items-center">
+              <div className="flex gap-4 items-center">
+                <h2 className="text-lg font-semibold">{title}</h2>
+                <Badge
+                  variant="secondary"
+                  className="border border-neutral-700"
+                >
+                  {visibility[0].toUpperCase() + visibility.slice(1)}
+                </Badge>
+              </div>
             </div>
+            {showUsername && (
+              <div className="text-sm text-muted-foreground flex gap-1 items-center">
+                @{author.username}
+              </div>
+            )}
           </div>
-          {showUsername && (
-            <div className="text-sm text-muted-foreground flex gap-1 items-center">
-              @{author.username}
-            </div>
-          )}
         </div>
-      </div>
-
-      <div className="text-sm text-muted-foreground flex justify-between ">
-        <div>
-          Created <RelativeTime datetime={createdAt} />
+        <div className="text-sm text-muted-foreground flex justify-between ">
+          <div>
+            Created <RelativeTime datetime={createdAt} />
+          </div>
         </div>
       </div>
 

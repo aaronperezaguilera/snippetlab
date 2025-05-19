@@ -52,7 +52,7 @@ export default async function LikesPage({
   return (
     <div className="flex flex-col gap-4 overflow-hidden">
       <h1 className="text-2xl font-semibold">Collections</h1>
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
         <Search placeholder="Search collections..." />
         {authenticatedUser?.id === user.id && (
           <Button asChild>
@@ -63,7 +63,7 @@ export default async function LikesPage({
         )}
       </div>
       {rows.length > 0 ? (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4">
           {rows.map((row) => (
             <CollectionCard key={row.id} collection={row} author={user} />
           ))}

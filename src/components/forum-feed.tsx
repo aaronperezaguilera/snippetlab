@@ -29,7 +29,7 @@ export async function ForumFeed() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Latest questions</h1>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-4">
         {questionsList.length > 0 ? (
           questionsList.map(
             ({ questions, snippets, users }) =>

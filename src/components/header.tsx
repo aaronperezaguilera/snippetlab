@@ -21,7 +21,9 @@ export async function Header() {
 
   return (
     <header
-      className="flex justify-between items-center p-4 gap-4 h-16 bg-popover border-b"
+      className={`flex justify-between items-center p-4 gap-4 h-16 ${
+        user ? "bg-popover border-b" : "bg-background"
+      }`}
       id="top"
     >
       <div className="flex items-center gap-4">
