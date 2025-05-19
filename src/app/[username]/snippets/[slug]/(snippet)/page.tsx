@@ -44,7 +44,7 @@ export default async function SnippetPage({
   }
 
   return (
-    <div className="flex flex-col gap-4 px-16">
+    <div className="flex flex-col gap-4 px-8">
       <CodeReader
         filename={snippet.filename}
         language={snippet.language}

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
-import Image from "next/image";
 import { currentUser } from "@clerk/nextjs/server";
 import { PlusIcon } from "lucide-react";
 import { db } from "@/db/drizzle";
@@ -29,7 +28,7 @@ export async function SnippetsWidget() {
     .limit(5);
 
   return (
-    <div className="pl-16">
+    <div className="px-8 pt-8 sticky top-0">
       <div className="flex flex-col gap-4">
         <div className="flex gap-3 items-center">
           <Author author={author} />

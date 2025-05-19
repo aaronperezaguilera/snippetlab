@@ -88,7 +88,7 @@ export default async function ProfilePage({
   const rows = await getRows();
 
   return (
-    <div className="flex flex-col gap-4 overflow-hidden">
+    <div className="flex flex-col gap-4 overflow-hidden pb-8">
       <h1 className="text-2xl font-bold">Snippets</h1>
 
       <div className="flex gap-2">
@@ -103,7 +103,7 @@ export default async function ProfilePage({
         )}
       </div>
       {rows.length > 0 ? (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4">
           {rows.map((snippet) =>
             snippet.userId === authenticatedUser?.id ||
             snippet.visibility === "public" ? (

@@ -13,7 +13,7 @@ export async function FeaturedUsers() {
   if (featuredUsers.length === 0) return;
 
   return (
-    <section className="flex flex-col gap-4 pr-16">
+    <section className="flex flex-col gap-4">
       <h2 className="text-xl font-bold">Featured users</h2>
       <div className="flex flex-col gap-2">
         {featuredUsers.map(({ user }) => (

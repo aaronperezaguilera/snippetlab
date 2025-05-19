@@ -31,7 +31,7 @@ export default async function ForumPage() {
 
   return (
     <>
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-8 py-8">
         <header className="flex justify-between items-center">
           <h1 className="text-4xl font-bold text-balance">Q&A Forum</h1>
           <Button>
@@ -42,7 +42,7 @@ export default async function ForumPage() {
         </header>
         <ForumFeed />
       </section>
-      <section className="flex flex-col pr-16">
+      <section className="flex flex-col bg-popover border-l px-8 pt-8">
         <h2 className="text-xl font-bold mb-4">Your questions</h2>
         {yourQuestions.length > 0 ? (
           <>

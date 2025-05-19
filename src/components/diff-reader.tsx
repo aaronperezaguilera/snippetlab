@@ -46,7 +46,10 @@ export function DiffReader({ language, original, modified }: CodeReaderProps) {
 
   return (
     <div>
-      <div ref={wrapperRef} className="w-full bg-[#1e1e1e] py-2 pr-2 relative">
+      <div
+        ref={wrapperRef}
+        className="w-full bg-[#1e1e1e] py-2 pr-2 relative rounded-b-sm border-b border-x"
+      >
         <DiffEditor
           theme="vs-dark"
           language={language}

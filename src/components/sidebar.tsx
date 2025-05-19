@@ -71,7 +71,7 @@ export function Sidebar() {
 
       {/* Sidebar panel */}
       <aside
-        className={`fixed top-0 left-0 w-80 h-full bg-background text-white shadow-lg transition-transform duration-300 transform  z-[70] ${
+        className={`fixed top-0 left-0 w-80 h-full bg-popover border-r text-white shadow-lg transition-transform duration-300 transform  z-[70] ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -82,7 +82,7 @@ export function Sidebar() {
           </Link>
           <button
             aria-label="Close sidebar"
-            className=" text-muted-foreground transition-colors hover:text-white cursor-pointer"
+            className=" text-muted-foreground hover:text-white cursor-pointer"
             onClick={closeSidebar}
           >
             <X />
@@ -93,7 +93,7 @@ export function Sidebar() {
             <li>
               <Link
                 href="/"
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 onClick={closeSidebar}
               >
                 <Home className="size-4" />
@@ -103,7 +103,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}`}
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 onClick={closeSidebar}
               >
                 <User className="size-4" />
@@ -113,7 +113,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/snippets`}
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 onClick={closeSidebar}
               >
                 <Code2 className="size-4" /> Your snippets
@@ -122,7 +122,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/collections`}
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 onClick={closeSidebar}
               >
                 <Book className="size-4" /> Your collections
@@ -131,7 +131,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/likes`}
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 onClick={closeSidebar}
               >
                 <Heart className="size-4" /> Your liked snippets
@@ -140,7 +140,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/${user.user?.username}/questions`}
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 onClick={closeSidebar}
               >
                 <MessageSquare className="size-4" /> Your questions
@@ -150,7 +150,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/forum`}
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 onClick={closeSidebar}
               >
                 <MessagesSquare className="size-4" />
@@ -160,7 +160,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/explore`}
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 onClick={closeSidebar}
               >
                 <Telescope className="size-4" />
@@ -171,7 +171,7 @@ export function Sidebar() {
             <li>
               <Link
                 href={`/account`}
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 onClick={closeSidebar}
               >
                 <Settings className="size-4" />
@@ -181,7 +181,7 @@ export function Sidebar() {
             <li>
               <a
                 href="https://github.com/aaronperezaguilera/snippetlab/issues/new"
-                className="flex items-center gap-2 px-2 py-1 hover:bg-accent/10"
+                className="flex items-center gap-2 px-2 py-1 hover:bg-neutral-800 rounded-sm"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={closeSidebar}

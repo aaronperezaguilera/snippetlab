@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <>
-      <section className="flex flex-col gap-8 overflow-hidden">
+      <section className="flex flex-col gap-8 overflow-hidden py-8">
         <h1 className="text-4xl font-bold text-balance">
           Welcome back, {user.firstName}
         </h1>
@@ -23,9 +23,11 @@ export default async function Home() {
         </div>
         <Feed />
       </section>
-      <div className="flex flex-col gap-8">
-        <ExploreWidget />
-        <FeaturedUsers />
+      <div className="relative bg-popover border-l">
+        <div className="flex flex-col gap-8 pt-8  px-8 sticky top-0">
+          <ExploreWidget />
+          <FeaturedUsers />
+        </div>
       </div>
     </>
   );

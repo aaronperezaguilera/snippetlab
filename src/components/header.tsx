@@ -20,7 +20,10 @@ export async function Header() {
   const user = await currentUser();
 
   return (
-    <header className="flex justify-between items-center p-4 gap-4 h-16">
+    <header
+      className="flex justify-between items-center p-4 gap-4 h-16 bg-popover border-b"
+      id="top"
+    >
       <div className="flex items-center gap-4">
         {user && <SidebarToggleButton />}
         <Link href="/" className="flex gap-2 items-center">

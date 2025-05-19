@@ -14,7 +14,7 @@ export function SnippetNav({
 }) {
   const pathname = usePathname();
   return (
-    <div className="flex gap-2 items-center w-fit px-16">
+    <div className="flex gap-2 items-center w-fit px-8">
       <Link
         href={`/${username}/snippets/${snippet}`}
         className={cn(
@@ -22,7 +22,7 @@ export function SnippetNav({
           {
             "border-accent hover:bg-transparent":
               !pathname.includes("versions") && !pathname.includes("comments"),
-            "hover:bg-accent/10":
+            "hover:bg-neutral-800 rounded-sm":
               pathname.includes("versions") || pathname.includes("comments"),
           }
         )}
@@ -35,7 +35,7 @@ export function SnippetNav({
           "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
             "border-accent hover:bg-transparent": pathname.includes("versions"),
-            "hover:bg-accent/10": !pathname.includes("versions"),
+            "hover:bg-neutral-800 rounded-sm": !pathname.includes("versions"),
           }
         )}
       >
@@ -47,7 +47,7 @@ export function SnippetNav({
           "px-4 py-2 border-b border-transparent transition-colors flex gap-2 items-center",
           {
             "border-accent hover:bg-transparent": pathname.includes("comments"),
-            "hover:bg-accent/10": !pathname.includes("comments"),
+            "hover:bg-neutral-800 rounded-sm": !pathname.includes("comments"),
           }
         )}
       >

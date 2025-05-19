@@ -7,7 +7,7 @@ import { Sparkles } from "lucide-react";
 export default function Loading() {
   return (
     <>
-      <section className="flex flex-col gap-8 overflow-hidden">
+      <section className="flex flex-col gap-8 overflow-hidden pt-8">
         <h1 className="text-4xl font-bold text-balance">Welcome back</h1>
         <div className="flex flex-col gap-4">
           <h2 className="text-xl font-bold">Generate your snippet with AI</h2>
@@ -40,7 +40,7 @@ export default function Loading() {
           </div>
         </div>
       </section>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8 pt-8 bg-popover border-l px-8">
         <section className="flex flex-col gap-4 pr-16">
           <h2 className="text-xl font-bold">Featured snippets</h2>
           <div className="flex flex-col gap-2">

@@ -29,7 +29,7 @@ export function QuestionCard({
   showUsername?: boolean;
 }) {
   return (
-    <div className="p-4 border-b flex flex-col relative gap-4 hover:bg-accent/5 transition-colors">
+    <div className="p-4 border-b flex flex-col relative gap-4 hover:bg-neutral-800 transition-colors">
       {showAuthor && author && <Author author={author} />}
       <div className="flex justify-between gap-2">
         <div className="flex flex-col gap-2">

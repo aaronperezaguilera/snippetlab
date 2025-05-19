@@ -12,9 +12,10 @@ export function ProfileNav({ username = "" }: { username?: string }) {
       <Link
         href={`/${username}`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
+          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors rounded-sm",
           {
-            "border-accent hover:bg-transparent": pathname === `/${username}`,
+            "border-accent hover:bg-transparent rounded-none":
+              pathname === `/${username}`,
           }
         )}
       >
@@ -23,11 +24,10 @@ export function ProfileNav({ username = "" }: { username?: string }) {
       <Link
         href={`/${username}/snippets`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
+          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors rounded-sm",
           {
-            "border-accent hover:bg-transparent": pathname.includes(
-              `/${username}/snippets`
-            ),
+            "border-accent hover:bg-transparent rounded-none":
+              pathname.includes(`/${username}/snippets`),
           }
         )}
       >
@@ -36,11 +36,10 @@ export function ProfileNav({ username = "" }: { username?: string }) {
       <Link
         href={`/${username}/collections`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
+          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors rounded-sm",
           {
-            "border-accent hover:bg-transparent": pathname.includes(
-              `/${username}/collections`
-            ),
+            "border-accent hover:bg-transparent rounded-none":
+              pathname.includes(`/${username}/collections`),
           }
         )}
       >
@@ -49,11 +48,10 @@ export function ProfileNav({ username = "" }: { username?: string }) {
       <Link
         href={`/${username}/likes`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
+          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors rounded-sm",
           {
-            "border-accent hover:bg-transparent": pathname.includes(
-              `/${username}/likes`
-            ),
+            "border-accent hover:bg-transparent rounded-none":
+              pathname.includes(`/${username}/likes`),
           }
         )}
       >
@@ -62,11 +60,10 @@ export function ProfileNav({ username = "" }: { username?: string }) {
       <Link
         href={`/${username}/questions`}
         className={cn(
-          "px-4 py-2 border-b border-transparent hover:bg-accent/10 transition-colors",
+          "px-4 py-2 border-b border-transparent hover:bg-neutral-800 transition-colors rounded-sm",
           {
-            "border-accent hover:bg-transparent": pathname.includes(
-              `/${username}/questions`
-            ),
+            "border-accent hover:bg-transparent rounded-none":
+              pathname.includes(`/${username}/questions`),
           }
         )}
       >

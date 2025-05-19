@@ -1,7 +1,7 @@
+import { SnippetCardSkeleton } from "@/components/skeletons/snippet-card-skeleton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
 import { PlusIcon } from "lucide-react";
 
 export default function Loading() {
@@ -31,24 +31,9 @@ export default function Loading() {
           <PlusIcon /> Create
         </Button>
       </div>
-      <div className="p-4 flex flex-col gap-4 border-b relative">
-        <Skeleton className="h-7 w-1/2" />
-
-        <Skeleton className="h-50 w-full" />
-        <Skeleton className="h-6 w-24" />
-      </div>
-      <div className="p-4 flex flex-col gap-4 border-b relative">
-        <Skeleton className="h-7 w-1/2" />
-
-        <Skeleton className="h-50 w-full" />
-        <Skeleton className="h-6 w-24" />
-      </div>
-      <div className="p-4 flex flex-col gap-4 border-b relative">
-        <Skeleton className="h-7 w-1/2" />
-
-        <Skeleton className="h-50 w-full" />
-        <Skeleton className="h-6 w-24" />
-      </div>
+      <SnippetCardSkeleton showAuthor={false} />
+      <SnippetCardSkeleton showAuthor={false} />
+      <SnippetCardSkeleton showAuthor={false} />
     </div>
   );
 }

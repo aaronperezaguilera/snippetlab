@@ -41,7 +41,7 @@ export default async function EditSnippet({
     .orderBy(desc(comments.createdAt));
 
   return (
-    <div className="flex flex-col gap-4 px-16 mt-4">
+    <div className="flex flex-col gap-4 px-8 mt-4">
       <h1 className="text-2xl font-bold">Comments</h1>
       <CommentForm snippetId={currentSnippet.id} />
       {snippetComments.length === 0 ? (

@@ -32,7 +32,7 @@ export function CollectionCard({
   }
 
   return (
-    <div className="p-4 flex flex-col relative gap-4 border-b hover:bg-accent/5 transition-colors">
+    <div className="p-4 flex flex-col relative gap-4 border-b hover:bg-neutral-800 transition-colors">
       <div className="flex flex-col gap-2">
         {showAuthor && <Author author={author} />}
         <div className="flex flex-col">

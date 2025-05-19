@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 export default function Loading() {
   return (
     <>
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-8 pt-8">
         <header className="flex justify-between items-center">
           <h1 className="text-4xl font-bold text-balance">Q&A Forum</h1>
           <Button disabled>
@@ -25,7 +25,7 @@ export default function Loading() {
           </div>
         </div>
       </section>
-      <section className="flex flex-col pr-16">
+      <section className="flex flex-col bg-popover border-l px-8 pt-8">
         <h2 className="text-xl font-bold mb-4">Your questions</h2>
         <div className="flex flex-col gap-2">
           <div className="p-4 flex flex-col gap-4 border-b relative">

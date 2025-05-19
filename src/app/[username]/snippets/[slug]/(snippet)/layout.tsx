@@ -94,59 +94,61 @@ export default async function SnippetLayout({
     .where(eq(collections.userId, authenticatedUser?.id || ""));
 
   return (
-    <main className="mt-16 grid grid-cols-[1fr_3fr_1fr] gap-16 relative min-h-screen">
-      <section className="flex flex-col gap-4 pl-16 sticky top-16 h-fit">
-        <h2 className="text-2xl font-semibold">About</h2>
-        <span className="text-muted-foreground">Author</span>
-        <div className="flex gap-3 items-center">
-          <Button
-            variant="ghost"
-            asChild
-            className="pr-4 pl-2 py-2 h-full -translate-x-2"
-          >
-            <Link
-              href={`/${author.username}`}
-              className="flex gap-3 items-center"
+    <main className="grid grid-cols-[1.2fr_2.8fr_1.2fr] gap-8 relative min-h-screen">
+      <section className="pl-8 bg-popover border-r">
+        <div className="flex flex-col gap-4 sticky top-0 py-8">
+          <h2 className="text-2xl font-semibold">About</h2>
+          <span className="text-muted-foreground">Author</span>
+          <div className="flex gap-3 items-center">
+            <Button
+              variant="ghost"
+              asChild
+              className="pr-4 pl-2 py-2 h-full -translate-x-2"
             >
-              {author.image_url && (
-                <Image
-                  src={author.image_url}
-                  width={1000}
-                  height={1000}
-                  alt="Profile"
-                  className="w-12 h-12 object-cover"
-                />
-              )}
-              <div className="flex flex-col">
-                <span>
-                  {author.first_name} {author.last_name}
-                </span>
-                <span>@{author.username}</span>
+              <Link
+                href={`/${author.username}`}
+                className="flex gap-3 items-center"
+              >
+                {author.image_url && (
+                  <Image
+                    src={author.image_url}
+                    width={1000}
+                    height={1000}
+                    alt="Profile"
+                    className="w-12 h-12 object-cover"
+                  />
+                )}
+                <div className="flex flex-col">
+                  <span>
+                    {author.first_name} {author.last_name}
+                  </span>
+                  <span>@{author.username}</span>
+                </div>
+              </Link>
+            </Button>
+          </div>
+          {snippet.tags && snippet.tags.length > 0 && (
+            <>
+              <span className="text-muted-foreground">Tags</span>
+              <div className="flex gap-2">
+                {snippet.tags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="secondary"
+                    className="border border-neutral-700"
+                    asChild
+                  >
+                    <Link href={`/explore?tags=${tag}`}>{tag}</Link>
+                  </Badge>
+                ))}
               </div>
-            </Link>
-          </Button>
+            </>
+          )}
         </div>
-        {snippet.tags && snippet.tags.length > 0 && (
-          <>
-            <span className="text-muted-foreground">Tags</span>
-            <div className="flex gap-2">
-              {snippet.tags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="secondary"
-                  className="border border-neutral-700"
-                  asChild
-                >
-                  <Link href={`/explore?tags=${tag}`}>{tag}</Link>
-                </Badge>
-              ))}
-            </div>
-          </>
-        )}
       </section>
-      <section className="flex flex-col gap-4">
+      <section className="flex flex-col gap-4 py-8">
         <SnippetNav username={username} snippet={slug} />
-        <header className="flex flex-col gap-2 px-16">
+        <header className="flex flex-col gap-2 px-8">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
               <h1 className="text-2xl font-bold">{snippet.title}</h1>
@@ -213,36 +215,38 @@ export default async function SnippetLayout({
         </header>
         {children}
       </section>
-      <section className="flex flex-col gap-4 pr-16 sticky top-16 h-fit">
-        {snippet.examples && snippet.examples.length > 0 && (
-          <>
-            <h2 className="text-2xl font-semibold">Examples</h2>
-            <div className="flex flex-wrap gap-2 w-fit">
-              {snippet.examples.map((example, i) => (
-                <Badge
-                  key={i}
-                  variant="secondary"
-                  className="border border-neutral-700"
-                  asChild
-                >
-                  <a
-                    href={example.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+      <section className="px-8 bg-popover border-l">
+        <div className="flex flex-col gap-4 sticky top-0 py-8">
+          {snippet.examples && snippet.examples.length > 0 && (
+            <>
+              <h2 className="text-2xl font-semibold">Examples</h2>
+              <div className="flex flex-wrap gap-2 w-fit">
+                {snippet.examples.map((example, i) => (
+                  <Badge
+                    key={i}
+                    variant="secondary"
+                    className="border border-neutral-700"
+                    asChild
                   >
-                    {EXAMPLE_SITE_ICONS[example.website]}
-                    {(example.website as string) !== "other"
-                      ? example.website.slice(0, 1).toUpperCase() +
-                        example.website.slice(1)
-                      : "Example"}
-                  </a>
-                </Badge>
-              ))}
-            </div>
-          </>
-        )}
-        <h2 className="text-2xl font-semibold">Summary</h2>
-        <p>{snippet.summary ? snippet.summary : "No summary provided."}</p>
+                    <a
+                      href={example.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {EXAMPLE_SITE_ICONS[example.website]}
+                      {(example.website as string) !== "other"
+                        ? example.website.slice(0, 1).toUpperCase() +
+                          example.website.slice(1)
+                        : "Example"}
+                    </a>
+                  </Badge>
+                ))}
+              </div>
+            </>
+          )}
+          <h2 className="text-2xl font-semibold">Summary</h2>
+          <p>{snippet.summary ? snippet.summary : "No summary provided."}</p>
+        </div>
       </section>
     </main>
   );

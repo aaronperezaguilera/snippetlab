@@ -14,6 +14,7 @@ import { Author } from "./author";
 import { InferSelectModel } from "drizzle-orm";
 import { snippets, users } from "@/db/schema";
 import { useAuth } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
 
 type Author = InferSelectModel<typeof users>;
 type Snippet = InferSelectModel<typeof snippets>;
@@ -24,12 +25,14 @@ export function SnippetCard({
   showAuthor = false,
   showUsername = false,
   showCode = true,
+  className,
 }: {
   author: Author;
   snippet: Snippet;
   showAuthor?: boolean;
   showUsername?: boolean;
   showCode?: boolean;
+  className?: string;
 }) {
   const {
     slug,
@@ -50,9 +53,19 @@ export function SnippetCard({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="px-2">{showAuthor && <Author author={author} />}</div>
+      {showAuthor && (
+        <div className="px-2">
+          {" "}
+          <Author author={author} />
+        </div>
+      )}
 
-      <div className="border bg-[#1C1C1C] rounded-sm p-4 flex flex-col relative gap-4 hover:bg-accent/5 transition-colors">
+      <div
+        className={cn(
+          "border bg-[#1C1C1C] rounded-sm p-4 flex flex-col relative gap-4 hover:bg-[#212121] transition-colors",
+          className
+        )}
+      >
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
@@ -72,8 +85,8 @@ export function SnippetCard({
           )}
         </div>
         {showCode && (
-          <div className="shadow-lg shadow-background overflow-hidden">
-            <div className="px-4 bg-[#28292c] py-2 border-b border-b-primary/10">
+          <div className="border overflow-hidden rounded-sm">
+            <div className="px-4 bg-[#28292c] py-2 border-b border-b-primary/10 rounded-t-sm">
               {filename}
             </div>
             <div className="relative overflow-hidden">
@@ -115,7 +128,7 @@ export function SnippetCard({
           </div>
         </div>
         <Link
-          href={`/${author.username}/snippets/${slug}`}
+          href={`/${author.username}/snippets/${slug}#top`}
           className="absolute inset-0 z-40"
         />
       </div>

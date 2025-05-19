@@ -40,11 +40,14 @@ export function CodeReader({ filename, language, code }: CodeReaderProps) {
   return (
     <div>
       {filename && (
-        <div className="px-4 bg-[#28292c] py-2 border-b border-b-primary/10">
+        <div className="px-4 bg-[#28292c] py-2 border border-b-primary/10 rounded-t-sm">
           {filename}
         </div>
       )}
-      <div ref={wrapperRef} className="w-full bg-[#1e1e1e] py-2 pr-2 relative">
+      <div
+        ref={wrapperRef}
+        className="w-full bg-[#1e1e1e] py-2 pr-2 relative rounded-b-sm border-b border-x"
+      >
         <CopyButton value={code} className="absolute z-50 right-3 top-3" />
         <Editor
           theme="vs-dark"

@@ -11,8 +11,10 @@ export default async function MainLayout({
     return children;
   }
   return (
-    <main className="mt-16 grid grid-cols-[1.2fr_2.8fr_1.2fr] gap-16 relative min-h-screen">
-      <SnippetsWidget />
+    <main className="grid grid-cols-[1.2fr_2.8fr_1.2fr] gap-8 relative min-h-screen">
+      <div className="bg-popover border-r">
+        <SnippetsWidget />
+      </div>
       {children}
     </main>
   );
