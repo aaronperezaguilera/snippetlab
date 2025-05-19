@@ -1,4 +1,5 @@
-import { QuestionCard } from "../question-card";
+import { Button } from "../ui/button";
+import Image from "next/image";
 
 export function ForumCard() {
   return (
@@ -12,59 +13,94 @@ export function ForumCard() {
         </p>
       </div>
       <div className="aspect-video pointer-events-none p-8 overflow-hidden flex flex-col gap-4 relative">
-        <QuestionCard
-          question={{
-            id: 1,
-            title: "How do I use the Monaco editor with React?",
-            content:
-              "I'm trying to integrate Monaco editor into my React project. What is the recommended way to set it up and handle syntax highlighting?",
-            createdAt: new Date(),
-            userId: "demo-author",
-            snippetId: 1,
-          }}
-          author={{
-            id: "demo-author",
-            username: "janedoe",
-            first_name: "Jane",
-            last_name: "Doe",
-            image_url: "/jane.webp",
-            bio: "Demo user for snippetforge",
-            website: "https://example.com",
-            github: "janedoe",
-            x: "@janedoe",
-            createdAt: new Date(),
-            updatedAt: null,
-          }}
-          showAuthor
-          showUsername
-        />
+        <div className="flex flex-col gap-4">
+          <div className="px-2">
+            <div className="flex items-center">
+              <Button
+                variant="ghost"
+                className={`pr-4 pl-2 py-2 h-full -translate-x-2 w-fit z-50`}
+              >
+                <Image
+                  src="/jane.webp"
+                  width={1000}
+                  height={1000}
+                  alt="Profile"
+                  className="w-12 h-12 object-cover rounded-sm overflow-hidden"
+                />
+                <div className="flex flex-col">
+                  <span>Jane Doe</span>
+                  <span>@janedoe</span>
+                </div>
+              </Button>
+            </div>
+          </div>
 
-        <QuestionCard
-          question={{
-            id: 42,
-            title: "What's the best way to debounce a function in JavaScript?",
-            content:
-              "I need to limit how often a heavy computation function runs when responding to rapid events (like window resizing). What’s a clean way to implement debounce in plain JavaScript or using lodash?",
-            createdAt: new Date("2025-05-18T10:30:00Z"),
-            userId: "john-doe",
-            snippetId: 2,
-          }}
-          author={{
-            id: "john-doe",
-            username: "johndoe",
-            first_name: "John",
-            last_name: "Doe",
-            image_url: "/john.webp",
-            bio: "Frontend engineer and open­source enthusiast",
-            website: "https://johndoe.dev",
-            github: "john-doe",
-            x: "@john_doe",
-            createdAt: new Date("2024-11-01T08:00:00Z"),
-            updatedAt: null,
-          }}
-          showAuthor
-          showUsername
-        />
+          <div className="p-4 border rounded-sm bg-card flex flex-col relative gap-4 hover:bg-neutral-800 transition-colors">
+            <div className="flex justify-between gap-2">
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-4 items-center justify-between">
+                  <h2 className="text-lg font-semibold line-clamp-1">
+                    How do I use the Monaco editor with React?
+                  </h2>
+
+                  <div className="text-sm text-muted-foreground text-nowrap">
+                    Posted 1 minute ago
+                  </div>
+                </div>
+                <p className="line-clamp-2">
+                  I&apos;m trying to integrate Monaco editor into my React
+                  project. What is the recommended way to set it up and handle
+                  syntax highlighting?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-4">
+          <div className="px-2">
+            <div className="flex items-center">
+              <Button
+                variant="ghost"
+                className={`pr-4 pl-2 py-2 h-full -translate-x-2 w-fit z-50`}
+              >
+                <Image
+                  src="/john.webp"
+                  width={1000}
+                  height={1000}
+                  alt="Profile"
+                  className="w-12 h-12 object-cover rounded-sm overflow-hidden"
+                />
+                <div className="flex flex-col">
+                  <span>John Doe</span>
+                  <span>@johndoe</span>
+                </div>
+              </Button>
+            </div>
+          </div>
+
+          <div className="p-4 border rounded-sm bg-card flex flex-col relative gap-4 hover:bg-neutral-800 transition-colors">
+            <div className="flex justify-between gap-2">
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-4 items-center justify-between">
+                  <h2 className="text-lg font-semibold line-clamp-1">
+                    What&apos;s the best way to debounce a function in
+                    JavaScript?
+                  </h2>
+
+                  <div className="text-sm text-muted-foreground text-nowrap">
+                    Posted 15 minute ago
+                  </div>
+                </div>
+                <p className="line-clamp-2">
+                  I need to limit how often a heavy computation function runs
+                  when responding to rapid events (like window resizing).
+                  What&apos;s a clean way to implement debounce in plain
+                  JavaScript or using lodash?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="absolute top-0 left-0 bg-gradient-to-t from-background to-transparent w-full h-full"></div>
       </div>
