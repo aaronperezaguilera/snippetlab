@@ -33,16 +33,14 @@ export function QuestionCard({
       {showAuthor && author && <Author author={author} />}
       <div className="flex justify-between gap-2">
         <div className="flex flex-col gap-2">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-4 items-center">
-              <h2 className="text-lg font-bold">{question.title}</h2>
+          <div className="flex gap-4 items-center justify-between">
+            <h2 className="text-lg font-bold line-clamp-1">{question.title}</h2>
+
+            <div className="text-sm text-muted-foreground text-nowrap">
+              Posted <RelativeTime datetime={question.createdAt} />
             </div>
           </div>
-          <p>{question.content}</p>
-        </div>
-
-        <div className="text-sm text-muted-foreground">
-          Posted <RelativeTime datetime={question.createdAt} />
+          <p className="line-clamp-2">{question.content}</p>
         </div>
       </div>
 

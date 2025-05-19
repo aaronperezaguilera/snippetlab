@@ -25,6 +25,7 @@ export function SnippetCard({
   showAuthor = false,
   showUsername = false,
   showCode = true,
+  showVisibility = false,
   className,
 }: {
   author: Author;
@@ -32,6 +33,7 @@ export function SnippetCard({
   showAuthor?: boolean;
   showUsername?: boolean;
   showCode?: boolean;
+  showVisibility?: boolean;
   className?: string;
 }) {
   const {
@@ -67,14 +69,19 @@ export function SnippetCard({
         )}
       >
         <div className="flex flex-col">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-4 items-center">
-              <h2 className="text-lg font-bold">{title}</h2>
-              <Badge variant="secondary" className="border border-neutral-700">
-                {visibility[0].toUpperCase() + visibility.slice(1)}
-              </Badge>
+          <div className="flex justify-between gap-4 items-center">
+            <div className="flex gap-4 items-center ">
+              <h2 className="text-lg font-bold line-clamp-1">{title}</h2>
+              {showVisibility && (
+                <Badge
+                  variant="secondary"
+                  className="border border-neutral-700"
+                >
+                  {visibility[0].toUpperCase() + visibility.slice(1)}
+                </Badge>
+              )}
             </div>
-            <div className="flex gap-2 items-center text-muted-foreground text-sm">
+            <div className="flex gap-2 items-center text-muted-foreground text-sm whitespace-nowrap">
               <Heart size={16} /> {likesCount} likes
             </div>
           </div>
