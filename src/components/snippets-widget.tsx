@@ -4,8 +4,9 @@ import Image from "next/image";
 import { currentUser } from "@clerk/nextjs/server";
 import { PlusIcon } from "lucide-react";
 import { db } from "@/db/drizzle";
-import { snippets } from "@/db/schema";
+import { snippets, users } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
+import { Author } from "./author";
 
 export async function SnippetsWidget() {
   const user = await currentUser();
@@ -18,6 +19,8 @@ export async function SnippetsWidget() {
     );
   }
 
+  const [author] = await db.select().from(users).where(eq(users.id, user.id));
+
   const snippetsList = await db
     .select()
     .from(snippets)
@@ -29,32 +32,7 @@ export async function SnippetsWidget() {
     <div className="pl-16">
       <div className="flex flex-col gap-4">
         <div className="flex gap-3 items-center">
-          <Button
-            variant="ghost"
-            asChild
-            className="pr-4 pl-2 py-2 h-full -translate-x-2"
-          >
-            <Link
-              href={`/${user.username}`}
-              className="flex gap-3 items-center"
-            >
-              {user.imageUrl && (
-                <Image
-                  src={user.imageUrl}
-                  width={1000}
-                  height={1000}
-                  alt="Profile"
-                  className="w-12 h-12 object-cover"
-                />
-              )}
-              <div className="flex flex-col">
-                <span>
-                  {user.firstName} {user.lastName}
-                </span>
-                <span>@{user.username}</span>
-              </div>
-            </Link>
-          </Button>
+          <Author author={author} />
         </div>
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-bold">Your Snippets</h2>

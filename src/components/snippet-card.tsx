@@ -49,9 +49,10 @@ export function SnippetCard({
   }
 
   return (
-    <div className="p-4 border-b flex flex-col relative gap-4 hover:bg-accent/5 transition-colors">
-      <div className="flex flex-col gap-2">
-        {showAuthor && <Author author={author} />}
+    <div className="flex flex-col gap-4">
+      <div className="px-2">{showAuthor && <Author author={author} />}</div>
+
+      <div className="border bg-[#1C1C1C] rounded-sm p-4 flex flex-col relative gap-4 hover:bg-accent/5 transition-colors">
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
             <div className="flex gap-4 items-center">
@@ -70,54 +71,54 @@ export function SnippetCard({
             </div>
           )}
         </div>
-      </div>
+        {showCode && (
+          <div className="shadow-lg shadow-background overflow-hidden">
+            <div className="px-4 bg-[#28292c] py-2 border-b border-b-primary/10">
+              {filename}
+            </div>
+            <div className="relative overflow-hidden">
+              <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#1e1e1e] to-transparent z-40" />
+              <CopyButton
+                value={code}
+                className="absolute z-50 right-3 top-3"
+              />
 
-      {showCode && (
-        <div className="shadow-lg shadow-background overflow-hidden">
-          <div className="px-4 bg-[#28292c] py-2 border-b border-b-primary/10">
-            {filename}
+              <SyntaxHighlighter
+                language={language}
+                style={vscDarkPlus}
+                showLineNumbers={false}
+                customStyle={{
+                  margin: 0,
+                  padding: "1rem",
+                  minHeight: "10rem",
+                  maxHeight: "10rem",
+                  overflow: "auto",
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "break-word",
+                  fontSize: "14px",
+                  overflowX: "hidden",
+                  overflowY: "hidden",
+                }}
+              >
+                {code}
+              </SyntaxHighlighter>
+            </div>
           </div>
-          <div className="relative overflow-hidden">
-            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#1e1e1e] to-transparent z-40" />
-            <CopyButton value={code} className="absolute z-50 right-3 top-3" />
-
-            <SyntaxHighlighter
-              language={language}
-              style={vscDarkPlus}
-              showLineNumbers={false}
-              customStyle={{
-                margin: 0,
-                padding: "1rem",
-                minHeight: "10rem",
-                maxHeight: "10rem",
-                overflow: "auto",
-                whiteSpace: "pre-wrap",
-                wordBreak: "break-word",
-                fontSize: "14px",
-                overflowX: "hidden",
-                overflowY: "hidden",
-              }}
-            >
-              {code}
-            </SyntaxHighlighter>
+        )}
+        <div className="text-sm text-muted-foreground flex justify-between ">
+          <div className="flex gap-1 items-center">
+            <div className="w-4 h-4">{LANGUAGE_ICON[language]}</div>
+            <span>{language[0].toUpperCase() + language.slice(1)}</span>
+          </div>
+          <div>
+            Updated <RelativeTime datetime={updatedAt} />
           </div>
         </div>
-      )}
-
-      <div className="text-sm text-muted-foreground flex justify-between ">
-        <div className="flex gap-1 items-center">
-          <div className="w-4 h-4">{LANGUAGE_ICON[language]}</div>
-          <span>{language[0].toUpperCase() + language.slice(1)}</span>
-        </div>
-        <div>
-          Updated <RelativeTime datetime={updatedAt} />
-        </div>
+        <Link
+          href={`/${author.username}/snippets/${slug}`}
+          className="absolute inset-0 z-40"
+        />
       </div>
-
-      <Link
-        href={`/${author.username}/snippets/${slug}`}
-        className="absolute inset-0 z-40"
-      />
     </div>
   );
 }

@@ -66,7 +66,7 @@ export async function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
             <DropdownMenu>
-              <DropdownMenuTrigger className="cursor-pointer ">
+              <DropdownMenuTrigger className="cursor-pointer rounded-sm overflow-hidden">
                 <Image
                   src={user?.imageUrl || "/default-avatar.png"}
                   alt={`${user?.username || "User"}'s profile picture`}

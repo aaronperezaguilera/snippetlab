@@ -29,7 +29,9 @@ export function Author({
               width={1000}
               height={1000}
               alt="Profile"
-              className={`${showBio ? "w-20 h-20" : "w-12 h-12"} object-cover`}
+              className={`${
+                showBio ? "w-20 h-20" : "w-12 h-12"
+              } object-cover rounded-sm overflow-hidden`}
             />
           )}
           <div className="flex flex-col">
