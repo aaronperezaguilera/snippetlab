@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { Card } from "@/components/ui/card";
 
 export default function HomePage() {
   return (
@@ -18,7 +19,7 @@ export default function HomePage() {
               <Link href="/sign-up">Sign up for SnippetLab</Link>
             </Button>
           </div>
-          <div className="scale-100 xl:scale-90 mt-10 xl:mt-0 xl:absolute -right-[900px] top-40 xl:-rotate-x-24 xl:rotate-y-24 xl:rotate-z-24">
+          <div className="scale-100 xl:scale-90 mt-10 xl:mt-0 xl:absolute -right-[900px] top-20 xl:-rotate-x-24 xl:rotate-y-24 xl:rotate-z-20">
             <Image
               src="/hero.png"
               width={1920}
@@ -28,6 +29,15 @@ export default function HomePage() {
             />
           </div>
         </div>
+      </section>
+      <section className="max-w-[1800px] mx-auto grid grid-cols-2 gap-8 mt-16">
+        <header className="col-span-2">
+          <h2 className="text-4xl lg:text-6xl font-bold text-balance max-w-[20ch] text-center xl:text-left">
+            All you need to do is code
+          </h2>
+        </header>
+        <Card>HOL</Card>
+        <Card>HOL</Card>
       </section>
     </main>
   );
