@@ -19,7 +19,7 @@ export default function HomePage() {
               <Link href="/sign-up">Sign up for SnippetLab</Link>
             </Button>
           </div>
-          <div className="scale-100 xl:scale-90 mt-10 xl:mt-0 xl:absolute -right-[900px] top-20 xl:-rotate-x-24 xl:rotate-y-24 xl:rotate-z-20">
+          <div className="scale-100 xl:scale-90 mt-10 xl:mt-0 xl:absolute -right-[900px] top-20 xl:-rotate-x-24 xl:rotate-y-24 xl:rotate-z-20 border">
             <Image
               src="/hero.png"
               width={1920}
