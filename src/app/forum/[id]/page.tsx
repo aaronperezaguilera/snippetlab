@@ -1,6 +1,7 @@
 import { AnswerForm } from "@/components/answer-form";
 import { Author } from "@/components/author";
 import { CodeReader } from "@/components/code-reader";
+import { Md } from "@/components/md";
 import { RelativeTime } from "@/components/relative-time";
 import { db } from "@/db/drizzle";
 import { answers, questions, snippets, users } from "@/db/schema";
@@ -41,7 +42,7 @@ export default async function QuestionPage({
       <div className="flex flex-col gap-4 pb-4 border-b">
         <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-semibold">{data.questions.title}</h1>
-          <p>{data.questions.content}</p>
+          <Md>{data.questions.content}</Md>
         </div>
         {data.snippets && (
           <CodeReader
@@ -63,7 +64,7 @@ export default async function QuestionPage({
             className="p-4 border-b flex flex-col relative gap-4 transition-colors"
           >
             {users && <Author author={users} />}
-            <p>{answers.content}</p>
+            <Md>{answers.content}</Md>
             {answers.code && answers.language && data.snippets && (
               <div>
                 <div className="px-4 bg-[#28292c] py-2 border rounded-t-sm">

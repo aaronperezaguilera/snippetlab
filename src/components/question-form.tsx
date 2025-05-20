@@ -24,7 +24,10 @@ export function QuestionForm({ snippets }: { snippets: Snippet[] }) {
     <form action={createQuestion} className="flex flex-col gap-4 mt-4">
       <Label htmlFor="title">Title</Label>
       <Input type="text" name="title" id="title" maxLength={200} required />
-      <Label htmlFor="content">Content</Label>
+      <Label htmlFor="content">
+        Content{" "}
+        <span className="text-muted-foreground">(Supports markdown)</span>
+      </Label>
       <Textarea
         name="content"
         id="content"

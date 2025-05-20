@@ -56,7 +56,12 @@ export function AnswerForm({
     <div>
       {addAnswer && (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <h2 className="text-xl">Your answer</h2>
+          <div className="flex gap-2 items-end">
+            <h2 className="text-xl">Your answer</h2>
+            <span className="text-muted-foreground text-sm">
+              (Supports markdown)
+            </span>
+          </div>
           <Textarea className="min-h-48" name="content" required />
           {addCode && (
             <>

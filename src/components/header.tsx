@@ -1,7 +1,13 @@
 import { Logo, LogoMuted } from "./logo";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { ChevronDown, Plus, Settings, User } from "lucide-react";
+import {
+  ArrowUpRightFromSquare,
+  ChevronDown,
+  Plus,
+  Settings,
+  User,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,11 +46,20 @@ export async function Header() {
       )}
       <div className="flex items-center gap-4">
         <a
+          href="https://snippetlab.featurebase.app/en/roadmap"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+        >
+          Roadmap <ArrowUpRightFromSquare size={14} />
+        </a>
+        <a
           href="https://github.com/aaronperezaguilera/snippetlab"
           target="_blank"
           rel="noopener noreferrer"
+          className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
         >
-          <Icons.gitHub className="size-6" />
+          Source code <Icons.gitHub className="size-4" />
         </a>
         {user ? (
           <>
