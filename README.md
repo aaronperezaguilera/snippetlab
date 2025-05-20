@@ -2,15 +2,10 @@
 
 **SnippetLab** es una plataforma todo‑en‑uno para crear, compartir y organizar fragmentos de código de forma colaborativa. Además incluye generación de snippets por IA, versionado, colecciones, foro Q\&A con soporte Markdown y todas las herramientas sociales que un desarrollador necesita. Uniendo la base de conocimiento personal con la comunidad.
 
----
 
 ## 🌍 Demo en vivo
 
-Accede a la versión desplegada en Vercel: [https://snippetlab.vercel.app](https://snippetlab.vercel.app)
-
-## 📦 Repositorio
-
-Clona o explora el proyecto en GitHub: [https://github.com/tu-usuario/snippetlab](https://github.com/tu-usuario/snippetlab)
+Accede a la versión desplegada en Vercel: [https://snippetlab.app/](https://snippetlab.app/)
 
 ---
 
@@ -103,4 +98,4 @@ SnippetLab facilita la gestión de snippets con:
 
 ## 📸 Capturas
 
-Hecho con ❤️
+Hecho con ❤️ para la [Hackatón de Midudev y Clerk de 2025]([https://snippetlab.vercel.app](https://github.com/midudev/hackaton-clerk-2025))
