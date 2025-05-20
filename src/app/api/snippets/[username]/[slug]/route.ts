@@ -7,11 +7,10 @@ import { NextResponse } from "next/server";
  * Route handler for fetching a snippet by username and slug.
  * Returns the raw code as text/plain and suggests filename for download.
  */
-export async function GET({
-  params,
-}: {
-  params: Promise<{ username: string; slug: string }>;
-}) {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ username: string; slug: string }> }
+) {
   const { username, slug } = await params;
 
   // 1) Buscar usuario
