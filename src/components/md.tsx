@@ -17,17 +17,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export function Md({ children }: { children: string }) {
   const MarkdownComponents: object = {
-    code({
-      node,
-      inline,
-      className,
-      ...props
-    }: {
-      node: any;
-      inline: boolean;
-      className?: string;
-      [key: string]: any;
-    }) {
+    code({ className, ...props }: { className?: string; [key: string]: any }) {
       const hasLang = /language-(\w+)/.exec(className || "");
       return hasLang ? (
         <SyntaxHighlighter
