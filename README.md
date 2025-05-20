@@ -67,7 +67,7 @@ SnippetLab facilita la gestión de snippets con:
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/snippetlab.git
+   git clone https://github.com/aaronperezaguilera/snippetlab.git
    ```
 2. Entra en el directorio e instala dependencias con pnpm:
 
