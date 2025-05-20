@@ -1,4 +1,5 @@
 import { ClerkCard } from "@/components/home/clerk-card";
+import { CLICard } from "@/components/home/cli-card";
 import { CollectionsCard } from "@/components/home/collections-card";
 import { CreateCard } from "@/components/home/create-card";
 import { ForkCard } from "@/components/home/fork-card";
@@ -17,11 +18,12 @@ export default function HomePage() {
           </h2>
         </header>
         <CreateCard />
-        <VersionsCard />
         <CollectionsCard />
+        <VersionsCard />
         <ForumCard />
-        <ForkCard />
         <SocialCard />
+        <ForkCard />
+        <CLICard />
         <ClerkCard />
       </section>
     </main>

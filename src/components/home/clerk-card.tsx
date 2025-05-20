@@ -1,7 +1,7 @@
 export function ClerkCard() {
   return (
-    <article className="border col-span-12 flex flex-col gap-8 rounded-sm overflow-hidden">
-      <div className="flex flex-col justify-center items-center gap-4 p-8 text-center">
+    <article className="border col-span-8 flex flex-col rounded-sm overflow-hidden p-8">
+      <div className="flex flex-col justify-center items-center gap-4 text-center">
         <h3 className="text-2xl">Secure Authentication with Clerk</h3>
         <p className="max-w-[60ch] text-muted-foreground text-pretty">
           Access with email/password or through external providers (Google,
@@ -9,7 +9,7 @@ export function ClerkCard() {
           your snippets project.
         </p>
       </div>
-      <div className="w-100 mx-auto pb-8">
+      <div className="w-100 mx-auto flex justify-center h-full">
         <svg
           viewBox="0 0 43 12"
           fill="none"
