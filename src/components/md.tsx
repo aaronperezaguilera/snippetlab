@@ -17,7 +17,10 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export function Md({ children }: { children: string }) {
   const MarkdownComponents: object = {
-    code({ className, ...props }: { className?: string; [key: string]: any }) {
+    code({
+      className,
+      ...props
+    }: React.PropsWithChildren<{ className?: string }>) {
       const hasLang = /language-(\w+)/.exec(className || "");
       return hasLang ? (
         <SyntaxHighlighter
@@ -37,7 +40,11 @@ export function Md({ children }: { children: string }) {
             overflowY: "hidden",
           }}
         >
-          {props.children}
+          {typeof props.children === "string"
+            ? props.children
+            : Array.isArray(props.children)
+            ? props.children.join("")
+            : String(props.children)}
         </SyntaxHighlighter>
       ) : (
         <code className={className} {...props} />
