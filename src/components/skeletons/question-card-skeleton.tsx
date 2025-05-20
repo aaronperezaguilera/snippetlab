@@ -3,8 +3,8 @@ import { Skeleton } from "../ui/skeleton";
 
 export function QuestionCardSkeleton() {
   return (
-    <div className="p-4 flex flex-col gap-4 border-b relative">
-      <div className="flex items-center">
+    <div className="flex flex-col gap-4 relative">
+      <div className="flex items-center pl-2">
         <Button
           variant="ghost"
           className={`pr-4 pl-2 py-2 h-full -translate-x-2 w-fit z-50`}
@@ -23,11 +23,13 @@ export function QuestionCardSkeleton() {
           </div>
         </Button>
       </div>
-      <Skeleton className="h-7 w-1/2" />
-      <Skeleton className="h-6 w-full" />
+      <div className="flex flex-col gap-4 border bg-card p-4 rounded-sm relative">
+        <Skeleton className="h-7 w-1/2" />
+        <Skeleton className="h-6 w-full" />
 
-      <Skeleton className="h-50 w-full" />
-      <Skeleton className="h-6 w-24" />
+        <Skeleton className="h-50 w-full" />
+        <Skeleton className="h-6 w-24" />
+      </div>
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default async function ProfilePage({
     .limit(4);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 pb-8">
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Pinned snippets</h2>
         {snippetsList.length > 0 ? (
