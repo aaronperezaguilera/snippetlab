@@ -142,6 +142,34 @@ Todo el código del CLI está en [https://github.com/aaronperezaguilera/snippetl
 
 ---
 
+## Contribuir
+1. Fork el repositorio.
+2. Crea una rama: git checkout -b feat/my-feature.
+3. Confirma tus cambios: git commit -m "feat: add my feature".
+4. Haz push de tu fork: git push origin feat/my-feature.
+5. Abre una pull request.
+
+---
+
 ## 📸 Capturas
+
+<img width="2553" alt="Screenshot 2025-05-20 at 20 59 04" src="https://github.com/user-attachments/assets/1dc55acd-5f13-4ed8-a420-aa1720a76ba2" />
+<img width="2553" alt="Screenshot 2025-05-20 at 20 59 46" src="https://github.com/user-attachments/assets/68a34334-1d98-42fb-b919-88352014b269" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 06 52" src="https://github.com/user-attachments/assets/babc1e2e-9450-4c9e-a40c-8afaf81eaac1" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 06 58" src="https://github.com/user-attachments/assets/5797296b-b9a3-4943-b9c6-210e84ddecfc" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 07 03" src="https://github.com/user-attachments/assets/fc05afc0-e667-4e52-b3ee-ca9aa2267551" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 07 28" src="https://github.com/user-attachments/assets/65187994-6ea9-4d8d-9361-11a4755942ba" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 07 33" src="https://github.com/user-attachments/assets/5e0a0f16-190a-421d-b207-e52d2ed0298b" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 04 02" src="https://github.com/user-attachments/assets/4e3b70b4-e372-46d4-a1f7-ef9689ba0ca5" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 05 29" src="https://github.com/user-attachments/assets/d8a20eef-2da0-4bcd-a107-8bbe5d4deea9" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 05 10" src="https://github.com/user-attachments/assets/b6eece69-812b-44fc-b50f-b146966e14de" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 05 20" src="https://github.com/user-attachments/assets/2a72b717-df57-43ac-915f-5c5f2906626f" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 05 55" src="https://github.com/user-attachments/assets/7e5eacb1-89c6-410f-a916-71501f9e4146" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 05 40" src="https://github.com/user-attachments/assets/916ae348-9fec-4ad3-ad4d-4c572174aabc" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 05 49" src="https://github.com/user-attachments/assets/72688c9f-7e06-440b-8665-9a848d0c5ce2" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 06 26" src="https://github.com/user-attachments/assets/70b9264b-a9be-4c29-a23e-13e8b29f6b6f" />
+<img width="2553" alt="Screenshot 2025-05-20 at 21 07 45" src="https://github.com/user-attachments/assets/20850c71-551f-48e0-9b03-1072cc023c76" />
+
+---
 
 Hecho con ❤️ para la [Hackatón de Midudev y Clerk de 2025](<[https://snippetlab.vercel.app](https://github.com/midudev/hackaton-clerk-2025)>)
