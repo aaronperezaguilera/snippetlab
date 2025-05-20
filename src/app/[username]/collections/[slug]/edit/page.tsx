@@ -3,6 +3,12 @@ import { db } from "@/db/drizzle";
 import { collections } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Edit collection - SnippetLab",
+  description: "Edit your collection",
+};
 
 export default async function NewCollectionPage({
   params,

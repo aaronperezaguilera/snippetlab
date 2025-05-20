@@ -18,6 +18,24 @@ type SearchParams = {
   sort?: "popular" | "newest" | "oldest";
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
+  const { username } = await params;
+  const [author] = await db
+    .select()
+    .from(users)
+    .where(eq(users.username, username));
+  return {
+    title: `@${author?.username} (${
+      author?.first_name + " " + author?.last_name
+    }) / Snippets`,
+    description: author?.bio,
+  };
+}
+
 export default async function ProfilePage({
   params,
   searchParams,

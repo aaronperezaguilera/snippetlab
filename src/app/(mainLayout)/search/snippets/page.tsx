@@ -3,6 +3,20 @@ import { db } from "@/db/drizzle";
 import { snippets, users } from "@/db/schema";
 import { eq, sql } from "drizzle-orm";
 
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ search: string }>;
+}) {
+  const params_search = (await searchParams) || {};
+  const search = (params_search.search || "").trim().toLowerCase();
+
+  return {
+    title: `Search ${search} in snippets - SnippetLab`,
+    description: `Search for ${search} in snippets`,
+  };
+}
+
 export default async function SnippetsSearchPage({
   searchParams,
 }: {

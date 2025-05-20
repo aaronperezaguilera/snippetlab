@@ -3,6 +3,12 @@ import { db } from "@/db/drizzle";
 import { snippets } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { and, desc, eq } from "drizzle-orm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create a new question - SnippetLab",
+  description: "Create a new question",
+};
 
 export default async function NewQuestionPage() {
   const user = await currentUser();

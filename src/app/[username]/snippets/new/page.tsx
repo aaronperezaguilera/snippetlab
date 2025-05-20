@@ -1,5 +1,11 @@
 import { GenerateAISnippet } from "@/components/generate-ai-snippet";
 import { SnippetForm } from "@/components/snippet-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create a new snippet - SnippetLab",
+  description: "Create a new snippet",
+};
 
 export default async function NewSnippet() {
   return (

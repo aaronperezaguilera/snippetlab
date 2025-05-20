@@ -3,9 +3,31 @@ import { Author } from "@/components/author";
 import { CodeReader } from "@/components/code-reader";
 import { Md } from "@/components/md";
 import { RelativeTime } from "@/components/relative-time";
+import { Button } from "@/components/ui/button";
 import { db } from "@/db/drizzle";
 import { answers, questions, snippets, users } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const [data] = await db
+    .select()
+    .from(questions)
+    .leftJoin(snippets, eq(questions.snippetId, snippets.id))
+    .leftJoin(users, eq(questions.userId, users.id))
+    .where(eq(questions.id, parseInt(id)));
+
+  return {
+    title: `@${data.users?.username} (${data.users?.first_name} ${data.users?.last_name}) / ${data.questions.title}`,
+    description: data.questions.content,
+  };
+}
 
 export default async function QuestionPage({
   params,
@@ -38,6 +60,11 @@ export default async function QuestionPage({
 
   return (
     <main className="container mx-auto mt-16 flex flex-col gap-4 min-h-screen">
+      <Button variant="ghost" className="w-fit" asChild>
+        <Link href="/forum">
+          <ChevronLeft /> Return to forum
+        </Link>
+      </Button>
       {data.users && <Author author={data.users} />}
       <div className="flex flex-col gap-4 pb-4 border-b">
         <div className="flex flex-col gap-4">

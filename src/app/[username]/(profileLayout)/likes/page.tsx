@@ -5,6 +5,24 @@ import { eq } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
 import Link from "next/link";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
+  const { username } = await params;
+  const [author] = await db
+    .select()
+    .from(users)
+    .where(eq(users.username, username));
+  return {
+    title: `@${author?.username} (${
+      author?.first_name + " " + author?.last_name
+    }) / Likes`,
+    description: author?.bio,
+  };
+}
+
 export default async function LikesPage({
   params,
 }: {

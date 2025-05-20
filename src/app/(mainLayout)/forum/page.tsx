@@ -7,6 +7,12 @@ import { questions, users } from "@/db/schema";
 import { db } from "@/db/drizzle";
 import { desc, eq } from "drizzle-orm";
 import { QuestionCard } from "@/components/question-card";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Q&A Forum - SnippetLab",
+  description: "A place to ask and answer questions about snippets",
+};
 
 export default async function ForumPage() {
   const user = await currentUser();

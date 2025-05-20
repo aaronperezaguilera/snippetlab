@@ -1,4 +1,10 @@
 import { CollectionForm } from "@/components/collection-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create a new collection - SnippetLab",
+  description: "Create a new collection",
+};
 
 export default async function NewCollectionPage() {
   return (

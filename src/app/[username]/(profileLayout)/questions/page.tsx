@@ -5,6 +5,24 @@ import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { QuestionCard } from "@/components/question-card";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
+  const { username } = await params;
+  const [author] = await db
+    .select()
+    .from(users)
+    .where(eq(users.username, username));
+  return {
+    title: `@${author?.username} (${
+      author?.first_name + " " + author?.last_name
+    }) / Questions`,
+    description: author?.bio,
+  };
+}
+
 export default async function QuestionsPage({
   params,
 }: {

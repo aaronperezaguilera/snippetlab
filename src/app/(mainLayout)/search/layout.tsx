@@ -1,6 +1,12 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { FeaturedUsers } from "@/components/featured-users";
 import { ExploreWidget } from "@/components/explore-widget";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Search - SnippetLab",
+  description: "Search snippets and users",
+};
 
 export default async function SearchPage({
   children,

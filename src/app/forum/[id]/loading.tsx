@@ -1,10 +1,14 @@
 import { SnippetCardSkeleton } from "@/components/skeletons/snippet-card-skeleton";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ChevronLeft } from "lucide-react";
 
 export default function Loading() {
   return (
     <main className="container mx-auto mt-16 flex flex-col gap-4 min-h-screen">
+      <Button variant="ghost" className="w-fit" disabled>
+        <ChevronLeft /> Return to forum
+      </Button>
       <div className="flex items-center">
         <Button
           variant="ghost"

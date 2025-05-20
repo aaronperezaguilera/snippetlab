@@ -5,6 +5,7 @@ import { eq, desc, and, ne, sql, asc, arrayContains, or } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs/server";
 import { ExploreFilters } from "@/components/explore-filters";
 import { SnippetCard } from "@/components/snippet-card";
+import { Metadata } from "next";
 
 type SearchParams = {
   search?: string;
@@ -12,6 +13,11 @@ type SearchParams = {
   language?: string;
   tags?: string;
   sort?: "popular" | "newest" | "oldest";
+};
+
+export const metadata: Metadata = {
+  title: "Explore snippets - SnippetLab",
+  description: "Explore snippets from the community",
 };
 
 export default async function ExplorePage({

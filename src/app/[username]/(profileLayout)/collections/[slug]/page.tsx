@@ -11,6 +11,28 @@ import { SnippetCard } from "@/components/snippet-card";
 import { Toast } from "@/components/toast";
 import { PinCollectionButton } from "@/components/pin-collection-button";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ username: string; slug: string }>;
+}) {
+  const { username, slug } = await params;
+  const [author] = await db
+    .select()
+    .from(users)
+    .where(eq(users.username, username));
+
+  const [collection] = await db
+    .select()
+    .from(collections)
+    .where(and(eq(collections.slug, slug), eq(collections.userId, author.id)));
+
+  return {
+    title: `@${author?.username} (${author?.first_name} ${author?.last_name}) / ${collection.title}`,
+    description: author?.bio,
+  };
+}
+
 export default async function CollectionPage({
   params,
   searchParams,

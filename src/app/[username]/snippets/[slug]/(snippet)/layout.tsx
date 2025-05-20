@@ -22,6 +22,28 @@ import { StarButton } from "@/components/star-button";
 import { ForkButton } from "@/components/fork-button";
 import { SaveButton } from "@/components/save-button";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ username: string; slug: string }>;
+}) {
+  const { username, slug } = await params;
+  const [author] = await db
+    .select()
+    .from(users)
+    .where(eq(users.username, username));
+
+  const [snippet] = await db
+    .select()
+    .from(snippets)
+    .where(and(eq(snippets.slug, slug), eq(snippets.userId, author.id)));
+
+  return {
+    title: `@${author?.username} (${author?.first_name} ${author?.last_name}) / ${snippet.title}`,
+    description: author?.bio,
+  };
+}
+
 export default async function SnippetLayout({
   children,
   params,

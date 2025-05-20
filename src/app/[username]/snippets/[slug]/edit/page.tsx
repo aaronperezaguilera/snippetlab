@@ -3,6 +3,12 @@ import { db } from "@/db/drizzle";
 import { snippets } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Edit snippet - SnippetLab",
+  description: "Edit your snippet",
+};
 
 export default async function EditSnippet({
   params,

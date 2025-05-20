@@ -1,4 +1,10 @@
 import { UserProfile } from "@clerk/nextjs";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Account Settings - SnippetLab",
+  description: "Account Settings",
+};
 
 export default function AccountPage() {
   return (
