@@ -199,7 +199,12 @@ export default async function SnippetLayout({
 
               {snippet.visibility === "public" && (
                 <>
-                  <ShareButton />
+                  <ShareButton
+                    isSnippet
+                    username={username}
+                    slug={snippet.slug}
+                    filename={snippet.filename}
+                  />
                   <StarButton
                     id={snippet.id}
                     initialStarred={starredSnippets.length > 0}
