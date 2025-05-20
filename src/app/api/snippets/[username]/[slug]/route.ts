@@ -21,10 +21,7 @@ export async function GET(
     .then((results) => results[0]);
 
   if (!userRecord) {
-    return NextResponse.json(
-      { error: "Usuario no encontrado" },
-      { status: 404 }
-    );
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
   // 2) Buscar snippet con código y nombre de archivo
@@ -38,10 +35,7 @@ export async function GET(
     .where(and(eq(snippets.userId, userRecord.id), eq(snippets.slug, slug)));
 
   if (!snippetRecord || snippetRecord.visibility !== "public") {
-    return NextResponse.json(
-      { error: "Snippet no encontrado" },
-      { status: 404 }
-    );
+    return NextResponse.json({ error: "Snippet not found" }, { status: 404 });
   }
 
   // 3) Devolver el código en texto plano, forzando descarga con filename
