@@ -64,10 +64,13 @@ export default async function QuestionPage({
           >
             {users && <Author author={users} />}
             <p>{answers.content}</p>
-            {answers.code && answers.language && (
-              <>
+            {answers.code && answers.language && data.snippets && (
+              <div>
+                <div className="px-4 bg-[#28292c] py-2 border rounded-t-sm">
+                  {data.snippets.filename}
+                </div>
                 <CodeReader language={answers.language} code={answers.code} />
-              </>
+              </div>
             )}
             <div className="text-sm text-muted-foreground">
               <RelativeTime datetime={answers.createdAt} />

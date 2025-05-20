@@ -43,12 +43,12 @@ function SubmitButton() {
       size="icon"
       type="submit"
       disabled={pending}
-      className="absolute top-3 right-3 hover:bg-gradient-to-br border bg-background text-white hover:from-blue-800/80 hover:to-purple-800/80 transition-colors"
+      className="absolute top-3 right-3 border bg-gradient-to-br from-background to-background text-white hover:bg-gradient-to-br hover:from-teal-700 hover:to-purple-700 transition-colors group "
     >
       {pending ? (
         <Loader2 className="animate-spin"></Loader2>
       ) : (
-        <Sparkles className="h-4 w-4" />
+        <Sparkles className="h-4 w-4 transition-all fill-background group-hover:fill-white" />
       )}
     </Button>
   );

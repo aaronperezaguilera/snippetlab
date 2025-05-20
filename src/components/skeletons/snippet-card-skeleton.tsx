@@ -9,7 +9,7 @@ export function SnippetCardSkeleton({
   return (
     <div className="flex flex-col gap-4">
       {showAuthor && (
-        <div className="flex items-center">
+        <div className="flex items-center pl-2">
           <Button
             variant="ghost"
             className={`pr-4 pl-2 py-2 h-full -translate-x-2 w-fit z-50`}

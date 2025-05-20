@@ -19,7 +19,7 @@ export default function Loading() {
           <PlusIcon /> Create
         </Button>
       </div>
-      <div>
+      <div className="flex flex-col gap-4">
         <CollectionCardSkeleton />
         <CollectionCardSkeleton />
         <CollectionCardSkeleton />

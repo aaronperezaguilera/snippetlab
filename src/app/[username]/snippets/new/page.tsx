@@ -3,7 +3,7 @@ import { SnippetForm } from "@/components/snippet-form";
 
 export default async function NewSnippet() {
   return (
-    <main className="container mx-auto mt-16 max-w-6xl min-h-screen">
+    <main className="container mx-auto mt-16 max-w-6xl min-h-screen pb-8">
       <h1 className="text-2xl font-semibold mb-8">Create a new snippet</h1>
       <SnippetForm type="create" />
       <div className="mt-4">

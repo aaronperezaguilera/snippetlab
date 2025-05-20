@@ -77,7 +77,7 @@ export function Sidebar() {
       >
         <div className="flex items-center justify-between px-4 h-16 border-b">
           <Link href="/" className="flex gap-2 items-center">
-            <Logo />
+            <Logo className="size-8" />
             <span className="text-xl font-semibold">SnippetLab</span>
           </Link>
           <button
