@@ -22,6 +22,7 @@ SnippetLab facilita la gestión de snippets con:
 - **Foro Q\&A** ligero en contexto de cada snippet, con soporte completo de **Markdown** para preguntas y respuestas.
 - **Página de explorar**: descubre usuarios y snippets filtrados por lenguaje, título y etiquetas.
 - **Navegación global y búsqueda** utilizando cmdk.
+- **CLI de SnippetLab**: descarga cualquier snippet público desde tu terminal con un solo comando.
 
 ---
 
@@ -35,16 +36,17 @@ SnippetLab facilita la gestión de snippets con:
 
 ## 🚀 Características principales
 
-| Funcionalidad                             | Detalles                                                                              |
-| ----------------------------------------- | ------------------------------------------------------------------------------------- |
-| **Crear/editar/borrar snippets**          | Editor Monaco, copiar código, IA, comentarios editables y notificaciones.             |
-| **Versionado de código**                  | Historial de versiones, diffs encadenados y botón _Revert_ para restaurar.            |
-| **Fork de snippets**                      | Duplicado instantáneo del snippet original en tu cuenta para modificar.               |
-| **Colecciones**                           | CRUD completo, asignación múltiple y compartir con enlaces directos.                  |
-| **Feed social**                           | Sigue a usuarios, crea tu feed personalizado y explora lo más reciente.               |
-| **Likes & bookmarks**                     | Marca tus favoritos y accede a ellos desde tu perfil.                                 |
-| **Foro Q\&A con Markdown**                | Plantea y responde preguntas con snippets embebidos, usa Markdown para formateo rico. |
-| **Descubrimiento de usuarios y snippets** | Descubre nuevos snippets y filtra por lenguaje, tags o título en la página _Explore_  |
+| Funcionalidad                             | Detalles                                                                                                |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Crear/editar/borrar snippets**          | Editor Monaco, copiar código, IA, comentarios editables y notificaciones.                               |
+| **Versionado de código**                  | Historial de versiones, diffs encadenados y botón _Revert_ para restaurar.                              |
+| **Fork de snippets**                      | Duplicado instantáneo del snippet original en tu cuenta para modificar.                                 |
+| **Colecciones**                           | CRUD completo, asignación múltiple y compartir con enlaces directos.                                    |
+| **Feed social**                           | Sigue a usuarios, crea tu feed personalizado y explora lo más reciente.                                 |
+| **Likes & bookmarks**                     | Marca tus favoritos y accede a ellos desde tu perfil.                                                   |
+| **Foro Q\&A con Markdown**                | Plantea y responde preguntas con snippets embebidos, usa Markdown para formateo rico.                   |
+| **Descubrimiento de usuarios y snippets** | Descubre nuevos snippets y filtra por lenguaje, tags o título en la página _Explore_                    |
+| **Compartir y CLI**                       | Comparte la URL de un snippet o colección o descárgalo directamente en tu proyecto con un solo comando. |
 
 ---
 
