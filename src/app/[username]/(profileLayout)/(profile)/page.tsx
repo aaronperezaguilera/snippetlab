@@ -66,6 +66,7 @@ export default async function ProfilePage({
                 showCode={false}
                 author={author}
                 snippet={snippet}
+                showVisibility
               />
             ))}
           </div>

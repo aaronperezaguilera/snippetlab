@@ -130,6 +130,7 @@ export default async function ProfilePage({
                 author={user}
                 {...snippet}
                 snippet={snippet}
+                showVisibility
               />
             ) : null
           )}
