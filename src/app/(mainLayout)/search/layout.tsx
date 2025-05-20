@@ -1,5 +1,4 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { SnippetsWidget } from "@/components/snippets-widget";
 import { FeaturedUsers } from "@/components/featured-users";
 import { ExploreWidget } from "@/components/explore-widget";
 
