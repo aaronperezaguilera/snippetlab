@@ -53,7 +53,8 @@ export async function Feed() {
         inArray(snippets.userId, followedIds)
       )
     )
-    .orderBy(desc(snippets.createdAt));
+    .orderBy(desc(snippets.updatedAt))
+    .limit(10);
 
   return (
     <div className="flex flex-col gap-4">

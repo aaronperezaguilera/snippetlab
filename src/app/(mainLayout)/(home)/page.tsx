@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
-import HomePage from "../home/page";
+import HomePage from "../../home/page";
 import { Feed } from "@/components/feed";
 import { FeaturedUsers } from "@/components/featured-users";
 import { ExploreWidget } from "@/components/explore-widget";

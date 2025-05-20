@@ -18,7 +18,7 @@ export default async function SnippetsSearchPage({
     .where(sql`LOWER(${snippets.title}) LIKE ${`%${search.toLowerCase()}%`}`);
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4 py-8">
       <h1 className="text-2xl font-semibold">
         Search {params_search.search} in snippets
       </h1>

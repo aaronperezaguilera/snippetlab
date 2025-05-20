@@ -18,13 +18,14 @@ export default async function SearchPage({
   }
 
   return (
-    <main className="mt-16 grid grid-cols-[1.2fr_2.8fr_1.2fr] gap-16 relative min-h-screen">
-      <SnippetsWidget />
+    <>
       {children}
-      <div className="flex flex-col gap-8">
-        <ExploreWidget />
-        <FeaturedUsers />
+      <div className="relative bg-popover border-l">
+        <div className="flex flex-col gap-8 pt-8  px-8 sticky top-0">
+          <ExploreWidget />
+          <FeaturedUsers />
+        </div>
       </div>
-    </main>
+    </>
   );
 }
