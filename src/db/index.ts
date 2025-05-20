@@ -27,7 +27,7 @@ export async function getFeaturedUsers(authenticatedUserId: string) {
       totalLikes: sum(snippets.likesCount).as("totalLikes"),
     })
     .from(users)
-    .leftJoin(snippets, eq(snippets.userId, users.id))
+    .innerJoin(snippets, eq(snippets.userId, users.id))
     .leftJoin(
       follows,
       and(
